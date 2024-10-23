@@ -16,28 +16,20 @@
         require __DIR__ . '/register.html';
     });
 
-    $router->map('GET', '/fundamentals', function() {
-        require __DIR__ . '/fundamentals/fundamentals-home.html';
-    });
-    
-    $router->map('GET', '/ownership', function () {
-        require __DIR__ . '/ownership/ownership-home.html';
+    // [a:page] is a regex match on alphanumerics that creates a variable $page
+
+    $router->map('GET', '/[a:page]', function($page) {
+        require __DIR__ . '/' . $page . '/' . $page . '-home.html';
     });
 
-    $router->map('GET', '/patternmatching', function () {
-        require __DIR__ . '/patternmatching/patternmatching-home.html';
+    // [i:id] is same as above comment, except for integers and creates $id
+
+    $router->map('GET', '/[a:page]/[i:id]', function($page, $id) {
+        require __DIR__ . '/' . $page . '/' . $page . '-' . $id . '.html';
     });
 
-    $router->map('GET', '/collections', function () {
-        require __DIR__ . '/collections/collections-home.html';
-    });
-
-    $router->map('GET', '/errorhandling', function() {
-        require __DIR__ . '/errorhandling/errorhandling-home.html';
-    });
-
-    $router->map('GET', '/generics', function() {
-        require __DIR__ . '/generics/generics-home.html';
+    $router->map('GET', '/[a:page]/quiz', function($page) {
+        require __DIR__ . '/' . $page . '/' . $page . '-quiz.html';
     });
 
     $match = $router->match();
