@@ -19,7 +19,7 @@
 
 <div class="titles">
     <h1 class="header">
-        Data Types
+        Primitive Data Types
     </h1>
 
     <h3 class="subheader">
@@ -29,8 +29,169 @@
 
 <div class="info">
     <p> 
-          
+        Rust's primitive data types work slightly differently to other imperative languages like Python and C.
     </p>
+</div>
+
+<div class="info">
+    <p> 
+        Rust is statically typed, but the type can be inferred at compile-time, negating the need to specify the type in some cases:
+    </p>
+    <p class="inlinelink">let mut i = 10; // i inferred as type i32 (explained below)<br/>
+                            println!({}, i);</p>
+</div>
+
+<div class="info">
+    <p> 
+        Integers require a specification of their <em>bit count</em>, 
+        as well as <em>whether they are signed or unsigned</em>:
+        <ul class="list">
+            <li>u8: unsigned 8-bit integer</li>
+            <li>u16: unsigned 16-bit integer</li>
+            <li>u32: unsigned 32-bit integer</li>
+            <li>...and so on, up to u128.</li>
+        </ul>
+        <ul class="list">
+            <li>i8: signed 8-bit integer</li>
+            <li>i16: signed 16-bit integer</li>
+            <li>...and so on, up to i128.</li>
+        </ul>
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        A defined integer variable that isn't specified with a size or signature (like the first example on this page) will default to <b>i32</b>.
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        There also exists integer data types that are based on the <em>CPU architecture of the machine executing the code: <b>isize</b> and <b>usize</b>.</em>
+        For example, on a 32-bit architecture, an <b>isize</b> variable would have the same bit count as an <b>i32</b> variable. 
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Data types can't always be inferred, such as when the built-in <b>into()</b> function is used to convert a variable of one type to another:
+    </p>
+    <p class="inlinelink"><b>Does not compile:</b><br/>
+        let x = "10";<br/>
+        let y = x.into();<br/>
+        println!("{}", y);
+    </p>
+    <p class="inline-err">error[E0283]: type annotations needed<br/>
+        |<br>
+        3 |     let y = x.into();<br/>
+          |          type must be known at this point<br/>
+          |<br/>
+          = note: cannot satisfy `_: From<&str>`<br/>
+          = note: required for `&str` to implement `Into<_>`<br/>
+        help: consider giving `y` an explicit type<br/>
+          |<br/>
+        3 |     let y: /* Type */ = x.into();<br/>
+    </p>
+    <p>Since there's no information on what type variable <em>y</em> is, the compiler doesn't know how to convert to it from a string variable <em>x</em>.</p>
+</div>
+
+<div class="info">
+    <p>
+        For trivial problems, such as type mismatches or unclear typing, the Rust compiler and runtime can print direct, contextual suggestions for how to fix the error!
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        Floating-point numbers can only be two possible sizes:
+        <ul class="list">
+            <li>f32: 32-bit float</li>
+            <li>f64: 64-bit float</li>
+        </ul>
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        There is no "fsize" data type in Rust, but if no type is specified for a float, the compiler will default to <b>f64</b>:
+    </p>
+    <p class="inlinelink">let f_big = 3.33; // f64<br/>
+                            let f_small: i32 = 3.3; // f32
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Alternatively, for type annotation, the type of a numerical variable can be <em>specified in its value</em>:
+        <ul class="list">
+            <li>2 as an unsigned 16-bit integer: 2u16 or 2_u16</li>
+            <li>35 as a signed 128-bit integer: 35i128 or 35_i128</li>
+        </ul>
+        An underscore can be optionally added, for clarity purposes.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Similar annotations exist for other types of numeral, like different number bases:
+        <ul class="list">
+            <li>10000 == 1_0000</li>
+            <li>20 in binary: <b>0b00010100</b> or <b>0b0001_0100</b></li>
+            <li>32 in hexadecimal: <b>0x</b>20</li>
+            <li>70 as a byte: b'F'</li>
+            <li>17 in octal: <b>0o</b>21</li>
+        </ul>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Booleans in Rust are lower-case, and require very little type annotation:
+    </p>
+    <p class="inlinelink">let t = true; // inferred as bool<br/></p>
+</div>
+
+<div class="info">
+    <p>
+        Expressions involving comparison of numerical values are also evaluated, and assigned as, bools:
+    </p>
+    <p class="inlinelink">let num = 5;<br/>
+                            let is_zero = (num == 0); // inferred as bool</p>
+    <p>
+        Variable <em>num</em> isn't zero, so variable <em>is_zero</em> equates to false, with no annotation explicitly needed.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Characters in Rust are representations of Unicode, and accept all kinds of different characters and emoticons:
+    </p>
+    <p class="inlinelink">let letter = 'b';<br/>
+                            let j: char = 'あ';</p>
+</div>
+
+<div class="info">
+    <p>
+        <b>There are two string types in Rust:</b>
+    </p>
+    <ul class="list">
+        <li>&str: string <em>literals</em></li>
+        <ul>
+            <li>immutable</li>
+        </ul>
+        <li>String: string <em>structs</em></li>
+        <ul>
+            <li>mutable</li>
+        </ul>
+    </ul>
+</div>
+
+<div class="info">
+    <p>
+        Aside from having different mutability, these two types behave very differently from each other, and this difference will be explained in much more detail in later sections.
+    </p>
+    
+
 </div>
 
 </div>

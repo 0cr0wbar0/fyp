@@ -29,7 +29,40 @@
 
 <div class="info">
     <p> 
-          
+        <b>All Rust variables are immutable by default.</b> The keyword <em>mut</em> must be used after <em>let</em> during assignment to create a mutable variable:
+    </p>
+    <p class="inlinelink">let mut number = 5;<br/>
+                          println!("{}", number); // prints '5'<br/>
+                          number = 10;<br/>
+                          println!("{}", number); // prints '10'</p>
+</div>
+
+<div class="info">
+    <p>
+        The above example also contains some instances of <br/> println!(), one of Rust's <b>macros</b>
+         (covered in more detail later). println!() prints the value of a given variable, depending on its <b>data type</b>.
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        Using the keyword <em>const</em>, Rust variables can also be defined as constants, forcing complete immutability throughout the entire lifetime of a variable:
+    </p>
+    <p class="inlinelink">const FORTY_TWO: u8 = 20 + 12 + 10;</p>
+    <p>
+        The piece of syntax involving the colon before the equals sign will be explained in the next section.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Constants can be defined at the very beginning of a Rust script, making them ideal for defining a value that has to be known and used across a whole program.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        To completely ensure that constants stay immutable, it is impossible for a constant to have a value that can't be calculated at compile-time.
     </p>
 </div>
 
@@ -37,7 +70,7 @@
 
 <div class="nav">
     <a href="https://fyp.cr0wbar.dev/fundamentals/1">&laquo; Variables</a>
-    <a href="https://fyp.cr0wbar.dev/fundamentals/3">Data Types &raquo;</a>
+    <a href="https://fyp.cr0wbar.dev/fundamentals/3">Primitive Data Types &raquo;</a>
 </div>
 
 </body>

@@ -92,6 +92,7 @@ body {
     background-color: #fca77c;
     padding-left: 20px;
     padding-right: 20px;
+    margin-bottom: 50px;
 }
 
 .header {
@@ -107,7 +108,7 @@ body {
     margin: 20px;
     background-color: #fca77c;
     padding: 20px;
-    max-width: 600px;
+    max-width: 800px;
 }
 
 .paddedinfo {
@@ -126,6 +127,8 @@ body {
     color: #facab1;
     max-width: 300px;
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .list li {
@@ -157,6 +160,36 @@ body {
 
 .inlinelink:hover {
     color: #ffd1bb;
+}
+
+.inline-err {
+    background-color: #571414;
+    border-radius: 10px;
+    color: #ff8c8c;
+    padding: 10px;
+}
+
+.inline-err:hover {
+    color: #ffcccc;
+}
+
+.animbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+    background-color: #fca77c;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.replaybutton {
+    border-radius: 10px;
+    background-color: #b04510;
+    border-color: #d05e26;
+    color: #f7bc9e;
+    font-size: 15px;
+    padding: 15px;
 }
 
 .box {
@@ -197,6 +230,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin: 25px;
 }
 
 .nav a {

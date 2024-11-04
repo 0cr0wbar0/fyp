@@ -29,14 +29,93 @@
 
 <div class="info">
     <p> 
-          
+        A struct is a simple Rust data structure, defined and customised by the programmer.
     </p>
+</div>
+
+<div class="info">
+    <p> 
+        Structs are made up of <em>fields</em>, internal pieces of data that also need their own data types:
+    </p>
+    <p class="inlinelink">
+        struct Train {<br/>
+            colour: &str, // Field definitions are separated by commas<br/>
+            num_of_coaches: i32,<br/>
+            max_speed_km/h: f64<br/>
+        }<br/>
+        <br/>
+        let t = Train {<br/>
+            colour: "Green",<br/>
+            num_of_coaches: 12,<br/>
+            max_speed_km/h: 109.125<br/>
+        }
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        Like with variables, each struct, and each field, also needs its own alias.
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        Struct fields can also be other structs:
+    </p>
+    <p class="inlinelink">
+        struct Driver {<br/>
+            name: &str,<br/>
+            years_of_exp: i32,<br/>
+            can_drive_diesel_trains: bool<br/>
+        }<br/>
+        <br/>
+        struct Train {<br/>
+            driver: Driver, // A driver assigned to a train<br/>
+            colour: &str,<br/>
+            num_of_coaches: i32,<br/>
+            max_speed_km/h: f64<br/>
+        }
+    </p>
+    <p class="inlinelink">
+        let d = Driver {<br/>
+            name: "Dave",<br/>
+            years_of_exp: 5,<br/>
+            can_drive_diesel_trains: false<br/>
+        }<br/>
+        <br/>
+        let new_t = Train {<br/>
+            driver: d,<br/>
+            colour: "Red",<br/>
+            num_of_coaches: 5,<br/>
+            max_speed_km/h: 149.55<br/>
+        }
+    </p>
+</div>
+
+<div class="info">
+    <p> 
+        <em>Enums</em>, short for enumerations, are tiny pieces of data that, similar to structs, are defined entirely by the programmer as a custom data type:
+    </p>
+    <p class="inlinelink">
+        enum Reviews {<br/>
+            Excellent,<br/>
+            Great,<br/>
+            Good,<br/>
+            Okay,<br/>
+            Bad,<br/>
+            Terrible<br/>
+        }
+    </p>
+</div>
+
+<div class="info">
+    <p>Unlike structs, however, enums can have their own fields be <em>defined inline as custom data types</em> (like with the above example).</p>
 </div>
 
 </div>
 
 <div class="nav">
-    <a href="https://fyp.cr0wbar.dev/fundamentals/3">&laquo; Data Types</a>
+    <a href="https://fyp.cr0wbar.dev/fundamentals/3">&laquo; Primitive Data Types</a>
     <a href="https://fyp.cr0wbar.dev/fundamentals/5">Functions & Control Flow &raquo;</a>
 </div>
 
