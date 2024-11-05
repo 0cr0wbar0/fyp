@@ -31,10 +31,10 @@
     <p> 
         <b>All Rust variables are immutable by default.</b> The keyword <em>mut</em> must be used after <em>let</em> during assignment to create a mutable variable:
     </p>
-    <p class="inlinelink">let mut number = 5;<br/>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+number+%3D+5%3B%0A++++println%21%28%22%7B%7D%22%2C+number%29%3B+%2F%2F+prints+%275%27%0A++++number+%3D+10%3B%0A++++println%21%28%22%7B%7D%22%2C+number%29%3B+%2F%2F+prints+%2710%27%0A%7D">let mut number = 5;<br/>
                           println!("{}", number); // prints '5'<br/>
                           number = 10;<br/>
-                          println!("{}", number); // prints '10'</p>
+                          println!("{}", number); // prints '10'</a></p>
 </div>
 
 <div class="info">
@@ -48,7 +48,7 @@
     <p> 
         Using the keyword <em>const</em>, Rust variables can also be defined as constants, forcing complete immutability throughout the entire lifetime of a variable:
     </p>
-    <p class="inlinelink">const FORTY_TWO: u8 = 20 + 12 + 10;</p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++const+FORTY_TWO%3A+u8+%3D+20+%2B+12+%2B+10%3B%0A%7D">const FORTY_TWO: u8 = 20 + 12 + 10;</a></p>
     <p>
         The piece of syntax involving the colon before the equals sign will be explained in the next section.
     </p>
@@ -56,7 +56,7 @@
 
 <div class="info">
     <p>
-        Constants can be defined at the very beginning of a Rust script, making them ideal for defining a value that has to be known and used across a whole program.
+        Constants can be defined at the very beginning of a Rust script, outside of any functions (explained later), making them ideal for defining a value that has to be known and used across a whole program.
     </p>
 </div>
 

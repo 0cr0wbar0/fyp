@@ -48,9 +48,47 @@
 
 <div class="info">
     <p> 
-        Unlike in C-derived languages, Rust does not allow for unassigned variables:
+        Rust does not allow for unassigned variables that are not <em>explicitly typed</em>:
     </p>
-    <p class="inlinelink"> <b>Does not compile:</b><br/> let variable_name; </p>
+    <p class="inlinelink"> <a class="inlinelink" href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+variable_name%3B%0A%7D">let variable_name;</a> </p>
+    <p class="inline-err">
+        error[E0282]: type annotations needed<br/>
+         --> src/main.rs:2:9<br/>
+          |<br/>
+        2 |     let variable_name;<br/>
+          |<br/>
+          |<br/>
+        help: consider giving `variable_name` an explicit type<br/>
+          |<br/>
+        2 |     let variable_name: /* Type */;<br/>
+          |<br/>                      
+          <br/>
+        For more information about this error, try `rustc --explain E0282`.<br/>
+        error: could not compile `playground` (bin "playground") due to 1 previous error</p>
+</div>
+
+<div class="info">
+    <p class="inlinelink">
+        <a class="inlinelink" href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+variable_name%3A+char%3B%0A%7D">let variable_name: char;</a>
+    </p>
+    <p>
+        The "char" after the colon in the above example is <b>not the value of the variable, but the data type.</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+    In Rust, explicit types for variables are specified after the variable name, separated from it by a colon, after which the actual value is specified with an equals sign:
+    </p>
+    <p class="inlinelink">
+        <a class="inlinelink" href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+variable_name%3A+char+%3D+%27b%27%3B%0A%7D">let variable_name: char = 'b';</a>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Rust's data types will be explained in more detail later in this chapter.
+    </p>
 </div>
 
 </div>

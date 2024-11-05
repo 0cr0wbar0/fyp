@@ -158,6 +158,15 @@ body {
     padding: 10px;
 }
 
+.inlinelink a {
+    color: #fca77c;
+    text-decoration: none;
+}
+
+.inlinelink a:hover {
+    color: #ffd1bb;
+}
+
 .inlinelink:hover {
     color: #ffd1bb;
 }
