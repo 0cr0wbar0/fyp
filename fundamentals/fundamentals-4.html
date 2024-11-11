@@ -93,7 +93,7 @@
 
 <div class="info">
     <p> 
-        <em>Enums</em>, short for enumerations, are tiny pieces of data that, similar to structs, are defined entirely by the programmer as a custom data type:
+        <em>Enums</em>, short for enumerations, are tiny pieces of data that, similar to structs, are defined entirely by the programmer as a custom data structure, and can only be one of <em>variants</em>:
     </p>
     <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++enum+Reviews+%7B%0A++++++++Excellent%2C%0A++++++++Great%2C%0A++++++++Good%2C%0A++++++++Okay%2C%0A++++++++Bad%2C%0A++++++++Terrible%0A++++%7D%0A%7D" target="_blank">
         enum Reviews {<br/>
@@ -108,7 +108,40 @@
 </div>
 
 <div class="info">
-    <p>Unlike structs, however, enums can have their own fields be <em>defined inline as custom data types</em> (like with the above example).</p>
+    <p>Enums can have their own variants be <em>defined inline as custom data types</em> (like with the above example). Variants with an alias but with no value are said to be of the <em>unit</em> type.</p>
+</div>
+
+<div class="info">
+    <p>
+        In a similar way to structs, enums can have multiple fields of different types and data structures:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++enum+OpcodeInts+%7B%0A++++++++++++RRQ+%3D+1%2C+%2F%2F+Variants+can+represent+hardcoded+values...%0A++++++++++++WRQ+%3D+2%2C%0A++++++++++++DATA+%3D+3%2C+%0A++++++++++++ACK+%3D+4%2C+%0A++++++++++++ERR+%3D+5+%0A++++++++%7D%0A++++++++%0A++++++++enum+Lengths+%7B+%0A++++++++++++One%28i32%29%2C+%2F%2F+...tuples+of+different+lengths...+%0A++++++++++++Two%28i32%2C+i32%29%2C+%0A++++++++++++Three%28i32%2C+i32%2C+i32%29%2C+%0A++++++++++++Four%28i32%2C+i32%2C+i32%2C+i32%29%2C+%0A++++++++++++Five%28i32%2C+i32%2C+i32%2C+i32%2C+i32%29+%0A++++++++%7D%0A++++++++%0A++++++++enum+Structs+%7B%0A++++++++++++Point+%7Bx%3A+i32%2C+y%3A+i32%7D%2C+%2F%2F+...and+structs%21%0A++++++++++++Precise3DPoint+%7Bx%3A+f32%2C+y%3A+f32%2C+z%3A+f32%7D%2C%0A++++++++%7D%0A++++++++%0A++++++++%23%5Brepr%28i32%29%5D%0A++++++++enum+Mix+%7B%0A++++++++++++Tuple%28f64%2C+f64%29%2C+%2F%2F+Enums+can+mix+these+types+together+as+well%0A++++++++++++Vehicle+%7Bcolour%3A+String%2C+num_of_wheels%3A+i32%7D%0A++++++++%7D%0A%7D" target="_blank">
+        enum OpcodeInts { <br/>
+            RRQ = 1, // Variants can represent hardcoded values... <br/>
+            WRQ = 2, <br/>
+            DATA = 3, <br/>
+            ACK = 4, <br/>
+            ERR = 5 <br/>
+        }<br/>
+        <br/>
+        enum Lengths { <br/>
+            One(i32), // ...tuples of different lengths... <br/>
+            Two(i32, i32), <br/>
+            Three(i32, i32, i32), <br/>
+            Four(i32, i32, i32, i32), <br/>
+            Five(i32, i32, i32, i32, i32) <br/>
+        }<br/>
+        <br/>
+        enum Structs {<br/>
+            Point {x: i32, y: i32}, // ...and structs!<br/>
+            Precise3DPoint {x: f32, y: f32, z: f32},<br/>
+        }<br/>
+        <br/>
+        enum Mix {<br/>
+            Tuple(f64, f64), // Enums can mix these types together as well<br/>
+            Vehicle {colour: String, num_of_wheels: i32}<br/>
+        }<br/></a>
+    </p>
 </div>
 
 </div>

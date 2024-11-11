@@ -48,7 +48,12 @@
     <p> 
         Using the keyword <em>const</em>, Rust variables can also be defined as constants, forcing complete immutability throughout the entire lifetime of a variable:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++const+FORTY_TWO%3A+u8+%3D+20+%2B+12+%2B+10%3B%0A%7D" target="_blank">const FORTY_TWO: u8 = 20 + 12 + 10;</a></p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=const+FORTY_TWO%3A+u8+%3D+20%2B12%2B10%3B%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+FORTY_TWO%29%0A%7D" target="_blank">
+        const FORTY_TWO: u8 = 20+12+10;<br/>
+        <br/>
+        fn main {<br/>
+            println!("{}", FORTY_TWO)<br/>
+        }</a></p>
     <p>
         The piece of syntax involving the colon before the equals sign will be explained in the next section.
     </p>

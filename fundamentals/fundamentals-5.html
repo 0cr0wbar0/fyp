@@ -29,7 +29,93 @@
 
 <div class="info">
     <p> 
-          
+        <b>Rust functions are private by default,</b> and are defined with the keyword <em>fn</em>:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+world%21%22%29%0A%7D" target="_blank">
+        fn main() {<br/>
+            println!("Hello, world!")<br/>
+        }<br/>
+    </a></p>
+    <p>The keyword <em>pub</em> must be used before <em>fn</em> in order to make a function public, and therefore accessible in other Rust programs.</p>
+</div>
+
+<div class="info">
+    <p>
+        Every Rust program needs a main function, which contains the only part of the program that will be executed. All other separately defined functions need to be included, or <em>called</em>, inside this function:  
+    </p>
+    <p class="inlinelink"><a>
+        fn main() { <br/>
+            println!("This is a string")<br/>
+        }<br/>
+        <br/>
+        fn hidden_string() {<br/>
+            println!("Ooh, secret string!") // Compiles, does not execute<br/>
+        }
+    </a></p>
+</div>
+
+<div class="info">
+    <p>
+        Rust functions can implicitly return the last found value in the function body as an expression, as long as the return value is explicitly typed
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+character%28%29%29%0A%7D%0A%0Afn+character%28%29+%7B%0A++++%27f%27+%2F%2F+Return+value+of+function+without+semicolon%2C+recognised+as+expression%0A%7D" target="_blank">
+        fn main() {<br/>
+            println!("{}", character())<br/>
+        }<br/>
+        <br/>
+        fn character() {<br/>
+            'f' // Return value of function without semicolon, recognised as expression<br/>
+        }<br/>
+    </a></p>
+    <p class="inline-err">
+        error[E0277]: `()` doesn't implement `std::fmt::Display`<br/>
+        --> src/main.rs:2:20<br/>
+        |<br/>
+        2 |     println!("{}", character())<br/>
+        |                    `()` cannot be formatted with the default formatter<br/>
+        |<br/>
+        = help: the trait `std::fmt::Display` is not implemented for `()`<br/>
+        <br/>
+        error[E0308]: mismatched types<br/>
+        --> src/main.rs:6:5<br/>
+        |<br/>
+        5 | fn character() {<br/>
+        |               - help: try adding a return type: `-> char`<br/>
+        6 |     'f' // Return value of function without semicolon<br/>
+        |     ^^^ expected `()`, found `char`<br/>
+        <br/>
+        Some errors have detailed explanations: E0277, E0308.<br/>
+        For more information about an error, try `rustc --explain E0277`.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Because the return value wasn't explicitly given for the character() function, and because it's trying to return an expression, the function returned the empty <em>unit type</em>, defined as ().
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Functions can be written to take parameters, variables defined in the brackets next to the function name that can then be used in the body of a function:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+reverse_nums%289%2C+10%29%29%0A%7D%0A%0Afn+reverse_nums%28i%3A+i32%2C+j%3A+i32%29+-%3E+%28i32%2C+i32%29+%7B%0A++++%28j%2C+i%29%0A%7D" target="_blank">
+        fn main() {<br/>
+            println!("{:?}", reverse_nums(9, 10))<br/>
+        }<br/>
+        <br/>
+        fn reverse_nums(i: i32, j: i32) -> (i32, i32) {<br/>
+            (j, i)<br/>
+        }
+    </a></p>
+    <p>
+        Function parameters <em>always need explicit type definitions.</em>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Note the syntax between the curly brackets in the string formatting of the println!() call in the above example. This prints the supplied function call in a <em>debug</em> view, allowing for the printing of data structures like structs, enums and tuples (explained later).
     </p>
 </div>
 
