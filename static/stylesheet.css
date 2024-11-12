@@ -156,6 +156,7 @@ body {
     border-radius: 10px;
     color: #fca77c;
     padding: 10px;
+    tab-size: 4;
 }
 
 .inlinelink a {
