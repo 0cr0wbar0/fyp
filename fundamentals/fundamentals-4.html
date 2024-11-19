@@ -62,7 +62,7 @@
     <p> 
         Struct fields can also be other structs:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++struct+Driver+%7B%0A++++++++name%3A+String%2C%0A++++++++years_of_exp%3A+i32%2C%0A++++++++can_drive_diesel_trains%3A+bool%0A++++++++%7D%0A++++++++%0A++++++++struct+Train+%7B%0A++++++++++++driver%3A+Driver%2C+%2F%2F+A+driver+assigned+to+a+train%0A++++++++++++colour%3A+String%2C%0A++++++++++++num_of_coaches%3A+i32%2C%0A++++++++++++max_speed_kmh%3A+f64%0A++++++++%7D%0A++++++++%0A++++++++let+d+%3D+Driver+%7B%0A++++++++++++name%3A+String%3A%3Afrom%28%22Dave%22%29%2C%0A++++++++++++years_of_exp%3A+5%2C%0A++++++++++++can_drive_diesel_trains%3A+false%0A++++++++%7D%3B%0A++++++++%0A++++++++let+new_t+%3D+Train+%7B%0A++++++++++++driver%3A+d%2C%0A++++++++++++colour%3A+String%3A%3Afrom%28%22Red%22%29%2C%0A++++++++++++num_of_coaches%3A+5%2C%0A++++++++++++max_speed_kmh%3A+149.55%0A++++++++%7D%3B%0A%7D" target="_blank">
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Driver+%7B%0A++++name%3A+String%2C%0A++++years_of_exp%3A+i32%2C%0A++++can_drive_diesel_trains%3A+bool%0A%7D%0A++++++++%0Astruct+Train+%7B%0A++++driver%3A+Driver%2C+%2F%2F+A+driver+assigned+to+a+train%0A++++colour%3A+String%2C%0A++++num_of_coaches%3A+i32%2C%0A++++max_speed_kmh%3A+f64%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+d+%3D+Driver+%7B%0A++++++++name%3A+String%3A%3Afrom%28%22Dave%22%29%2C%0A++++++++years_of_exp%3A+5%2C%0A++++++++can_drive_diesel_trains%3A+false%0A++++%7D%3B%0A++++++++%0A++++let+new_t+%3D+Train+%7B%0A++++++++driver%3A+d%2C%0A++++++++colour%3A+String%3A%3Afrom%28%22Red%22%29%2C%0A++++++++num_of_coaches%3A+5%2C%0A++++++++max_speed_kmh%3A+149.55%0A++++%7D%3B%0A++++%0A%7D+" target="_blank">
         struct Driver {<br/>
             &nbsp;name: String,<br/>
             &nbsp;years_of_exp: i32,<br/>
@@ -76,18 +76,20 @@
             &nbsp;max_speed_kmh: f64<br/>
         }<br/>
         <br/>
-        let d = Driver {<br/>
-            &nbsp;name: String::from("Dave"),<br/>
-            &nbsp;years_of_exp: 5,<br/>
-            &nbsp;can_drive_diesel_trains: false<br/>
-        };<br/>
+        fn main() {<br/>
+            &nbsp;let d = Driver {<br/>
+            &nbsp;&nbsp;name: String::from("Dave"),<br/>
+            &nbsp;&nbsp;years_of_exp: 5,<br/>
+            &nbsp;&nbsp;can_drive_diesel_trains: false<br/>
+            &nbsp;};<br/>
         <br/>
-        let new_t = Train {<br/>
-            &nbsp;driver: d,<br/>
-            &nbsp;colour: String::from("Red"),<br/>
-            &nbsp;num_of_coaches: 5,<br/>
-            &nbsp;max_speed_kmh: 149.55<br/>
-        };</a>
+            &nbsp;let new_t = Train {<br/>
+            &nbsp;&nbsp;driver: d,<br/>
+            &nbsp;&nbsp;colour: String::from("Red"),<br/>
+            &nbsp;&nbsp;num_of_coaches: 5,<br/>
+            &nbsp;&nbsp;max_speed_kmh: 149.55<br/>
+            &nbsp;};<br/>
+        }</a>
     </p>
 </div>
 
@@ -95,7 +97,7 @@
     <p> 
         <em>Enums</em>, short for enumerations, are tiny pieces of data that, similar to structs, are defined entirely by the programmer as a custom data structure, and can only be one of <em>variants</em>:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++enum+Reviews+%7B%0A++++++++Excellent%2C%0A++++++++Great%2C%0A++++++++Good%2C%0A++++++++Okay%2C%0A++++++++Bad%2C%0A++++++++Terrible%0A++++%7D%0A%7D" target="_blank">
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Reviews+%7B%0A++++Excellent%2C%0A++++Great%2C%0A++++Good%2C%0A++++Okay%2C%0A++++Bad%2C%0A++++Terrible%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+bad_review+%3D+Reviews%3A%3ABad%3B%0A%7D" target="_blank">
         enum Reviews {<br/>
             &nbsp;Excellent,<br/>
             &nbsp;Great,<br/>
@@ -103,6 +105,10 @@
             &nbsp;Okay,<br/>
             &nbsp;Bad,<br/>
             &nbsp;Terrible<br/>
+        }<br/>
+        
+        fn main() {<br/>
+        &nbsp;let bad_review = Reviews::Bad;<br/>
         }</a>
     </p>
 </div>
@@ -115,7 +121,7 @@
     <p>
         In a similar way to structs, enums can have multiple fields of different types and data structures:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++enum+OpcodeInts+%7B%0A++++++++++++RRQ+%3D+1%2C+%2F%2F+Variants+can+represent+hardcoded+values...%0A++++++++++++WRQ+%3D+2%2C%0A++++++++++++DATA+%3D+3%2C+%0A++++++++++++ACK+%3D+4%2C+%0A++++++++++++ERR+%3D+5+%0A++++++++%7D%0A++++++++%0A++++++++enum+Lengths+%7B+%0A++++++++++++One%28i32%29%2C+%2F%2F+...tuples+of+different+lengths...+%0A++++++++++++Two%28i32%2C+i32%29%2C+%0A++++++++++++Three%28i32%2C+i32%2C+i32%29%2C+%0A++++++++++++Four%28i32%2C+i32%2C+i32%2C+i32%29%2C+%0A++++++++++++Five%28i32%2C+i32%2C+i32%2C+i32%2C+i32%29+%0A++++++++%7D%0A++++++++%0A++++++++enum+Structs+%7B%0A++++++++++++Point+%7Bx%3A+i32%2C+y%3A+i32%7D%2C+%2F%2F+...and+structs%21%0A++++++++++++Precise3DPoint+%7Bx%3A+f32%2C+y%3A+f32%2C+z%3A+f32%7D%2C%0A++++++++%7D%0A++++++++%0A++++++++%23%5Brepr%28i32%29%5D%0A++++++++enum+Mix+%7B%0A++++++++++++Tuple%28f64%2C+f64%29%2C+%2F%2F+Enums+can+mix+these+types+together+as+well%0A++++++++++++Vehicle+%7Bcolour%3A+String%2C+num_of_wheels%3A+i32%7D%0A++++++++%7D%0A%7D" target="_blank">
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+OpcodeInts+%7B%0A+RRQ+%3D+1%2C+%2F%2F+Variants+can+represent+hardcoded+values...%0A+WRQ+%3D+2%2C%0A+DATA+%3D+3%2C%0A+ACK+%3D+4%2C%0A+ERR+%3D+5%0A%7D%0A%0Aenum+Lengths+%7B%0A+One%28i32%29%2C+%2F%2F+...tuples+of+different+lengths...%0A+Two%28i32%2C+i32%29%2C%0A+Three%28i32%2C+i32%2C+i32%29%2C%0A+Four%28i32%2C+i32%2C+i32%2C+i32%29%2C%0A+Five%28i32%2C+i32%2C+i32%2C+i32%2C+i32%29%0A%7D%0A%0Aenum+Structs+%7B%0A+Point+%7Bx%3A+i32%2C+y%3A+i32%7D%2C+%2F%2F+...and+structs%21%0A+Precise3DPoint+%7Bx%3A+f32%2C+y%3A+f32%2C+z%3A+f32%7D%2C%0A%7D%0A%0Aenum+Mix+%7B%0A+Tuple%28f64%2C+f64%29%2C+%2F%2F+Enums+can+mix+these+types+together+as+well%0A+Vehicle+%7Bcolour%3A+String%2C+num_of_wheels%3A+i32%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A+let+opcode+%3D+OpcodeInts%3A%3ADATA%3B%0A+let+three_d_point+%3D+Structs%3A%3APrecise3DPoint%7B%0A++++x%3A+28.17%2C+%0A++++y%3A+34.78%2C+%0A++++z%3A+97.12%0A+%7D%3B%0A+let+tuple_example+%3D+Mix%3A%3ATuple%2854.982%2C+34.195%29%3B%0A%7D" target="_blank">
         enum OpcodeInts { <br/>
             &nbsp;RRQ = 1, // Variants can represent hardcoded values... <br/>
             &nbsp;WRQ = 2, <br/>
@@ -140,7 +146,18 @@
         enum Mix {<br/>
             &nbsp;Tuple(f64, f64), // Enums can mix these types together as well<br/>
             &nbsp;Vehicle {colour: String, num_of_wheels: i32}<br/>
-        }<br/></a>
+        }<br/>
+        <br/>
+        fn main() {<br/>
+            &nbsp;let opcode = OpcodeInts::DATA;<br/>
+            &nbsp;let three_d_point = Structs::Precise3DPoint {<br/>
+                &nbsp;&nbsp;x: 28.17,<br/>
+                &nbsp;&nbsp;y: 34.78,<br/>
+                &nbsp;&nbsp;z: 97.12<br/>
+                &nbsp;};<br/>
+            &nbsp;let tuple_example = Mix::Tuple(54.982, 34.195);<br/>
+        }
+        </a>
     </p>
 </div>
 
