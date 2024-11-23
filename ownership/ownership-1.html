@@ -29,7 +29,41 @@
 
 <div class="info">
     <p>
-        
+        Scopes, the areas of a program in which given variables are valid for access, are an absolutely vital component of Rust's guarantees of memory safety.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Separately from functions, scopes can be explicitly defined in Rust code with curly brackets:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+n%3A+i32+%3D+10%3B%0A++++%7B%0A++++++++let+n%3A+i32+%3D+10+*+20%3B%0A++++++++println%21%28%22The+scoped+value+of+n+is+%7B%7D%22%2C+n%29%3B%0A++++%7D%0A++++println%21%28%22The+unscoped+value+of+n+is+%7B%7D%22%2C+n%29%3B%0A%7D" target="_blank">
+        fn main() {<br/>
+        &nbsp;let n: i32 = 10;<br/>
+        &nbsp;{<br/>
+        &nbsp;&nbsp;let n: i32 = 10 * 20;<br/>
+        &nbsp;&nbsp;println!("The scoped value of n is {}", n);<br/>
+        &nbsp;}<br/>
+        &nbsp;println!("The unscoped value of n is {}", n);<br/>
+        }
+    </a></p>
+</div>
+
+<div class="info">
+    <p>
+        The above example is an instance of <em>shadowing</em>: the variable <em>n</em> is defined once in the main scope of the main function, then a new variable <em>n</em> is defined in the inner scope with a different value.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        These two variables are entirely separate from one another, and they're only allowed to coexist in this piece of code because of the scope that separates them.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Once the inner scope finishes execution, the variable defined inside it is completely dropped, meaning that when the original variable <em>n</em> is printed, it has the value assigned to it independently of the inner scope.
     </p>
 </div>
 
