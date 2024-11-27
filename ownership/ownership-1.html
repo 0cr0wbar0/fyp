@@ -67,6 +67,26 @@
     </p>
 </div>
 
+<div class="info">
+    <p>
+        Rust enforces the <b>Resource Acquisition Is Initialisation (RAII)</b> technique automatically during execution.
+        This is an execution model commonly used in C++ programs that ties the window of access to a variable to the period of time between the <em>creation</em> of the variable, and the point at which the variable <em>goes out of scope</em>.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation visualising Rust compiler destructing an out-of-scope variable goes here</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Rust has a built-in <em>trait</em> (a set of rules that <em>modify the behaviour of a given data type</em>, explained in more detail later) called <em>Drop</em>.
+        This trait implements a function, drop(), on all data types, and the Rust runtime uses this function to delete out-of-scope variables from memory, no matter their data type.
+    </p>
+</div>
+
 </div>
 
 <div class="nav">
