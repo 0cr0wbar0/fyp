@@ -87,6 +87,45 @@
     </p>
 </div>
 
+<div class="info">
+    <p>
+        It is completely forbidden to manually call the drop() function on any value whatsoever:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+ToDrop+%7B%0A++++i%3A+i32%0A%7D%0A%0A%2F%2F%2F+This+impl+tries+to+manually+implement+custom+destruction%0A%2F%2F%2F+behaviour+for+ToDrop+struct%0Aimpl+Drop+for+ToDrop+%7B+%0A++++fn+drop%28%26mut+self%29+%7B%0A++++++++%2F%2F+some+code+to+execute+when+struct+is+dropped%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+i+%3D+ToDrop+%7B+i%3A+20+%7D%3B%0A++++i.drop%28%29%3B%0A%7D" target="_blank">
+        struct ToDrop {<br/>
+        &nbsp;i: i32<br/>
+        }<br/>
+        <br/>
+        /// This impl tries to manually implement custom destruction<br/>
+        /// behaviour for ToDrop struct<br/>
+        impl Drop for ToDrop { <br/>
+        &nbsp;fn drop(&mut self) {<br/>
+        &nbsp;&nbsp;// some code to execute when struct is dropped<br/>
+        &nbsp;}<br/>
+        }<br/>
+        <br/>
+        fn main() {<br/>
+        &nbsp;let i = ToDrop { i: 20 };<br/>
+        &nbsp;i.drop();<br/>
+        }<br/>
+    </a></p>
+    <p class="inline-err">
+        error[E0040]: explicit use of destructor method<br/>
+        --> src/main.rs:15:7<br/>
+        |<br/>
+        15 |  i.drop();<br/>
+        |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^^^^ explicit destructor calls not allowed<br/>
+        |<br/>
+        help: consider using `drop` function<br/>
+        |<br/>
+        15 |     drop(i);<br/>
+        |&nbsp;&nbsp;&nbsp;&nbsp;+++++ ~<br/>
+        <br/>
+        For more information about this error, try `rustc --explain E0040`.<br/>
+        error: could not compile `temp` (bin "temp") due to 1 previous error
+    </p>
+</div>
+
 </div>
 
 <div class="nav">
@@ -102,3 +141,4 @@
 </audio>
 
 </html>
+<br/>
