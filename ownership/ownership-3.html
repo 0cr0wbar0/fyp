@@ -29,7 +29,128 @@
 
 <div class="info">
     <p>
-        
+        Like for most programming languages, the Rust runtime manages its stored variables, functions, macros and other such pieces of data in two distinct areas of memory: <b>stack</b> memory and <b>heap</b> memory.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Whether a variable is stored in the stack or in the heap depends on its data type, particularly, <em>whether the size of a variable of that data type can be known at compile-time</em>.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Learning this distinction may seem daunting, but understanding it will also further understanding of Rust's ownership system, since memory management is handled with ownership in such a way 
+        that most Rust programmers won't need to concern themselves with it, even without a garbage collector.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Stack memory:
+        <ul class="list">
+            <li>is a <b>last-in-first-out (LIFO)</b> memory space; for some value to be removed, every value that entered after it must be removed first</li>
+            <li>stores values with sizes that are <b>already known</b> and <b>are unchangeable</b></li>
+            <li><em>pushes</em> (inserts) values when assigned and <em>pops</em> (removes) them from the stack when they're destructed</li>
+            <li>push & pop operations are very fast, as the position from which to add or remove never changes</li>
+        </ul>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation demonstrating integer variables pushing to, and popping from, the stack, goes here</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Heap memory:
+        <ul class="list">
+            <li>is a less structured, more open memory space</li>
+            <li>stores values with <b>unknown initial sizes</b> that <b>may change during execution</b></li>
+            <li>space is <b>allocated and deallocated</b> instead of pushed and popped</li>
+            <li>allocation is slower and more expensive than stack operations, as the runtime constantly needs to distinguish between used memory and free memory</li>
+        </ul>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation demonstrating a struct being allocated to, and being deallocated from, the heap, goes here</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        As mentioned on the previous page, C and C++ allow programmers to handle memory manually. More specifically, C allows programmers to manually <em>allocate, reallocate and deallocate spaces on the heap</em>. 
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Rust, on the other hand, will automatically perform these operations on the heap, depending on the ownership status of a value.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Recall the two string data types mentioned in the last chapter: since String structs are <em>mutable</em>, they are allocated in heap memory, whereas string slices (explained in more detail on the next page) are <em>immutable</em>, and pushed to the stack during execution.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Specifically, String structs are allocated on the heap during their lifetimes, but the actual body of the string is <em>stored on the stack</em>, and the struct has a memory pointer to the first character of the string.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation of String struct creation goes here</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        When the struct is assigned a new set of characters, these characters are simply pushed onto the stack, and the String struct's pointer is moved to those new characters. The old sequence of characters subsequently go out of scope, and are eventually popped from the stack.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation of String struct reassignment goes here</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        However, in the case of one String struct being assigned to another, the one taking the value will have it pointer moved to the <em>same memory as the struct being assigned</em>. This is to save memory, and prevent bloat on the stack:
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation of String struct memory-saving goes here</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Values stored exclusively on the stack are known by the compiler to never change in storage size during execution, such as integers, booleans and single characters. However, if these need to be stored in a dynamic context for whatever reason, Rust offers a <em>generic</em> (explained later) called <b>Box&lt;&gt;.</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        The Box generic allocates heap memory for a given variable, before pushing a pointer to this memory space onto the stack. A variable is said to be <b>boxed</b> if it is being explicitly stored on the heap using this generic, when it would normally be stored on the stack.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation of boxed integer being created goes here</b>
     </p>
 </div>
 

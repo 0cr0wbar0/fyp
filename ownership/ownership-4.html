@@ -29,7 +29,25 @@
 
 <div class="info">
     <p>
-        
+        Where String structs consist of an allocated place on the heap pointing to a sequence of characters on the stack, string slices are only the latter part: an <em>ungrowable, fixed sequence</em> of Unicode characters pushed to the stack in order.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P - Animation of string slice assignment goes here</b>
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        String slices aren't the only kind of slice. Generally, slices in Rust are <em>references to sequences of memory cells on the stack</em>. Vectors are structs stored on the heap, and are mutable, but <em>arrays</em> in Rust are immutable slices of stack memory.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        <b>W.I.P. - Animation of array slice creation goes here</b>
     </p>
 </div>
 
