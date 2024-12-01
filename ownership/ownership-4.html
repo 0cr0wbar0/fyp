@@ -29,7 +29,7 @@
 
 <div class="info">
     <p>
-        Where String structs consist of an allocated place on the heap pointing to a sequence of characters on the stack, string slices are only the latter part: an <em>ungrowable, fixed sequence</em> of Unicode characters pushed to the stack in order.
+        Where String structs consist of an allocated place in heap memory pointing to a sequence of characters on the stack, string slices (denoted as a type with &str) are only the latter part: an <em>ungrowable, fixed sequence</em> of Unicode characters pushed to the stack in order.
     </p>
 </div>
 
@@ -41,7 +41,19 @@
 
 <div class="info">
     <p>
-        String slices aren't the only kind of slice. Generally, slices in Rust are <em>references to sequences of memory cells on the stack</em>. Vectors are structs stored on the heap, and are mutable, but <em>arrays</em> in Rust are immutable slices of stack memory.
+        String slices aren't the only kind of slice. Generally, slices in Rust are <em>references to sequences of memory cells on the stack</em>. 
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Vectors are structs stored on the heap, and are mutable, but <em>arrays</em> in Rust are immutable sequences of stack memory.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Rust arrays (denoted with [T], where T is a primitive type) and slices of Rust arrays (denoted with &[T]) are so similar in data structure that all methods implemented for array slices can be used on unsliced arrays.
     </p>
 </div>
 
