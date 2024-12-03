@@ -188,9 +188,13 @@ body {
     flex-direction: column;
     justify-content: center;
     margin: 20px;
-    background-color: #fca77c;
+    background-color: #ff935d;
     padding: 20px;
     max-width: 800px;
+}
+
+.animbox img {
+    min-width: 800px;
 }
 
 .replaybutton {
