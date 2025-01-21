@@ -29,8 +29,54 @@
 
 <div class="info">
     <p>
-        
+        The need for all match statements in Rust to be completely exhaustive for all possible matches can, in some cases, lead to boilerplate code that may be annoying to write.
     </p>
+</div>
+
+<div class="info">
+    <p>
+        For situations where pattern matching is being used on a value, and <em>not all matches need to be considered</em> when checking that value, if-let statements will likely be better suited for the task.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        An if-let statement is a control flow statement that defines a <em>single</em> matching pattern and then checks whether or not a given variable matches it:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+num%3A+i32+%3D+5%3B%0A++++if+let+5+%3D+num+%7B%0A++++++++println%21%28%22Correct+value%21%22%29%0A++++%7D+else+%7B%0A++++++++println%21%28%22Incorrect+value%21%22%29%0A++++%7D%0A%7D" target="_blank">
+        fn main() {<br/>
+        &nbsp;let num: i32 = 5;<br/>
+        &nbsp;if let 5 = num {<br/>
+        &nbsp;&nbsp;println!("Correct value!")<br/>
+        &nbsp;} else {<br/>
+        &nbsp;&nbsp;println!("Incorrect value!")<br/>
+        &nbsp;}<br/>
+        }
+    </a></p>
+    <p>The above example is similar to the first example given for match statements on the previous page, with the exception that this is exclusively checking if the variable <em>num</em> exactly matches the value 5, and for no other matching pattern.</p>
+</div>
+
+<div class="info">
+    <p>
+        If-let statements can, of course, work with discriminants in enums as well. The below example is a modified example regarding enums from the previous page:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Vehicles+%7B%0A++++Car%2C%0A++++Boat%2C%0A++++Train%2C%0A++++Plane%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+v+%3D+Vehicles%3A%3ATrain%3B%0A++++if+let+Vehicles%3A%3ACar+%3D+v+%7B%0A++++++++println%21%28%22This+is+a+car%21%22%29%0A++++%7D+else+%7B%0A++++++++println%21%28%22This+isn%27t+a+car%21%22%29%0A++++%7D%0A%7D" target="_blank">
+        enum Vehicles {<br/>
+        &nbsp;Car,<br/>
+        &nbsp;Boat,<br/>
+        &nbsp;Train,<br/>
+        &nbsp;Plane<br/>
+        }<br/>
+        <br/>
+        fn main() {<br/>
+        &nbsp;let v = Vehicles::Train;<br/>
+        &nbsp;if let Vehicles::Car = v {<br/>
+        &nbsp;&nbsp;println!("This is a car!")<br/>
+        &nbsp;} else {<br/>
+        &nbsp;&nbsp;println!("This isn't a car!")<br/>
+        &nbsp;}<br/>
+        }
+    </a></p>
 </div>
 
 </div>
