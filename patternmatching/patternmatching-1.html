@@ -33,6 +33,7 @@
         <ul class="list">
             <li>the value of a variable</li>
             <li>the discriminant (variant type) of an enum</li>
+            <li>the value and status of an Option type (explained later)</li>
         </ul>
     </p>
 </div>
@@ -74,7 +75,7 @@
 <div class="info">
     <p>
         As a side note, the macro being called in the wildcard clause is used to explicitly define areas of code that are manually known to be unreachable, hence its name. 
-        If the programmer is wrong, and the code explicitly defined as unreachable using this macro does indeed turn out to be reachable, the macro will panic, with an error message that can be passed to it as a string.
+        If the programmer is wrong, and the code explicitly defined as unreachable using this macro is indeed reached and executed during runtime, the macro will panic, with an error message that can be passed to it as a string.
     </p>
 </div>
 

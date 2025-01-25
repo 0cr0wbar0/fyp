@@ -79,11 +79,67 @@
     </a></p>
 </div>
 
+<div class="info">
+    <p>
+        Regarding enum structs (discriminants of an enum defined as structs), the primary way to <em>access or edit their fields</em> is through pattern matching:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Structs+%7B%0A++++Point+%7B+x%3A+i32%2C+y%3A+i32+%7D%2C%0A++++Precise3DPoint+%7B+x%3A+f64%2C+y%3A+f64%2C+z%3A+f64+%7D%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+strct+%3D+Structs%3A%3APrecise3DPoint+%7B%0A++++++++x%3A+23.5567%2C%0A++++++++y%3A+43.2343%2C%0A++++++++z%3A+98.7987%0A++++%7D%3B%0A++++if+let+Structs%3A%3APrecise3DPoint+%7B%0A++++++++x%3A+match_x%2C%0A++++++++y%3A+match_y%2C%0A++++++++z%3A+match_z%0A++++%7D+%3D+strct+%7B%0A++++++++println%21%28%22%7B%7D+%7B%7D+%7B%7D%22%2C+match_x%2C+match_y%2C+match_z%29%0A++++%7D%0A%7D%0A" target="_blank">
+        enum Structs {<br/>
+        &nbsp;Point { x: i32, y: i32 },<br/>
+        &nbsp;Precise3DPoint { x: f64, y: f64, z: f64 },<br/>
+        }<br/>
+        <br/>
+        fn main() {<br/>
+        &nbsp;let strct = Structs::Precise3DPoint {<br/>
+        &nbsp;&nbsp;x: 23.5567,<br/>
+        &nbsp;&nbsp;y: 43.2343,<br/>
+        &nbsp;&nbsp;z: 98.7987<br/>
+        &nbsp;};<br/>
+        &nbsp;if let Structs::Precise3DPoint {<br/>
+        &nbsp;&nbsp;x: match_x,<br/>
+        &nbsp;&nbsp;y: match_y,<br/>
+        &nbsp;&nbsp;z: match_z<br/>
+        &nbsp;} = strct {<br/>
+        &nbsp;&nbsp;println!("{} {} {}", match_x, match_y, match_z)<br/>
+        &nbsp;}<br/>
+        }
+        
+    </a></p>
+    <p>
+       Temporary bindings are made to successful matches, which can then be accessed and edited. In the above example, the aliases <em>match_x</em> through to <em>match_z</em> represent these bindings.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Additionally, when matching on enum structs, some of the fields being matched on can be <em>optionally omitted with range syntax</em> (double full stop) if they are irrelevant to the desired match:
+    </p>
+    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Structs+%7B%0A++++Point+%7B+x%3A+i32%2C+y%3A+i32+%7D%2C%0A++++Precise3DPoint+%7B+x%3A+f64%2C+y%3A+f64%2C+z%3A+f64+%7D%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+strct+%3D+Structs%3A%3APoint+%7B+%0A++++++++x%3A+23%2C+%0A++++++++y%3A+43+%0A++++%7D%3B%0A++++if+let+Structs%3A%3APoint+%7B+%0A++++++++x%3A+match_x%2C+%0A++++++++..+%0A++++%7D+%3D+strct+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+match_x%29%0A++++%7D%0A%7D%0A" target="_blank">
+        enum Structs {<br/>
+        &nbsp;Point { x: i32, y: i32 },<br/>
+        &nbsp;Precise3DPoint { x: f64, y: f64, z: f64 },<br/>
+        }<br/>
+        <br/>
+        fn main() {<br/>
+        &nbsp;let strct = Structs::Point {<br/>
+        &nbsp;&nbsp;x: 23,<br/>
+        &nbsp;&nbsp;y: 43<br/>
+        &nbsp;};<br/>
+        &nbsp;if let Structs::Point {<br/>
+        &nbsp;&nbsp;x: match_x,<br/>
+        &nbsp;&nbsp;..<br/>
+        &nbsp;} = strct {<br/>
+        &nbsp;&nbsp;println!("{}", match_x)<br/>
+        &nbsp;}<br/>
+        }
+    </a></p>
+</div>
+
 </div>
 
 <div class="nav">
     <a href="https://fyp.cr0wbar.dev/patternmatching/1">&laquo; Match Statements</a>
-    <a href="https://fyp.cr0wbar.dev/patternmatching/quiz">Quiz &raquo;</a>
+    <a href="https://fyp.cr0wbar.dev/patternmatching/3">The Option Enum &raquo;</a>
 </div>
 
 </body>
