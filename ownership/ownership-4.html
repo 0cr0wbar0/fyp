@@ -47,19 +47,25 @@
 
 <div class="info">
     <p>
-        Vectors are structs stored on the heap, and are mutable, but <em>arrays</em> in Rust are immutable sequences of stack memory.
+        Vectors are structs stored on the heap, and are mutable, but <em>arrays</em> in Rust are immutable sequences of stack memory:
+    </p>
+</div>
+
+<div class="animbox">
+    <p>
+        <img src="../static/array.gif">
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        The syntax used to define the variable <em>arr</em> in the above example is shorthand for defining vectors and arrays in Rust: <em>[1;5]</em> means an array with five elements which all equal 1.
     </p>
 </div>
 
 <div class="info">
     <p>
         Rust arrays (denoted with [T], where T is a primitive type) and slices of Rust arrays (denoted with &[T]) are so similar in data structure that all methods implemented for array slices can be used on unsliced arrays.
-    </p>
-</div>
-
-<div class="info">
-    <p>
-        <b>W.I.P. - Animation of array slice creation goes here</b>
     </p>
 </div>
 
