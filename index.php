@@ -32,6 +32,14 @@
         require __DIR__ . '/' . $page . '/' . $page . '-quiz.html';
     });
 
+    $router->map('GET', '/static/*', function() {
+        require __DIR__ . '/home.html';
+    });
+
+    $router->map('GET', '/vendor/*', function() {
+        require __DIR__ . '/home.html';
+    });
+
     $match = $router->match();
 
     if( is_array($match) && is_callable( $match['target'] ) ) {
