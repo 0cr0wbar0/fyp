@@ -139,7 +139,7 @@
 
 <div class="info">
     <p>
-        Functions can also be <em>implemented on structs and enums</em>:
+        Functions can also be <em>implemented on structs and enums,</em> as methods, with the <em>impl</em> keyword:
     </p>
     <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Train+%7B%0A++++colour%3A+String%2C%0A++++num_of_coaches%3A+i32%2C%0A++++max_speed_kmh%3A+f64%0A%7D%0A%0Aimpl+Train+%7B%0A++++pub+fn+how_many_coaches%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.num_of_coaches%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+t+%3D+Train+%7B%0A++++++++colour%3A+String%3A%3Afrom%28%22Green%22%29%2C%0A++++++++num_of_coaches%3A+5%2C%0A++++++++max_speed_kmh%3A+120.05%0A++++%7D%3B%0A++++%0A++++t.how_many_coaches%28%29%3B%0A%7D" target="_blank">
         struct Train {<br/>
@@ -168,7 +168,7 @@
 
 <div class="info">
     <p>
-        The syntax involving the ampersand symbol (&) in the above example will be fully explained in the next chapter. For now, note that in order for the Train struct <em>t</em> to access its own fields, it has to get them using the <em>self</em> keyword. This allows structs and enums to refer to themselves in functions, and perform actions like calling other functions on themselves.
+        The syntax involving the ampersand symbol (&) in the above example will be fully explained in the next chapter. For now, note that in order for the Train struct <em>t</em> to access its own fields, it has to get them using the <em>self</em> keyword. This allows structs and enums to refer to themselves in their methods, and perform actions like calling other functions and methods on themselves.
     </p>
 </div>
 
@@ -200,7 +200,7 @@
 
 <div class="info">
     <p>
-        The main feature that sets function-like macros apart from functions is that macros can take <b>variable numbers of parameters as input:</b>
+        The main feature that sets function-like macros apart from functions is that macros can take <b>variable numbers of arguments as input:</b>
     </p>
     <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+world%21%22%29%3B%0A++++%2F%2F+One+argument+given+to+println%21%28%29%0A%0A++++let+x+%3D+5%3B%0A++++println%21%28%22The+value+of+x+is%3A+%7B%7D%22%2C+x%29%3B%0A++++%2F%2F+Two+arguments+given%3A%0A++++%2F%2F+Formatted+string+and+one+variable+to+print+with+string%0A++++%0A++++let+y+%3D+vec%21%5B10%2C+100%2C+1000%5D%3B%0A++++%2F%2F+Creating+a+vector+%28mutable+Rust+array%29+with+vec%21%0A%0A++++println%21%28%22The+values+of+vector+y+are+%7B%7D%2C+%7B%7D+and+%7B%7D%22%2C+y%5B0%5D%2C+y%5B1%5D%2C+y%5B2%5D%29%3B%0A++++%2F%2F+Four+arguments+given%3A%0A++++%2F%2F+Formatted+string+with+three+inputs%2C+and+three+vector+elements%0A%7D" target="_blank">
         fn main() {<br/>
