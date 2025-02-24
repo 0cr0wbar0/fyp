@@ -100,8 +100,8 @@
         <br/>
         impl ChangeString for Cloneable {<br/>
         &nbsp;&nbsp;fn change_string(&mut self, val: &'static str) -> &'static str {<br/>
-        &nbsp;&nbsp;self.string = val;<br/>
-        &nbsp;&nbsp;self.string<br/>
+        &nbsp;&nbsp;&nbsp;self.string = val;<br/>
+        &nbsp;&nbsp;&nbsp;self.string<br/>
         &nbsp;}<br/>
         }<br/>
         <br/>

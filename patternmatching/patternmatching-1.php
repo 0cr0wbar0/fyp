@@ -33,7 +33,7 @@
         <ul class="list">
             <li>the value of a variable</li>
             <li>the discriminant (variant type) of an enum</li>
-            <li>the value and status of an Option type (explained later)</li>
+            <li>the value and status of an Option or Result type (explained later)</li>
         </ul>
     </p>
 </div>

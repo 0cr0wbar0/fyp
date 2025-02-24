@@ -5,7 +5,7 @@
     $router = new AltoRouter();
 
     $router->map('GET', '/', function() {
-        require __DIR__ . '/home.html';
+        require __DIR__ . '/home.php';
     });
 
     $router->map('GET', '/login', function() {
@@ -19,25 +19,25 @@
     // [a:page] is a regex match on alphanumerics that creates a variable $page
 
     $router->map('GET', '/[a:page]', function($page) {
-        require __DIR__ . '/' . $page . '/' . $page . '-home.html';
+        require __DIR__ . '/' . $page . '/' . $page . '-home.php';
     });
 
     // [i:id] is same as above comment, except for integers and creates $id
 
     $router->map('GET', '/[a:page]/[i:id]', function($page, $id) {
-        require __DIR__ . '/' . $page . '/' . $page . '-' . $id . '.html';
+        require __DIR__ . '/' . $page . '/' . $page . '-' . $id . '.php';
     });
 
     $router->map('GET', '/[a:page]/quiz', function($page) {
-        require __DIR__ . '/' . $page . '/' . $page . '-quiz.html';
+        require __DIR__ . '/' . $page . '/' . $page . '-quiz.php';
     });
 
     $router->map('GET', '/static/*', function() {
-        require __DIR__ . '/home.html';
+        require __DIR__ . '/home.php';
     });
 
     $router->map('GET', '/vendor/*', function() {
-        require __DIR__ . '/home.html';
+        require __DIR__ . '/home.php';
     });
 
     $match = $router->match();
@@ -45,7 +45,8 @@
     if( is_array($match) && is_callable( $match['target'] ) ) {
         call_user_func_array( $match['target'], $match['params'] );
     } else {
-        header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        http_response_code(404);
+        echo "404 Not Found";
     }
 
 ?>

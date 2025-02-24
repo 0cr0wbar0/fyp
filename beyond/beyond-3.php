@@ -144,8 +144,7 @@
 
 <div class="info">
   <p>
-    Note the message in the above erroneous example suggesting use of the <em>static lifetime.</em> This is a reserved alias for lifetimes that last for the duration
-    of the entire program.
+    Note the message in the above erroneous example suggesting use of the <em>static lifetime.</em> This is a reserved alias for lifetimes that last <b>for the duration of the entire program.</b>
   </p>
 </div>
 

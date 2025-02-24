@@ -105,7 +105,7 @@
                 &nbsp;&nbsp;let mut y: i32 = 0;<br/>
                 &nbsp;&nbsp;&nbsp;while y < 5 {<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;y += 1;<br/>
-                    &nbsp;&nbsp;}<br/>
+                    &nbsp;&nbsp;&nbsp;}<br/>
                     &nbsp;&nbsp;y<br/>
                 &nbsp;};<br/>
             &nbsp;println!("{}", x)<br/>

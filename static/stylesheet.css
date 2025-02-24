@@ -21,14 +21,11 @@
 .navbar {
     display: flex;
     justify-content: space-around;
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
     position: sticky;
     background-color: #87411e;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-bottom: 30px;
+    margin: 0 0 30px;
 }
 
 body {
@@ -85,6 +82,32 @@ body {
     height: auto;
 }
 
+#answertext {
+    font-size: 1rem;
+    font-family: "SF Mono";
+    background-color: #87411e;
+    border-color: #87411e;
+    color: #ffd1bb;
+    resize: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: auto;
+    height: auto;
+}
+
+.codeinput {
+    font-size: 1rem;
+    font-family: "SF Mono";
+    background-color: #87411e;
+    border-color: #87411e;
+    color: #ffd1bb;
+    resize: vertical;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: auto;
+    height: auto;
+}
+
 .titles {
     display: flex;
     flex-direction: column;
@@ -102,6 +125,24 @@ body {
 .subheader {
     color: #87411e;
     max-width: 960px;
+}
+
+@media (max-width: 680px) {
+    .titles {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fca77c;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 50px;
+        font-size: x-large;
+    }
+
+    .subheader {
+        max-width: fit-content;
+    }
+
 }
 
 .info {
@@ -126,9 +167,7 @@ body {
     background-color: #87411e;
     color: #facab1;
     max-width: 300px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px auto;
 }
 
 .list li {
@@ -146,9 +185,18 @@ body {
     background-color: #87411e;
     color: #facab1;
     max-width: 300px;
-    margin: auto;
-    margin-top: 15px;
-    max-width: 250px;
+    margin: 15px auto auto;
+}
+
+.quizsubmit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    background-color: #facab1;
 }
 
 .inlinelink {
@@ -168,9 +216,6 @@ body {
     color: #ffd1bb;
 }
 
-.inlinelink:hover {
-    color: #ffd1bb;
-}
 
 .inline-err {
     background-color: #571414;
@@ -193,8 +238,19 @@ body {
     max-width: 800px;
 }
 
-.animbox img {
-    min-width: 800px;
+@media (max-width: 680px) {
+    .animbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10px;
+        background-color: #ff935d;
+        padding: 20px;
+    }
+
+    .animbox img {
+        max-width: 300px;
+    }
 }
 
 .replaybutton {
@@ -215,8 +271,7 @@ body {
 .background {
     font-family: "SF Mono";
     background-color: #facab1;
-    border: 20px;
-    border-color: #87411e;
+    border: 20px #87411e;
 }
 
 #ImageBox {
@@ -231,8 +286,7 @@ body {
 
 #ImageBox img {
     margin: 10px;
-    border: 10px;
-    border-color: #572a14;
+    border: 10px #572a14;
     transition: all .2s ease-in-out;
 }
 
@@ -262,4 +316,19 @@ body {
     background-color: #752e0b;
     border-style: inset;
     border-color: #a84e21;
+}
+
+@media (max-width: 680px) {
+
+    .nav a {
+        text-decoration: none;
+        border-radius: 10px;
+        background-color: #b04510;
+        border-color: #d05e26;
+        border-style: outset;
+        color: #f7bc9e;
+        font-size: 30px;
+        padding: 5px;
+    }
+
 }

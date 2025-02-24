@@ -81,14 +81,14 @@
         }
     </a></p>
     <p>
-        In order to handle the possibility of accessing a key that doesn't exist, this method returns an Option that needs to be unwrapped.
+        In order to handle the possibility of accessing a key that doesn't exist, this method returns an <em>Option</em> that needs to be unwrapped (explained in the chapter on error handling).
         Additionally, as can be seen in both this example and the previous example, many methods that make accesses to hash maps <em>expect a reference</em> to a numerical index rather than an actual numerical value.
     </p>
 </div>
 
 <div class="info">
     <p>
-        Rust hash map structs have three particularly useful built-in methods that allow for iterations over specific parts of the hash map.
+        Rust hash map structs have three particularly useful built-in methods that allow for iterations over specific parts of the hash map: <em>keys(), values()</em> and <em>iter().</em>
     </p>
 </div>
 
