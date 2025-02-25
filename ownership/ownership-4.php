@@ -1,3 +1,7 @@
+<?php
+session_start();
+require "../rustrunner.php";
+?>
 <html lang="en" class="background">
 
 <head>
@@ -34,9 +38,11 @@
 </div>
 
 <div class="animbox">
-    <p>
-        <img src="../static/string_slice.gif">
-    </p>
+    <canvas id='slice' width="480px" height="324px"></canvas>
+    <div class="nav">
+        <button class="textsubmit" id='slice_anim_reset'>Play</button>
+        <button class="textsubmit" id='slice_anim_pause'>Pause</button>
+    </div>
 </div>
 
 <div class="info">
@@ -52,9 +58,11 @@
 </div>
 
 <div class="animbox">
-    <p>
-        <img src="../static/array.gif">
-    </p>
+    <canvas id='array' width="480px" height="334px"></canvas>
+    <div class="nav">
+        <button class="textsubmit" id='array_anim_reset'>Play</button>
+        <button class="textsubmit" id='array_anim_pause'>Pause</button>
+    </div>
 </div>
 
 <div class="info">
@@ -65,7 +73,37 @@
 
 <div class="info">
     <p>
-        Rust arrays (denoted with [T], where T is a primitive type) and slices of Rust arrays (denoted with &[T]) are so similar in data structure that all methods implemented for array slices can be used on unsliced arrays.
+        This is one of two primary ways that arrays can be defined in Rust, with the other method involving an explicit definition of <em>each element</em> to be in the array (for example, the array defined above could also be defined as <em>[1, 1, 1, 1, 1]</em>.)
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Rust arrays (denoted with [T; N], where T is a primitive type and N is an unchanging size) and slices (denoted with [T] or &[T]) are so similar in data structure that all methods implemented for slices can be used on arrays.
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Arrays can be iterated over with for loops, but they also implement a trait that allows for an <em>iterator</em> to be used on them:
+    </p>
+    <p class="inlinelink">
+        fn main() {<br/>
+        &nbsp;let arr: [usize; 5] = [1, 2, 3, 4, 5];<br/>
+        &nbsp;for n in arr {<br/>
+        &nbsp;&nbsp;println!("{}", n); // conventional for loop<br/>
+        &nbsp;}<br/>
+        <br/>
+        &nbsp;for i in arr.iter() { // iter() method creates an iterator for arr<br/>
+        &nbsp;&nbsp;println!("{}", i)<br/>
+        &nbsp;}<br/>
+        }
+    </p>
+</div>
+
+<div class="info">
+    <p>
+        Iterators are implemented for most, if not all, of Rust's built-in collection types, like arrays, vectors and hash maps (the latter two are further explained in the Collections chapter).
     </p>
 </div>
 
@@ -75,6 +113,62 @@
     <a href="https://fyp.cr0wbar.dev/ownership/3">&laquo; Stack & Heap Memory</a>
     <a href="https://fyp.cr0wbar.dev/ownership/quiz">Quiz &raquo;</a>
 </div>
+
+<script src="../static/sprites.min.js"></script>
+<script>
+    let slice = new Sprite( {
+        src: '../static/string_slice.png',
+        id: 'slice',
+        width: 480,
+        height: 324,
+        image_width: 17280,
+        err: true
+    });
+
+    let array = new Sprite( {
+        src: '../static/array.png',
+        id: 'array',
+        width: 480,
+        height: 334,
+        image_width: 14880,
+        err: true
+    });
+
+    document.getElementById("slice_anim_reset").onclick = function () {
+        if (document.getElementById("slice_anim_reset").innerHTML !== "Play") {
+            document.getElementById("slice_anim_reset").innerHTML = "Play";
+        }
+        slice.play( {
+            fps: 5,
+            from: 1,
+            to: 24,
+            n: 0
+        });
+    }
+
+    document.getElementById("slice_anim_pause").onclick = function () {
+        slice.pause();
+        document.getElementById("slice_anim_reset").innerHTML = "Reset";
+    }
+
+    document.getElementById("array_anim_reset").onclick = function () {
+        if (document.getElementById("array_anim_reset").innerHTML !== "Play") {
+            document.getElementById("array_anim_reset").innerHTML = "Play";
+        }
+        array.play( {
+            fps: 5,
+            from: 1,
+            to: 24,
+            n: 0
+        });
+    }
+
+    document.getElementById("array_anim_pause").onclick = function () {
+        array.pause();
+        document.getElementById("array_anim_reset").innerHTML = "Reset";
+    }
+</script>
+<?php js(); ?>
 
 </body>
 

@@ -4,7 +4,7 @@ session_start();
 $servername = "127.0.0.1";
 $root_user = "root";
 $db_name = "rust_course";
-$root_password = "";
+$root_password = "pirhyw-9jyvxa-pavzUj";
 
 $database = new mysqli($servername, $root_user, $root_password, $db_name);
 ?>
@@ -42,14 +42,12 @@ $database = new mysqli($servername, $root_user, $root_password, $db_name);
 
         <?php
 
-        $qry = $database->query("select * from Quizzes where quiz_id = 2");
+        $qry = $database->query("select question_1, question_2, question_3, question_4, question_5 from Quizzes where quiz_id = 2");
 
-        while ($row = $qry->fetch_assoc()) {
-            echo htmlspecialchars_decode($row["question_1"]);
-            echo htmlspecialchars_decode($row["question_2"]);
-            echo htmlspecialchars_decode($row["question_3"]);
-            echo htmlspecialchars_decode($row["question_4"]);
-            echo htmlspecialchars_decode($row["question_5"]);
+        $row = $qry->fetch_assoc();
+
+        foreach ($row as $i) {
+            echo htmlspecialchars_decode($i);
         }
 
         ?>

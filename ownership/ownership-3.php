@@ -1,3 +1,7 @@
+<?php
+session_start();
+require "../rustrunner.php";
+?>
 <html lang="en" class="background">
 
 <head>
@@ -59,9 +63,11 @@
 </div>
 
 <div class="animbox">
-    <p>
-        <img src="../static/stack.gif">
-    </p>
+    <canvas id='stack' width="480px" height="231px"></canvas>
+    <div class="nav">
+        <button class="textsubmit" id='stack_anim_reset'>Play</button>
+        <button class="textsubmit" id='stack_anim_pause'>Pause</button>
+    </div>
 </div>
 
 <div class="info">
@@ -77,9 +83,11 @@
 </div>
 
 <div class="animbox">
-    <p>
-        <img src="../static/heap.gif">
-    </p>
+    <canvas id='heap' width="480px" height="380px"></canvas>
+    <div class="nav">
+        <button class="textsubmit" id='heap_anim_reset'>Play</button>
+        <button class="textsubmit" id='heap_anim_pause'>Pause</button>
+    </div>
 </div>
 
 <div class="info">
@@ -167,7 +175,7 @@
 
 <div class="info">
     <p>
-        Values stored exclusively on the stack are known by the compiler to never change in storage size during execution, such as integers, booleans and single characters. However, if these need to be stored in a dynamic context for whatever reason, Rust offers a <em>generic</em> (explained later) called <b>Box&lt;&gt;.</b>
+        Values stored exclusively on the stack are known by the compiler to never change in storage size during execution, such as integers, booleans and single characters. However, if these need to be stored in a dynamic context for whatever reason, Rust offers a <em>generic</em> (explained later) called <b>Box.</b>
     </p>
 </div>
 
@@ -178,9 +186,11 @@
 </div>
 
 <div class="animbox">
-    <p>
-        <img src="../static/boxed.gif">
-    </p>
+    <canvas id='boxed' width="480px" height="309px"></canvas>
+    <div class="nav">
+        <button class="textsubmit" id='boxed_anim_reset'>Play</button>
+        <button class="textsubmit" id='boxed_anim_pause'>Pause</button>
+    </div>
 </div>
 
 </div>
@@ -189,6 +199,89 @@
     <a href="https://fyp.cr0wbar.dev/ownership/2">&laquo; References</a>
     <a href="https://fyp.cr0wbar.dev/ownership/4">Slices &raquo;</a>
 </div>
+
+<script src="../static/sprites.min.js"></script>
+<script>
+    let stack = new Sprite( {
+        src: '../static/stack.png',
+        id: 'stack',
+        width: 480,
+        height: 231,
+        image_width: 38880,
+        err: true
+    });
+
+    let heap = new Sprite( {
+        src: '../static/heap.png',
+        id: 'heap',
+        width: 480,
+        height: 380,
+        image_width: 17280,
+        err: true
+    });
+
+    let boxed = new Sprite( {
+        src: '../static/boxed.png',
+        id: 'boxed',
+        width: 480,
+        height: 309,
+        image_width: 11520,
+        err: true
+    });
+
+    document.getElementById("stack_anim_reset").onclick = function () {
+        if (document.getElementById("stack_anim_reset").innerHTML !== "Play") {
+            document.getElementById("stack_anim_reset").innerHTML = "Play";
+        }
+        stack.play( {
+            fps: 5,
+            from: 1,
+            to: 81,
+            n: 0
+        });
+    }
+
+    document.getElementById("stack_anim_pause").onclick = function () {
+        stack.pause();
+        document.getElementById("stack_anim_reset").innerHTML = "Reset";
+    }
+
+    document.getElementById("heap_anim_reset").onclick = function () {
+        if (document.getElementById("heap_anim_reset").innerHTML !== "Play") {
+            document.getElementById("heap_anim_reset").innerHTML = "Play";
+        }
+        heap.play( {
+            fps: 5,
+            from: 1,
+            to: 36,
+            n: 0
+        });
+    }
+
+    document.getElementById("heap_anim_pause").onclick = function () {
+        heap.pause();
+        document.getElementById("heap_anim_reset").innerHTML = "Reset";
+    }
+
+    document.getElementById("boxed_anim_reset").onclick = function () {
+        if (document.getElementById("boxed_anim_reset").innerHTML !== "Play") {
+            document.getElementById("boxed_anim_reset").innerHTML = "Play";
+        }
+        boxed.play( {
+            fps: 5,
+            from: 1,
+            to: 24,
+            n: 0
+        });
+    }
+
+    document.getElementById("boxed_anim_pause").onclick = function () {
+        boxed.pause();
+        document.getElementById("boxed_anim_reset").innerHTML = "Reset";
+    }
+
+</script>
+<?php js(); ?>
 
 </body>
 

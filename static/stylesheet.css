@@ -10,11 +10,12 @@
 }
 
 .textsubmit {
+    font-family: "SF Mono";
+    font-size: 1.5rem;
     border-radius: 10px;
     background-color: #b04510;
     border-color: #572a14;
     color: #f7bc9e;
-    font-size: 15px;
     padding: 15px;
 }
 
@@ -100,6 +101,7 @@ body {
     font-family: "SF Mono";
     background-color: #87411e;
     border-color: #87411e;
+    border-radius: 10px;
     color: #ffd1bb;
     resize: vertical;
     margin-top: 10px;
@@ -201,6 +203,9 @@ body {
 
 .inlinelink {
     background-color: #572a14;
+    text-align: left;
+    font-size: 1rem;
+    font-family: "SF Mono";
     border-radius: 10px;
     color: #fca77c;
     padding: 10px;

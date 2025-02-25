@@ -1,3 +1,7 @@
+<?php
+session_start();
+require "../rustrunner.php";
+?>
 <html lang="en" class="background">
 
 <head>

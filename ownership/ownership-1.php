@@ -1,3 +1,7 @@
+<?php
+session_start();
+require "../rustrunner.php";
+?>
 <html lang="en" class="background">
 
 <head>
@@ -37,7 +41,7 @@
     <p>
         Separately from functions, scopes can be explicitly defined in Rust code with curly brackets:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+n%3A+i32+%3D+10%3B%0A++++%7B%0A++++++++let+n%3A+i32+%3D+10+*+20%3B%0A++++++++println%21%28%22The+scoped+value+of+n+is+%7B%7D%22%2C+n%29%3B%0A++++%7D%0A++++println%21%28%22The+unscoped+value+of+n+is+%7B%7D%22%2C+n%29%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let n: i32 = 10;<br/>
         &nbsp;{<br/>
@@ -46,7 +50,22 @@
         &nbsp;}<br/>
         &nbsp;println!("The unscoped value of n is {}", n);<br/>
         }
-    </a></p>
+    </p>
+    <div class="info" id="example1">
+        <?php example_exec("fn main() {\n
+        \tlet n: i32 = 10;\n
+        \t{\n
+        \t\tlet n: i32 = 10 * 20;\n
+        \t\tprintln!(&quot;The scoped value of n is {}&quot;, n);\n
+        \t}\n
+        \tprintln!(&quot;The unscoped value of n is {}&quot;, n);\n
+        }", 'example1'); ?>
+    </div>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br/></b>Try executing this</p>
+<?php exercise_exec("fn main() {\r\n \tprintln!(\"hi\")\n }", 'test'); ?>
 </div>
 
 <div class="info">
@@ -75,7 +94,11 @@
 </div>
 
 <div class="animbox">
-    <img id="replayable" src="../static/scopes.gif">
+    <canvas id='scopes' width="480" height="276"></canvas>
+    <div class="nav">
+    <button class="textsubmit" id="scope_anim_reset">Play</button>
+    <button class="textsubmit" id="scope_anim_pause">Pause</button>
+    </div>
 </div>
 
 <div class="info">
@@ -138,6 +161,35 @@
     <a href="https://fyp.cr0wbar.dev/ownership/2">References &raquo;</a>
 </div>
 
+<script src="../static/sprites.min.js"></script>
+<script>
+    let scopes = new Sprite({
+        src: '../static/scopes.png',
+        id: 'scopes',
+        width: 480,
+        height: 276,
+        image_width: 27360,
+        err: true
+    });
+
+    document.getElementById("scope_anim_reset").onclick = function () {
+        if (document.getElementById("scope_anim_reset").innerHTML !== "Play") {
+            document.getElementById("scope_anim_reset").innerHTML = "Play";
+        }
+        scopes.play( {
+            fps: 5,
+            from: 1,
+            to: 57,
+            n: 0
+        });
+    }
+
+    document.getElementById("scope_anim_pause").onclick = function () {
+        scopes.pause();
+        document.getElementById("scope_anim_reset").innerHTML = "Reset";
+    }
+</script>
+<?php js(); ?>
 </body>
 
 <audio autoplay id="mouseclick">
