@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../rustrunner.php";
+include __DIR__."/../rustrunner.php";
 ?>
 <html lang="en" class="background">
 
