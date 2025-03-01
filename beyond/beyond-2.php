@@ -60,7 +60,7 @@ include __DIR__."/../rustrunner.php";
         When defining a struct or enum, pre-existing traits defined in the standard Rust library can be explicitly implemented with the <em>derive attribute</em>.
         This is written on the line before the definition of the data type in question, and multiple traits can be implemented at once:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=%23%5Bderive%28Clone%2C+Debug%29%5D%0Astruct+Cloneable+%7B%0A++++string%3A+String%2C%0A++++integer%3A+i32%2C%0A++++float%3A+f64%2C%0A++++character%3A+char%2C%0A++++boolean%3A+bool%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+cln+%3D+Cloneable+%7B%0A++++++++string%3A+String%3A%3Afrom%28%22hello%22%29%2C%0A++++++++integer%3A+28%2C%0A++++++++float%3A+169.3487%2C%0A++++++++character%3A+%27A%27%2C%0A++++++++boolean%3A+true%0A++++%7D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+dbg%21%28%26cln%29%29%3B+%2F%2F+displayable+with+debugging+macro%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+cln.clone%28%29%29+%2F%2F+cloneable%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         #[derive(Clone, Debug)]<br/>
         struct Cloneable {<br/>
         &nbsp;string: String,<br/>
@@ -81,14 +81,39 @@ include __DIR__."/../rustrunner.php";
         &nbsp;println!("{:?}", dbg!(&cln)); // displayable with debugging macro<br/>
         &nbsp;println!("{:?}", cln.clone()) // cloneable<br/>
         }<br/>
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("#[allow(dead_code)]
+            #[derive(Clone, Debug)]
+        struct Cloneable {
+        string: String,
+        integer: i32,
+        float: f64,
+        character: char,
+        boolean: bool
+        }
+        
+        fn main() {
+        let cln = Cloneable {
+        string: String::from(\"hello\"),
+        integer: 28,
+        float: 169.3487,
+        character: 'A',
+        boolean: true
+        };
+        println!(\"{:?}\", dbg!(&cln));
+        println!(\"{:?}\", cln.clone())
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         Of course, the programmer can write and implement their own structs, using the <em>trait and impl keywords</em>:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Cloneable+%7B%0A++++string%3A+%26%27static+str%2C%0A++++integer%3A+i32%2C%0A++++float%3A+f64%2C%0A++++character%3A+char%2C%0A++++boolean%3A+bool%0A%7D%0A%0Atrait+ChangeString+%7B%0A++++fn+change_string%28%26mut+self%2C+val%3A+%26%27static+str%29+-%3E+%26%27static+str+%3B%0A%7D%0A%0A%0Aimpl+ChangeString+for+Cloneable+%7B%0A++++fn+change_string%28%26mut+self%2C+val%3A+%26%27static+str%29+-%3E+%26%27static+str+%7B%0A++++++++self.string+%3D+val%3B%0A++++++++self.string%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+cln+%3D+Cloneable+%7B%0A++++++++string%3A+%22hello%22%2C%0A++++++++integer%3A+28%2C%0A++++++++float%3A+169.3487%2C%0A++++++++character%3A+%27A%27%2C%0A++++++++boolean%3A+true%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+cln.change_string%28%22hi%21%22%29%29%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         struct Cloneable {<br/>
         &nbsp;string: &'static str,<br/>
         &nbsp;integer: i32,<br/>
@@ -119,10 +144,45 @@ include __DIR__."/../rustrunner.php";
         &nbsp;};<br/>
         &nbsp;println!("{}", cln.change_string("hi!"))<br/>
         }<br/>
-    </a></p>
+    </p>
     <p>
         Methods in traits are usually defined without bodies, only type definitions, and they have code written for them per implementation.
     </p>
+    <div>
+        <?php
+            example_exec("#[allow(dead_code)]
+            struct Cloneable {
+        string: &'static str,
+        integer: i32,
+        float: f64,
+        character: char,
+        boolean: bool
+        }
+        
+        trait ChangeString {
+        fn change_string(&mut self, val: &'static str) -> &'static str ;
+        }
+        
+        
+        impl ChangeString for Cloneable {
+        fn change_string(&mut self, val: &'static str) -> &'static str {
+        self.string = val;
+        self.string
+        }
+        }
+        
+        fn main() {
+        let mut cln = Cloneable {
+        string: \"hello\",
+        integer: 28,
+        float: 169.3487,
+        character: 'A',
+        boolean: true
+        };
+        println!(\"{}\", cln.change_string(\"hi!\"))
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 </div>
@@ -131,6 +191,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/beyond/1">&laquo; Generic types</a>
     <a href="https://fyp.cr0wbar.dev/beyond/3">Lifetimes &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

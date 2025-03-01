@@ -41,7 +41,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         Vectors can be initialised in two main ways:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+fstvec%3A+Vec%3Ci32%3E+%3D+Vec%3A%3Anew%28%29%3B+%2F%2F+Initialised+with+struct+constructor%0A++++fstvec.push%2810%29%3B%0A++++fstvec.push%285%29%3B%0A++++%0A++++let+sndvec%3A+Vec%3Cf64%3E+%3D+vec%21%5B2.643%2C+4.219%2C+9.263%5D%3B+%2F%2F+Initialised+with+vec%21+macro%0A%0A++++println%21%28%22%7B%3A%3F%7D+%7B%3A%3F%7D%22%2C+fstvec%2C+sndvec%29%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let mut fstvec: Vec&lt;i32&gt; = Vec::new(); // Constructor method<br/>
         &nbsp;fstvec.push(10);<br/>
@@ -51,39 +51,68 @@ include __DIR__."/../rustrunner.php";
             <br/>
         &nbsp;println!("{:?} {:?}", fstvec, sndvec)<br/>
         }  
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn main() {
+        let mut fstvec: Vec&lt;i32&gt; = Vec::new();
+        fstvec.push(10);
+        fstvec.push(5);
+            
+        let sndvec: Vec&lt;f64&gt; = vec![2.643, 4.219, 9.263]; 
+            
+        println!(\"{:?} {:?}\", fstvec, sndvec)
+        }  ", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
-        As can be seen in the above example, there is a shorthand macro, <em>vec!</em>, for quickly initialising a vector before immediately filling it with values (although empty vectors can still be made by leaving the macro's square brackets empty).
+        As can be seen in the above example, there is a shorthand macro, <em>vec!</em>, for quickly initialising a vector and immediately filling it with values (although empty vectors can still be made by leaving the macro's square brackets empty).
         The shorthand syntax that can be used with arrays can also be used with this macro:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+vec%3A+Vec%3Cf64%3E+%3D+vec%21%5B23.45673%3B+10%5D%3B+%2F%2F+creates+vector+with+ten+elements+equal+to+this+float%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+vec%29%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let vec: Vec&lt;f64&gt; = vec![23.45673; 10]; // creates vector with ten elements equal to this float<br/>
         &nbsp;println!("{:?}", vec)<br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn main() {
+        let vec: Vec&lt;f64&gt; = vec![23.45673; 10];
+        println!(\"{:?}\", vec)
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         As with arrays, individual elements of vectors can be accessed with indexing...:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+vec%3A+Vec%3Ci32%3E+%3D+vec%21%5B56%2C+23%2C+78%2C+92%2C+108%5D%3B+%0A++++println%21%28%22%7B%7D%22%2C+vec%5B2%5D%29+%2F%2F+prints+78+%28zero-indexed%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let vec: Vec&lt;i32&gt; = vec![56, 23, 78, 92, 108];<br/>
         &nbsp;println!("{}", vec[2]) // prints 78 (zero-indexed)<br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn main() {
+        let vec: Vec&lt;i32&gt; = vec![56, 23, 78, 92, 108];
+        println!(\"{}\", vec[2])
+        }", "example3");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         ...and iterated over with loops:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+vec%3A+Vec%3Ci32%3E+%3D+vec%21%5B12%2C+43%2C+5%2C+78%2C+32%5D%3B+%0A++++%0A++++for+v+in+vec+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+v%29%3B%0A++++%7D%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let vec: Vec&lt;i32&gt; = vec![12, 43, 5, 78, 32];<br/>
         <br/>
@@ -91,7 +120,18 @@ include __DIR__."/../rustrunner.php";
         &nbsp;&nbsp;println!("{}", v);<br/>
         &nbsp;}<br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn main() {
+        let vec: Vec&lt;i32&gt; = vec![12, 43, 5, 78, 32];
+        
+        for v in vec {
+        println!(\"{}\", v);
+        }
+        }", "example4");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -122,6 +162,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/collections">&laquo; Collections intro</a>
     <a href="https://fyp.cr0wbar.dev/collections/2">Hash maps &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

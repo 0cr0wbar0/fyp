@@ -42,7 +42,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         In a similar manner to vectors, hash maps can be initialised with their constructor method <b>new()</b>:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0A%0Afn+main%28%29+%7B%0A++++let+mut+map%3A+HashMap%3Cisize%2C+%26str%3E+%3D+HashMap%3A%3Anew%28%29%3B%0A++++%0A++++map.insert%281%2C+%22h%22%29%3B+%2F%2F+1+is+the+key%2C+%22h%22+is+the+value%0A++++map.insert%282%2C+%22i%22%29%3B%0A++++map.insert%283%2C+%22%21%22%29%3B%0A++++%0A++++println%21%28%22%7B%7D%7B%7D%7B%7D%22%2C+map%5B%261%5D%2C+map%5B%262%5D%2C+map%5B%263%5D%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         use std::collections::HashMap;<br/>
         <br/>
         fn main() {<br/>
@@ -54,10 +54,24 @@ include __DIR__."/../rustrunner.php";
         <br/>
         &nbsp;println!("{}{}{}", map[&1], map[&2], map[&3])<br/>
         }
-    </a></p>
+    </p>
     <p>
         Unlike vectors, however, as can be seen on the first line of the above example, hash maps may not immediately be available, and may need to be imported from the <em>collections</em> module in the standard crate.
     </p>
+    <div>
+        <?php
+            example_exec("use std::collections::HashMap;
+            fn main() {
+        let mut map: HashMap&lt;isize, &str&gt; = HashMap::new();
+        
+        map.insert(1, \"h\");
+        map.insert(2, \"i\");
+        map.insert(3, \"!\");
+        
+        println!(\"{}{}{}\", map[&1], map[&2], map[&3])
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -71,7 +85,7 @@ include __DIR__."/../rustrunner.php";
         The hash map struct has many methods implemented for it to simplify the process of working with this data structure, such as <em>get(K)</em>,
         which takes a key K and returns a reference for its value, if it exists:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0A%0Afn+main%28%29+%7B%0A+let+mut+map+%3D+HashMap%3A%3Anew%28%29%3B%0A%0A+map.insert%281%2C+%22h%22%29%3B%0A+map.insert%282%2C+%22i%22%29%3B%0A+map.insert%283%2C+%22%21%22%29%3B%0A%0A+println%21%28%22%7B%7D%22%2C+map.get%28%263%29.unwrap%28%29%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         use std::collections::HashMap;<br>
         <br>
         fn main() {<br>
@@ -83,11 +97,25 @@ include __DIR__."/../rustrunner.php";
         <br>
         &nbsp;println!("{}", map.get(&3).unwrap())<br>
         }
-    </a></p>
+    </p>
     <p>
         In order to handle the possibility of accessing a key that doesn't exist, this method returns an <em>Option</em> that needs to be unwrapped (explained in the chapter on error handling).
         Additionally, as can be seen in both this example and the previous example, many methods that make accesses to hash maps <em>expect a reference</em> to a numerical index rather than an actual numerical value.
     </p>
+    <div>
+        <?php
+            example_exec("use std::collections::HashMap;
+        fn main() {
+        let mut map = HashMap::new();
+        
+        map.insert(1, \"h\");
+        map.insert(2, \"i\");
+        map.insert(3, \"!\");
+        
+        println!(\"{}\", map.get(&3).unwrap())
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -100,8 +128,8 @@ include __DIR__."/../rustrunner.php";
     <p>
         <em>keys()</em> allows for exclusive iteration over the hash map's keys, and <em>values()</em> offers the same for the hash map's values:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0A%0Afn+main%28%29+%7B%0A++++let+mut+map+%3D+HashMap%3A%3Anew%28%29%3B%0A++++%0A++++map.insert%281%2C+%22h%22%29%3B%0A++++map.insert%282%2C+%22e%22%29%3B%0A++++map.insert%283%2C+%22l%22%29%3B%0A++++map.insert%284%2C+%22l%22%29%3B%0A++++map.insert%285%2C+%22o%22%29%3B%0A++++map.insert%286%2C+%22%21%22%29%3B%0A++++%0A++++for+i+in+map.keys%28%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+i%29%0A++++%7D%0A++++println%21%28%29%3B%0A++++for+c+in+map.values%28%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+c%29%0A++++%7D%0A%7D" target="_blank">
-        use std::collections::HashMap;<br/>
+    <p class="inlinelink">
+        use std::collections::HashMap;
         <br/>
         fn main() {<br/>
         &nbsp;let mut map = HashMap::new();<br/>
@@ -121,15 +149,39 @@ include __DIR__."/../rustrunner.php";
         &nbsp;&nbsp;println!("{}", c)<br/>
         &nbsp;}<br/>
         }
-    </a></p>
+    </p>
     <p>Note that <em>keys()</em> and <em>values()</em> return their results in a random order every time they are used.</p>
+    <div>
+        <?php
+            example_exec("use std::collections::HashMap;
+        
+        fn main() {
+        let mut map = HashMap::new();
+        
+        map.insert(1, \"h\");
+        map.insert(2, \"e\");
+        map.insert(3, \"l\");
+        map.insert(4, \"l\");
+        map.insert(5, \"o\");
+        map.insert(6, \"!\");
+        
+        for i in map.keys() {
+        println!(\"{}\", i)
+        }
+        println!();
+        for c in map.values() {
+        println!(\"{}\", c)
+        }
+        }", "example3");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         <em>iter()</em> returns all key-value pairs in the hash map, while <em>iter_mut() returns a mutable reference to the value of each pair</em>, which can be very helpful if any edits need to be made to the values in respect to the keys:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0A%0Afn+main%28%29+%7B%0A++++let+mut+map+%3D+HashMap%3A%3Anew%28%29%3B%0A++++%0A++++map.insert%281%2C+%22h%22%29%3B%0A++++map.insert%282%2C+%22e%22%29%3B%0A++++map.insert%283%2C+%22l%22%29%3B%0A++++map.insert%284%2C+%22l%22%29%3B%0A++++map.insert%285%2C+%22o%22%29%3B%0A++++map.insert%286%2C+%22%21%22%29%3B%0A++++%0A++++for+%28k%2C+v%29+in+map.iter_mut%28%29+%7B%0A++++++++if+k+%25+2+%21%3D+0+%7B%0A++++++++++++*v+%3D+%22_%22%3B%0A++++++++%7D%0A++++%7D%0A++++%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+map%29%0A++++%0A%7D" target="_blank">
+    <p class="inlinelink">
         use std::collections::HashMap;<br/>
         <br/>
         fn main() {<br/>
@@ -151,10 +203,34 @@ include __DIR__."/../rustrunner.php";
         &nbsp;println!("{:?}", map)<br/>
         <br>
         }
-    </a></p>
+    </p>
     <p>
         <em>iter()</em> and <em>iter_mut()</em> also return their elements in a random order.
     </p>
+    <div>
+        <?php
+            example_exec("use std::collections::HashMap;
+        
+        fn main() {
+        let mut map = HashMap::new();
+        
+        map.insert(1, \"h\");
+        map.insert(2, \"e\");
+        map.insert(3, \"l\");
+        map.insert(4, \"l\");
+        map.insert(5, \"o\");
+        map.insert(6, \"!\");
+        
+        for (k, v) in map.iter_mut() {
+        if k % 2 != 0 {
+        *v = \"_\";
+        }
+        }
+        
+        println!(\"{:?}\", map)
+        }", "example4");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -179,6 +255,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/collections/1">&laquo; Vectors</a>
     <a href="https://fyp.cr0wbar.dev/collections/quiz">Quiz &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

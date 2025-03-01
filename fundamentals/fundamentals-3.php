@@ -41,11 +41,20 @@ include __DIR__."/../rustrunner.php";
     <p> 
         Rust is statically typed, but the type can be inferred at compile-time, negating the need to specify the type in some cases:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+i+%3D+10%3B+%2F%2F+i+inferred+as+type+i32%0A++++println%21%28%22%7B%7D%22%2C+i%29%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
-        &nbsp;let mut i = 10; // i inferred as type i32 (explained below)<br/>
+        &nbsp;let i = 10; // i inferred as type i32 (explained below)<br/>
         &nbsp;println!("{}", i);<br/>
-        }</a></p>
+        }
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let i = 10;
+        println!(\"{}\", i);
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -81,14 +90,14 @@ include __DIR__."/../rustrunner.php";
 
 <div class="info">
     <p>
-        Data types can't always be inferred, such as when the built-in <b>into()</b> function is used to convert a variable of one type to another:
+        Data types can't always be inferred, such as when the built-in <b>into()</b> method is used to convert a variable of one type to another:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+x+%3D+%2210%22%3B%0A++++let+y+%3D+x.into%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+y%29%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let x = "10";<br/>
         &nbsp;let y = x.into();<br/>
         println!("{}", y);<br/>
-        }</a>
+        }
     </p>
     <p class="inline-err">error[E0283]: type annotations needed<br/>
         |<br>
@@ -127,12 +136,20 @@ include __DIR__."/../rustrunner.php";
     <p> 
         There is no "fsize" data type in Rust, but if no type is specified for a float, the compiler will default to <b>f64</b>:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+f_big+%3D+3.33%3B+%2F%2F+f64%0A++++let+f_small%3A+i32+%3D+3.3%3B+%2F%2F+f32%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let f_big = 3.33; // f64<br/>
-        &nbsp;let f_small: i32 = 3.3; // f32<br/>
-        }</a>
+        &nbsp;let f_small: f32 = 3.3; // f32<br/>
+        }
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let _f_big = 3.33;
+        let _f_small: f32 = 3.3;
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -163,37 +180,65 @@ include __DIR__."/../rustrunner.php";
     <p>
         Booleans in Rust are lower-case, and require very little type annotation:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+t+%3D+true%3B+%2F%2F+Inferred+as+bool%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main () {<br/>
         &nbsp;let t = true; // inferred as bool<br/>
-        }</a></p>
+        }
+    </p>
+    <div>
+        <?php
+            example_exec("fn main () {
+        let _t = true;
+        }", "example3");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         Expressions involving comparison of numerical values are also evaluated, and assigned as, bools:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+num+%3D+5%3B%0A++++let+is_zero+%3D+%28num+%3D%3D+0%29%3B+%2F%2F+Inferred+as+bool%0A++++println%21%28%22%7B%7D%22%2C+is_zero%29%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let num = 5;<br/>
         &nbsp;let is_zero = (num == 0); // inferred as bool<br/>
-        &nbsp;println!("{}", is_zero);
-        }</a></p>
+        &nbsp;println!("{}", is_zero);<br/>
+        }
+    </p>
     <p>
         Variable <em>num</em> isn't zero, so variable <em>is_zero</em> equates to false, with no annotation explicitly needed.
     </p>
+    <div>
+        <?php
+        example_exec("fn main() {
+        let num = 5;
+        let is_zero = num == 0;
+        println!(\"{}\", is_zero);
+        }", "example4");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         Characters in Rust are representations of Unicode, and accept all kinds of different characters and emoticons:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+letter+%3D+%27b%27%3B%0A++++let+j%3A+char+%3D+%27%E3%81%82%27%3B+%2F%2F+Japanese+character%0A++++let+c%3A+char+%3D+%27%E5%A5%BD%27%3B+%2F%2F+Chinese+character%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let letter = 'b';<br/>
         &nbsp;let j: char = 'あ'; // Japanese character<br/>
         &nbsp;let c: char = '好'; // Chinese character<br/>
-        }</a></p>
+        }
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let _letter = 'b';
+        let _j: char = 'あ';
+        let _c: char = '好';
+        }", "example5");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -201,7 +246,7 @@ include __DIR__."/../rustrunner.php";
         <b>There are two string types in Rust:</b>
     </p>
     <ul class="list">
-        <li>&str: string <em>literals</em></li>
+        <li>&str: string <em>slices</em> or <em>literals</em></li>
         <ul>
             <li>immutable</li>
         </ul>
@@ -216,8 +261,6 @@ include __DIR__."/../rustrunner.php";
     <p>
         Aside from having different mutability, these two types behave very differently from each other, and this difference will be fully explained in later chapters.
     </p>
-    
-
 </div>
 
 </div>
@@ -226,6 +269,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/fundamentals/2">&laquo; Mutability</a>
     <a href="https://fyp.cr0wbar.dev/fundamentals/4">Structs & Enums &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

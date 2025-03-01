@@ -50,7 +50,7 @@ include __DIR__."/../rustrunner.php";
   <p>
     In the following example, the function takes a string slice and explicitly returns a string slice:
   </p>
-  <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+f%28fst%3A+%26str%29+-%3E+%26str+%7B%0A++++fst%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+f%28%22h%22%29%29%0A%7D%0A" target="_blank">
+  <p class="inlinelink">
     fn f(fst: &str) -> &str {<br/>
     &nbsp;fst<br/>
     }<br/>
@@ -58,17 +58,25 @@ include __DIR__."/../rustrunner.php";
     fn main() {<br/>
     &nbsp;println!("{}", f("h"))<br/>
     }
-  </a></p>
+  </p>
   <p>
     Here, the compiler infers that the string input and the string output last as long as each other.
   </p>
+    <?php
+    example_exec("fn f(fst: &str) -> &str {
+    fst
+    }
+    fn main() {
+    println!(\"{}\", f(\"h\"))
+    }", "example1");
+    ?>
 </div>
 
 <div class="info">
   <p>
     The following example, however, is not so simple:
   </p>
-  <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+f%28fst%3A+%26str%2C+snd%3A+%26str%29+-%3E+%26str+%7B%0A++++fst.to_owned%28%29+%2B+snd+%2F%2F+string+concat+requires+left-hand+string+to+be+owned%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+f%28%22h%22%2C+%22i%22%29%29%0A%7D%0A" target="_blank">
+  <p class="inlinelink">
     fn f(fst: &str, snd: &str) -> &str {<br/>
     &nbsp;fst.to_owned() + snd // string concat requires left-hand string to be owned<br/>
     }<br/>
@@ -76,7 +84,7 @@ include __DIR__."/../rustrunner.php";
     fn main() {<br/>
     &nbsp;println!("{}", f("h", "i"))<br/>
     }
-  </a></p>
+  </p>
   <p class="inline-err">
     error[E0106]: <b>missing lifetime specifier</b><br/>
     --> src/main.rs:1:31<br/>
@@ -113,7 +121,7 @@ include __DIR__."/../rustrunner.php";
   <p>
     A similar error also arises if a function is specified as returning a reference, but takes no parameters:
   </p>
-  <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+f%28%29+-%3E+%26str+%7B%0A++++%22hi%22%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+f%28%29%29%0A%7D%0A" target="_blank">
+  <p class="inlinelink">
     fn f() -> &str {<br/>
     &nbsp;"hi"<br/>
     }<br/>
@@ -121,7 +129,7 @@ include __DIR__."/../rustrunner.php";
     fn main() {<br/>
     &nbsp;println!("{}", f())<br/>
     }
-  </a></p>
+  </p>
   <p class="inline-err">
     error[E0106]: missing lifetime specifier<br/>
     --> src/main.rs:1:11<br/>
@@ -157,7 +165,7 @@ include __DIR__."/../rustrunner.php";
     Explicit lifetime parameters share the <em>same angle bracket syntax</em> as generics. If a function uses generics and lifetime parameters at the same time,
     these need to be defined in the same brackets:
   </p>
-  <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+f%3C%27a%2C+T%3E%28arr%3A+%26%27a+%5BT%5D%29+-%3E+%26%27a+T+where+T%3A+Copy+%7B%0A++++%26arr%5B0%5D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+f%28%26%5B1%3B+5%5D%29%29%0A%7D%0A" target="_blank">
+  <p class="inlinelink">
     fn f<'a, T>(arr: &'a [T]) -> &'a T where T: Copy {<br/>
     &nbsp;&arr[0]<br/>
     }<br/>
@@ -165,10 +173,21 @@ include __DIR__."/../rustrunner.php";
     fn main() {<br/>
     &nbsp;println!("{}", f(&[1; 5]))<br/>
     }
-  </a></p>
+  </p>
   <p>
     The lifetime specifier <b>'a</b> used here means that the function, its parameter and its return value all share the same lifetime.
   </p>
+    <div>
+        <?php
+            example_exec("fn f<'a, T>(arr: &'a [T]) -> &'a T where T: Copy {
+    &arr[0]
+    }
+    
+    fn main() {
+    println!(\"{}\", f(&[1; 5]))
+    }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -182,18 +201,29 @@ include __DIR__."/../rustrunner.php";
   <p>
     This example takes two generic parameters of explicitly different lifetimes, meaning that the parameter <em>val</em> can potentially last for a differing period of time than the parameter <em>arr</em> during execution:
   </p>
-  <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+f%3C%27a%2C+%27b%2C+T%2C+U%3E%28arr%3A+%26%27a+%5BT%5D%2C+val%3A+%26%27b+U%29+-%3E+%28%26%27a+T%2C+%26%27b+U%29+where+T%3A+Copy%2C+U%3A+%3FSized+%7B%0A++++%28%26arr%5B0%5D%2C+val%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+f%28%26%5B1%3B+5%5D%2C+%22hello%22%29%29%0A%7D%0A" target="_blank">
+  <p class="inlinelink">
     fn f<'a, 'b:'a, T, U>(arr: &'a [T], val: &'b U) -> (&'a T, &'b U) <br/> where T: Copy, U: ?Sized {<br/>
     &nbsp;(&arr[0], val)<br/>
     }<br/>
     <br/>
     fn main() {<br/>
-    &nbsp;println!("{}", f(&[1; 5], "hello"))<br/>
+    &nbsp;println!("{:?}", f(&[1; 5], "hello"))<br/>
     }
-  </a></p>
+  </p>
   <p>
     Note the colon in the generic definition: lifetime <em>'b</em> is being explicitly defined inline as <b>lasting longer</b> than <em>'a,</em> and the Rust compiler will attempt to enforce these bounds whenever this function is called.
   </p>
+    <div>
+        <?php
+        example_exec("fn f<'a, 'b:'a, T, U>(arr: &'a [T], val: &'b U) -> (&'a T, &'b U)  where T: Copy, U: ?Sized {
+    (&arr[0], val)
+    }
+    
+    fn main() {
+    println!(\"{:?}\", f(&[1; 5], \"hello\"))
+    }", "example3");
+        ?>
+    </div>
 </div>
 
 </div>
@@ -202,6 +232,8 @@ include __DIR__."/../rustrunner.php";
   <a href="https://fyp.cr0wbar.dev/beyond/2">&laquo; Traits</a>
   <a href="https://fyp.cr0wbar.dev/beyond/quiz">Quiz &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

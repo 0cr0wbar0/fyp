@@ -112,7 +112,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         Specifically, String structs are allocated on the heap during their lifetimes, but the actual body of the string is <em>stored on the stack</em>, and the struct has a memory pointer to the first character of the string.
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++%2F%2F%2F+The+below+string+struct+is+built+using+from%28%29%2C%0A++++%2F%2F%2F+a+built-in+method+that+attempts+to+convert+%0A++++%2F%2F%2F+a+variable+of+one+type+into+another+type.%0A++++%2F%2F%2F+%0A++++%2F%2F%2F+Here%2C+a+string+literal+%28a.k.a.+a+value+of+type+%26str%29%0A++++%2F%2F%2F+is+pushed+onto+the+stack+character+by+character%2C+%0A++++%2F%2F%2F+and+the+struct+is+then+allocated+in+%0A++++%2F%2F%2F+heap+memory+and+has+its+pointer+set+to+the+string+literal.%0A++++%0A++++let+str_struct+%3D+String%3A%3Afrom%28%22This+is+a+struct%21%22%29%3B%0A++++%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             <br/>
         &nbsp;/// The below string struct is built using from(),<br/>
@@ -127,14 +127,21 @@ include __DIR__."/../rustrunner.php";
         &nbsp;let str_struct = String::from("This is a struct!");<br/>
         <br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let _str_struct = String::from(\"This is a struct!\");
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         When the struct is assigned a new set of characters, these characters are simply pushed onto the stack, and the String struct's pointer is moved to those new characters. The old sequence of characters subsequently goes out of scope, and is eventually popped from the stack.
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++%2F%2F%2F+When+the+below+struct+is+given%0A++++%2F%2F%2F+a+new+value+on+the+second+line%2C+%0A++++%2F%2F%2F+its+pointer+is+moved+to+the+new+%0A++++%2F%2F%2F+string+literal%2C+and+the+previous%0A++++%2F%2F%2F+string+literal+goes+out+of+scope.%0A++++%0A++++let+mut+str_struct+%3D+String%3A%3Afrom%28%22This+is+a+struct%21%22%29%3B%0A++++%0A++++str_struct+%3D+String%3A%3Afrom%28%22This+is+a+new+string%21%22%29%3B%0A++++%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             <br/>
         &nbsp;/// When the below struct is given<br/>
@@ -148,14 +155,22 @@ include __DIR__."/../rustrunner.php";
         &nbsp;str_struct = String::from("This is a new string!");<br/>
         <br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let mut _str_struct = String::from(\"This is a struct!\");
+        _str_struct = String::from(\"This is a new string!\");
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         However, in the case of one String struct being assigned to another, the one taking the value will have its pointer moved to the <em>same memory as the struct being assigned</em>. This is to save memory, and prevent bloat on the stack.
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++%2F%2F%2F+Assigning+the+first+variable%0A++++%2F%2F%2F+to+the+second+will+move+ownership%0A++++%2F%2F%2F+of+the+first%2C+making+it+inaccessible%2C%0A++++%2F%2F%2F+but+will+also+cause+both+structs+to%0A++++%2F%2F%2F+point+to+the+same+sequence+of+memory%0A++++%2F%2F%2F+cells+on+the+stack.%0A%0A++++let+str_struct+%3D+String%3A%3Afrom%28%22This+is+a+struct%21%22%29%3B%0A++++%0A++++let+second_struct+%3D+str_struct%3B%0A++++%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             <br/>
         &nbsp;/// Assigning the first variable<br/>
@@ -170,7 +185,15 @@ include __DIR__."/../rustrunner.php";
         &nbsp;let second_struct = str_struct;<br/>
             <br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn main() {
+        let _str_struct = String::from(\"This is a struct!\");
+        let _second_struct = _str_struct;
+        }", "example3");
+        ?>
+    </div>
 </div>
 
 <div class="info">

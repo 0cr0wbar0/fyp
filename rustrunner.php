@@ -12,10 +12,9 @@ function exercise_exec($input, $exercise_id): void
     </form>
     <script>
     // Take over form submission
-    const form = document.querySelector("#<?= $exercise_id ?>");
-    form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    sendData(form);
+    document.querySelector("#<?= $exercise_id ?>").addEventListener("submit", (event) => {
+        event.preventDefault();
+        sendData(document.querySelector("#<?= $exercise_id ?>"));
     });
     </script>
     <?php
@@ -33,12 +32,10 @@ function example_exec($str, $example_id): void
     </form>
     <script>
         // Take over form submission
-        const div = document.querySelector("#<?= $example_id ?>");
-        const newForm = div.querySelector("#<?= $example_id ?>");
-        newForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            sendData(newForm);
-        });
+    document.querySelector("#<?= $example_id ?>").addEventListener("submit", (event) => {
+        event.preventDefault();
+        sendData(document.querySelector("#<?= $example_id ?>"));
+    });
     </script>
     <?php
 }

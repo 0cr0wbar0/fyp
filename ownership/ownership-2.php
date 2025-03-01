@@ -90,7 +90,7 @@ include __DIR__."/../rustrunner.php";
         However, there are inevitably going to be situations where a single variable needs to be accessed by many different parts of a Rust program multiple times.
         In order to allow this to happen, <b>references</b> to variables can be used in place of the variables themselves:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22borrowed%22%29%3B%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D%22%2C+%0A++++++++++++get_string_capacity%28%26s%29%2C%0A++++++++++++get_last_char%28%26mut+s%29%2C%0A++++++++++++get_length%28%26s%29%29%3B%0A%7D%0A%0A%0A%2F%2F%2F+Takes+reference+to+a+String+struct%2C%0A%2F%2F%2F+returns+capacity+in+bytes%0Afn+get_string_capacity%28string%3A+%26String%29+-%3E+usize+%7B%0A++++string.capacity%28%29%0A%7D%0A%0A%2F%2F%2F+Takes+*mutable*+reference+to+a+String%2C%0A%2F%2F%2F+returns+last+character+of+String%2C%0A%2F%2F%2F+provided+the+String%27s+length+is+%3E%3D+1%0Afn+get_last_char%28string%3A+%26mut+String%29+-%3E+char+%7B%0A++++string.pop%28%29.unwrap%28%29+%2F%2F+this+method+explained+later%21%0A%7D%0A%0A%0A%2F%2F%2F+Takes+reference+to+a+String%2C%0A%2F%2F%2F+returns+current+length%0Afn+get_length%28string%3A+%26String%29+-%3E+usize+%7B%0A++++string.len%28%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br>
         &nbsp;let mut s = String::from("borrowed");<br>
         &nbsp;println!("{} {:?} {}", <br>
@@ -100,7 +100,7 @@ include __DIR__."/../rustrunner.php";
         }<br>
         <br>
         /// Takes reference to a String struct,<br>
-        /// returns capacity in bytes<br><br/>
+        /// returns capacity in bytes<br>
         fn get_string_capacity(string: &String) -> usize {<br>
         &nbsp;string.capacity()<br>
         }<br>
@@ -117,10 +117,32 @@ include __DIR__."/../rustrunner.php";
         fn get_length(string: &String) -> usize {<br>
         &nbsp;string.len()<br>
         }<br>
-    </a></p>
+    </p>
     <p>
         References to variables, and the definition of the types of these variable references, are denoted with an ampersand (&). 
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let mut s = String::from(\"borrowed\");
+        println!(\"{} {:?} {}\", 
+        get_string_capacity(&s),
+        get_last_char(&mut s),
+        get_length(&s));
+        }
+        fn get_string_capacity(string: &String) -> usize {
+        string.capacity()
+        }
+        
+        fn get_last_char(string: &mut String) -> char {
+        string.pop().unwrap()
+        }
+        
+        fn get_length(string: &String) -> usize {
+        string.len()
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">

@@ -41,11 +41,11 @@ include __DIR__."/../rustrunner.php";
     <p>
         This macro immediately and irrecoverably terminates the program in which it was called:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++panic%21%28%22Error%21%22%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br>
         &nbsp;panic!("Error!")<br/>
         }
-    </a></p>
+    </p>
     <p>
         It then prints the exact line and column numbers for where the panic occurred, and (optionally) prints a string, passed to it as a parameter, to error output explaining the reason, as well as a full backtrace of the runtime call stack (the record of processes executed during runtime):
     </p>
@@ -74,12 +74,12 @@ include __DIR__."/../rustrunner.php";
     <p>
         For example, the method <em>remove()</em>, implemented for vectors, will call the <br/>panic!() macro if an attempt is made to remove an element on an out-of-bounds index:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+v+%3D+vec%21%5B1%2C2%2C3%2C4%2C5%5D%3B%0A++++v.remove%286%29%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let mut v = vec![1,2,3,4,5];<br/>
         &nbsp;v.remove(6);<br/>
         }
-    </a></p>
+    </p>
     <p class="inline-err">
         thread 'main' panicked at src/main.rs:3:7:<br/>
         removal index (is 6) should be < len (is 5)
@@ -96,7 +96,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         Since this macro allows for full string formatting, relevant variables and values can be passed into the error output string for maximum contextual clarity:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+big_num+%3D+i128%3A%3AMAX%3B%0A++++panic%21%28%22Number+%7Bnum%7D+is+too+big%21%22%2C+num+%3D+big_num%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let big_num = i128::MAX;<br/>
         &nbsp;panic!("Number {num} is too big!", num = big_num)<br/>
@@ -114,6 +114,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/errorhandling">&laquo; Error handling intro</a>
     <a href="https://fyp.cr0wbar.dev/errorhandling/2">The Result enum &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

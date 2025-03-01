@@ -35,13 +35,24 @@ include __DIR__."/../rustrunner.php";
     <p> 
         <b>All Rust variables are immutable by default.</b> The keyword <em>mut</em> must be used after <em>let</em> during assignment to create a mutable variable:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+number+%3D+5%3B%0A++++println%21%28%22%7B%7D%22%2C+number%29%3B+%2F%2F+prints+%275%27%0A++++number+%3D+10%3B%0A++++println%21%28%22%7B%7D%22%2C+number%29%3B+%2F%2F+prints+%2710%27%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         let mut number = 5;<br/>
         println!("{}", number); // prints '5'<br/>
         number = 10;<br/>
         println!("{}", number); // prints '10'<br/>
-        }</a></p>
+        }
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let mut number = 5;
+        println!(\"{}\", number);
+        number = 10;
+        println!(\"{}\", number);
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -55,20 +66,29 @@ include __DIR__."/../rustrunner.php";
     <p> 
         Using the keyword <em>const</em>, Rust variables can also be defined as constants, forcing complete immutability throughout the entire lifetime of a variable:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=const+FORTY_TWO%3A+u8+%3D+20%2B12%2B10%3B%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+FORTY_TWO%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         const FORTY_TWO: u8 = 20+12+10;<br/>
         <br/>
         fn main() {<br/>
             &nbsp;println!("{}", FORTY_TWO)<br/>
-        }</a></p>
+        }
+    </p>
+    <div>
+        <?php
+        example_exec("const FORTY_TWO: u8 = 20+12+10;
+        fn main() {
+        println!(\"{}\", FORTY_TWO)
+        }", "example2");
+        ?>
+    </div>
     <p>
-        The piece of syntax involving the colon before the equals sign will be explained in the next section.
+        The piece of syntax involving the colon before the equals sign will be explained on the next page.
     </p>
 </div>
 
 <div class="info">
     <p>
-        Constants can be defined at the very beginning of a Rust script, outside of any functions (explained later), making them ideal for defining a value that has to be known and used across a whole program.
+        Constants can be defined at the very beginning of a Rust script, outside any functions (explained later), making them ideal for defining a value that has to be known and reused across a whole program.
     </p>
 </div>
 
@@ -84,6 +104,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/fundamentals/1">&laquo; Variables</a>
     <a href="https://fyp.cr0wbar.dev/fundamentals/3">Primitive Data Types &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

@@ -35,19 +35,26 @@ include __DIR__."/../rustrunner.php";
     <p> 
         <b>Rust functions are private by default,</b> and are defined with the keyword <em>fn</em>:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+world%21%22%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             &nbsp;println!("Hello, world!")<br/>
         }<br/>
-    </a></p>
+    </p>
     <p>The keyword <em>pub</em> must be used before <em>fn</em> in order to make a function public, and therefore accessible in other Rust programs.</p>
+    <div>
+        <?php
+        example_exec("fn main() {
+            println!(\"Hello, world!\")
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         Every Rust program needs a main function, which contains the only part of the program that will be executed. All other separately defined functions need to be included, or <em>called</em>, inside this function:  
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B+%0A++++println%21%28%22This+is+a+string%22%29%0A%7D%0A++++++++%0Afn+hidden_string%28%29+%7B%0A++++println%21%28%22Ooh%2C+secret+string%21%22%29+%2F%2F+Compiles%2C+does+not+execute%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() { <br/>
             &nbsp;println!("This is a string")<br/>
         }<br/>
@@ -55,14 +62,26 @@ include __DIR__."/../rustrunner.php";
         fn hidden_string() {<br/>
             &nbsp;println!("Ooh, secret string!") // Compiles, does not execute<br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn main() {
+            println!(\"This is a string\")
+        }
+        
+        #[allow(dead_code)]
+        fn hidden_string() {
+            println!(\"Ooh, secret string!\")
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         Rust functions can implicitly return the last found value in the function body as an expression, as long as the return value is explicitly typed:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+character%28%29%29%0A%7D%0A%0Afn+character%28%29+%7B%0A++++%27f%27+%2F%2F+Return+value+of+function+without+semicolon%2C+recognised+as+expression%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             &nbsp;println!("{}", character())<br/>
         }<br/>
@@ -70,7 +89,7 @@ include __DIR__."/../rustrunner.php";
         fn character() {<br/>
             &nbsp;'f' // Return value of function without semicolon, recognised as expression<br/>
         }<br/>
-    </a></p>
+    </p>
     <p class="inline-err">
         error[E0277]: `()` doesn't implement `std::fmt::Display`<br/>
         --> src/main.rs:2:20<br/>
@@ -103,7 +122,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         In Rust, the results of functions can immediately be assigned to variables:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+x%3A+i32+%3D+%7B%0A++++++++let+mut+y%3A+i32+%3D+0%3B%0A++++++++while+y+%3C+5+%7B%0A++++++++++++y+%2B%3D+1%3B%0A++++++++%7D%0A++++++++y%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+x%29%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             &nbsp;let x: i32 = {<br/>
                 &nbsp;&nbsp;let mut y: i32 = 0;<br/>
@@ -114,14 +133,28 @@ include __DIR__."/../rustrunner.php";
                 &nbsp;};<br/>
             &nbsp;println!("{}", x)<br/>
         }<br/>
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+            let x: i32 = {
+                let mut y: i32 = 0;
+                while y < 5 {
+                    y += 1;
+                    }
+                    y
+                };
+            println!(\"{}\", x)
+        }", "example3");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         Functions can be written to take parameters, variables defined in the brackets next to the function name that can then be used in the body of a function:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+reverse_nums%289%2C+10%29%29%0A%7D%0A%0Afn+reverse_nums%28i%3A+i32%2C+j%3A+i32%29+-%3E+%28i32%2C+i32%29+%7B%0A++++%28j%2C+i%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             &nbsp;println!("{:?}", reverse_nums(9, 10))<br/>
         }<br/>
@@ -129,10 +162,21 @@ include __DIR__."/../rustrunner.php";
         fn reverse_nums(i: i32, j: i32) -> (i32, i32) {<br/>
             &nbsp;(j, i)<br/>
         }
-    </a></p>
+    </p>
     <p>
         Function parameters <em>always need explicit type definitions.</em>
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+            println!(\"{:?}\", reverse_nums(9, 10))
+        }
+        
+        fn reverse_nums(i: i32, j: i32) -> (i32, i32) {
+            (j, i)
+        }", "example4");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -145,7 +189,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         Functions can also be <em>implemented on structs and enums,</em> as methods, with the <em>impl</em> keyword:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Train+%7B%0A++++colour%3A+String%2C%0A++++num_of_coaches%3A+i32%2C%0A++++max_speed_kmh%3A+f64%0A%7D%0A%0Aimpl+Train+%7B%0A++++pub+fn+how_many_coaches%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.num_of_coaches%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+t+%3D+Train+%7B%0A++++++++colour%3A+String%3A%3Afrom%28%22Green%22%29%2C%0A++++++++num_of_coaches%3A+5%2C%0A++++++++max_speed_kmh%3A+120.05%0A++++%7D%3B%0A++++%0A++++t.how_many_coaches%28%29%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         struct Train {<br/>
             &nbsp;colour: String,<br/>
             &nbsp;num_of_coaches: i32,<br/>
@@ -167,7 +211,33 @@ include __DIR__."/../rustrunner.php";
             <br/>
             &nbsp;t.how_many_coaches();<br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("#[allow(dead_code)]
+            struct Train {
+            colour: String,
+            num_of_coaches: i32,
+            max_speed_kmh: f64
+        }
+        
+        impl Train {
+            pub fn how_many_coaches(&self) {
+                println!(\"{}\", &self.num_of_coaches);
+            }
+        }
+        
+        fn main() {
+            let t = Train {
+                colour: String::from(\"Green\"),
+                num_of_coaches: 5,
+                max_speed_kmh: 120.05
+            };
+            
+            t.how_many_coaches();
+        }", "example5");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -206,12 +276,12 @@ include __DIR__."/../rustrunner.php";
     <p>
         The main feature that sets function-like macros apart from functions is that macros can take <b>variable numbers of arguments as input:</b>
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+world%21%22%29%3B%0A++++%2F%2F+One+argument+given+to+println%21%28%29%0A%0A++++let+x+%3D+5%3B%0A++++println%21%28%22The+value+of+x+is%3A+%7B%7D%22%2C+x%29%3B%0A++++%2F%2F+Two+arguments+given%3A%0A++++%2F%2F+Formatted+string+and+one+variable+to+print+with+string%0A++++%0A++++let+y+%3D+vec%21%5B10%2C+100%2C+1000%5D%3B%0A++++%2F%2F+Creating+a+vector+%28mutable+Rust+array%29+with+vec%21%0A%0A++++println%21%28%22The+values+of+vector+y+are+%7B%7D%2C+%7B%7D+and+%7B%7D%22%2C+y%5B0%5D%2C+y%5B1%5D%2C+y%5B2%5D%29%3B%0A++++%2F%2F+Four+arguments+given%3A%0A++++%2F%2F+Formatted+string+with+three+inputs%2C+and+three+vector+elements%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             &nbsp;println!("Hello, world!"); <br/>&nbsp;// One argument given to println!()<br/>
             <br/>
             &nbsp;let x = 5;<br/>
-            &nbsp;println!("The value of x is: {}", x); <br/>&nbsp;// Two arguments given:<br/>
+            &nbsp;println!("The value of x is {}", x); <br/>&nbsp;// Two arguments given:<br/>
             &nbsp;// Formatted string and one variable to print with string<br/>
             <br/>
             &nbsp;let y = vec![10, 100, 1000];<br/>&nbsp;// Creating a vector (mutable Rust array) with vec!<br/>
@@ -219,8 +289,23 @@ include __DIR__."/../rustrunner.php";
             &nbsp;println!("The values of vector y are {}, {} and {}", y[0], y[1], y[2]); <br/>&nbsp;// Four arguments given:<br/>
             &nbsp;// Formatted string with three inputs, and three vector elements<br/>
         }
-        
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+            println!(\"Hello, world!\"); 
+            
+            let x = 5;
+            println!(\"The value of x is {}\", x); 
+            
+           
+            let y = vec![10, 100, 1000];
+           
+            println!(\"The values of vector y are {}, {} and {}\", y[0], y[1], y[2]);
+           
+        }", "example6");
+        ?>
+    </div>
 </div>
 
 </div>
@@ -229,6 +314,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/fundamentals/4">&laquo; Structs & Enums</a>
     <a href="https://fyp.cr0wbar.dev/fundamentals/6">Control Flow &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

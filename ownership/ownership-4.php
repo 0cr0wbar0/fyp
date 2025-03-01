@@ -99,6 +99,19 @@ include __DIR__."/../rustrunner.php";
         &nbsp;}<br/>
         }
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let arr: [usize; 5] = [1, 2, 3, 4, 5];
+        for n in arr {
+        println!(\"{}\", n);
+        }
+        for i in arr.iter() {
+        println!(\"{}\", i)
+        }
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">

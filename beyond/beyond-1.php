@@ -45,7 +45,7 @@ include __DIR__."/../rustrunner.php";
         This is made possible through <b>generic types</b> - ambiguous representations of multiple possible types,
         that allow functions, methods, enums and structs to handle parameters or fields, respectively, regardless of their actual data type:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+first_of_vec%3CT%3A+Copy%3E%28v%3A+Vec%3CT%3E%29+-%3E+T+%7B%0A++++v%5B0%5D+%2F%2F+of+type+T%2C+where+T+is+copyable%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%0A++++++++%22%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++first_of_vec%28vec%21%5B1%2C+2%2C+3%5D%29%2C%0A++++++++first_of_vec%28vec%21%5B%22a%22%2C+%22b%22%2C+%22c%22%5D%29%2C%0A++++++++first_of_vec%28vec%21%5Btrue%2C+false%2C+false%5D%29%0A++++%29%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         fn first_of_vec&lt;T: Copy&gt;(v: Vec&lt;T&gt;) -> T {<br/>
         &nbsp;v[0] // of type T, where T is copyable<br/>
         }<br/>
@@ -58,11 +58,27 @@ include __DIR__."/../rustrunner.php";
         &nbsp;&nbsp;first_of_vec(vec![true, false, false])<br/>
         &nbsp;)<br/>
         }
-    </a></p>
+    </p>
     <p>
         Note how the <em>first_of_vec()</em> function in the above example uses the angle bracket (< >) syntax previously seen for definitions of
         vectors, hash maps, and other built-in structs and enums in the standard Rust library.
     </p>
+    <div>
+        <?php
+            example_exec("fn first_of_vec&lt;T: Copy&gt;(v: Vec&lt;T&gt;) -> T {
+       v[0]
+        }
+        
+        fn main() {
+        println!(
+        \"{} {} {}\",
+        first_of_vec(vec![1, 2, 3]),
+        first_of_vec(vec![\"a\", \"b\", \"c\"]),
+        first_of_vec(vec![true, false, false])
+        )
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -118,7 +134,7 @@ include __DIR__."/../rustrunner.php";
         One valid alternative to the syntax in the first example, however, is to introduce the trait binding at the end of the function typing (after the parameters and return type)
         with the <b>where</b> keyword:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+first_of_vec%3CT%3E%28v%3A+Vec%3CT%3E%29+-%3E+T+where+T%3A+Copy+%7B%0A++++v%5B0%5D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%0A++++++++%22%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++first_of_vec%28vec%21%5B1%2C+2%2C+3%5D%29%2C%0A++++++++first_of_vec%28vec%21%5B%22a%22%2C+%22b%22%2C+%22c%22%5D%29%2C%0A++++++++first_of_vec%28vec%21%5Btrue%2C+false%2C+false%5D%29%0A++++%29%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         fn first_of_vec&lt;T&gt;(v: Vec&lt;T&gt;) -> T <b>where T: Copy</b> {<br/>
         &nbsp;v[0]<br/>
         }<br/>
@@ -131,8 +147,23 @@ include __DIR__."/../rustrunner.php";
         &nbsp;&nbsp;first_of_vec(vec![true, false, false])<br/>
         &nbsp;)<br/>
         }
-
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn first_of_vec&lt;T&gt;(v: Vec&lt;T&gt;) -> T where T: Copy {
+        v[0]
+        }
+        
+        fn main() {
+        println!(
+        \"{} {} {}\",
+        first_of_vec(vec![1, 2, 3]),
+        first_of_vec(vec![\"a\", \"b\", \"c\"]),
+        first_of_vec(vec![true, false, false])
+        )
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -147,6 +178,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/beyond">&laquo; Beyond the basics intro</a>
     <a href="https://fyp.cr0wbar.dev/beyond/2">Traits &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

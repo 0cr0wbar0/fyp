@@ -46,7 +46,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         The main method of pattern matching in Rust is through a match statement, which takes a given variable and has defined sections of code that run if that variable's value satisfies a match for that section:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+num%3A+i32+%3D+5%3B%0A++++match+num+%7B%0A++++++++1..%3D4+%3D%3E+%7B%0A++++++++++++println%21%28%22Too+small%21%22%29%3B%0A++++++++%7D%0A++++++++5+%3D%3E+%7B%0A++++++++++++println%21%28%22Match%21%22%29%3B%0A++++++++%7D%0A++++++++6..+%3D%3E+%7B%0A++++++++++++println%21%28%22Too+big%21%22%29%3B%0A++++++++%7D%0A++++++++_+%3D%3E+%7B%0A++++++++++++unreachable%21%28%29%0A++++++++%7D%0A++++%7D%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br>
         &nbsp;let num: i32 = 5;<br>
         &nbsp;&nbsp;match num {<br>
@@ -64,10 +64,31 @@ include __DIR__."/../rustrunner.php";
         &nbsp;&nbsp;&nbsp;}<br>
         &nbsp;&nbsp;}<br>
         &nbsp;}<br>
-    </a></p>
+    </p>
     <p>
         Depending on the type of the variable in question, <em>ranges</em> can be specified for matching patterns. The above example prints "Too small!" if the value is 1, 2, 3 or 4, and prints "Too big!" if the value is 6 or greater.
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let num: i32 = 5;
+        match num {
+        1..=4 => {
+        println!(\"Too small!\");
+        }
+        5 => {
+        println!(\"Match!\");
+        }
+        6.. => {
+        println!(\"Too big!\");
+        }
+        _ => {
+        unreachable!()
+        }
+        }
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -87,7 +108,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         It is forbidden to define a match statement with <em>non-exhaustive patterns</em>, that is, if not all possible values of a variable of a certain type are covered by the defined patterns:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+num%3A+i32+%3D+5%3B%0A++++match+num+%7B%0A++++++++1..%3D4+%3D%3E+%7B%0A++++++++++++println%21%28%22Too+small%21%22%29%3B%0A++++++++%7D%0A++++++++5+%3D%3E+%7B%0A++++++++++++println%21%28%22Match%21%22%29%3B%0A++++++++%7D%0A++++++++6..+%3D%3E+%7B%0A++++++++++++println%21%28%22Too+big%21%22%29%3B%0A++++++++%7D%0A++++++++%2F%2F+No+wildcard+pattern%0A++++%7D%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br>
             &nbsp;let num: i32 = 5;<br>
             &nbsp;&nbsp;match num {<br>
@@ -103,7 +124,7 @@ include __DIR__."/../rustrunner.php";
             &nbsp;&nbsp;&nbsp;// No wildcard pattern<br>
             &nbsp;&nbsp;}<br>
             &nbsp;}<br>
-    </a></p>
+    </p>
     <p class="inline-err">
     Compiling temp v0.1.0<br>
     error[E0004]: non-exhaustive patterns: `i32::MIN..=0_i32` not covered<br>
@@ -128,7 +149,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         For matching on a variable with an enum type, either all possible discriminants must be included, or the wildcard must be included if this is not the case: 
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Vehicles+%7B%0A++++Car%2C%0A++++Boat%2C%0A++++Train%2C%0A++++Plane%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+v+%3D+Vehicles%3A%3ATrain%3B%0A++++match+v+%7B%0A++++++++Vehicles%3A%3ACar+%3D%3E+%7B%0A++++++++++++println%21%28%22Beep%21%22%29%3B%0A++++++++%7D%0A++++++++Vehicles%3A%3ABoat+%3D%3E+%7B%0A++++++++++++println%21%28%22Splash%21%22%29%3B%0A++++++++%7D%0A++++++++Vehicles%3A%3ATrain+%3D%3E+%7B%0A++++++++++++println%21%28%22Honk%21%22%29%3B%0A++++++++%7D%0A++++++++Vehicles%3A%3APlane+%3D%3E+%7B%0A++++++++++++println%21%28%22Zoom%21%22%29%3B%0A++++++++%7D+%2F%2F+Wildcard+not+needed+here%2C+as+all+discriminants+covered%0A++++%7D%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         enum Vehicles {<br>
         &nbsp;Car,<br>
         &nbsp;Boat,<br>
@@ -155,7 +176,34 @@ include __DIR__."/../rustrunner.php";
             &nbsp;&nbsp;// Wildcard not needed here, as all discriminants covered<br>
             &nbsp;}<br>
         }<br>
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("#[allow(dead_code)]
+            enum Vehicles {
+        Car,
+        Boat,
+        Train,
+        Plane
+        }
+        fn main() {
+            let v = Vehicles::Train;
+            match v {
+            Vehicles::Car => {
+            println!(\"Beep!\");
+            }
+            Vehicles::Boat => {
+            println!(\"Splash!\");
+            }
+            Vehicles::Train => {
+            println!(\"Honk!\");
+            }
+            Vehicles::Plane => {
+            println!(\"Zoom!\");
+            }
+            }}", "example2");
+        ?>
+    </div>
 </div>
 
 </div>
@@ -164,6 +212,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/patternmatching">&laquo; Pattern Matching intro</a>
     <a href="https://fyp.cr0wbar.dev/patternmatching/2">If-let statements &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

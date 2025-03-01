@@ -41,20 +41,29 @@ include __DIR__."/../rustrunner.php";
     <p>
         Quick, single-line comments are denoted with a double forward slash (//):
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+vector%3A+Vec%3Cisize%3E+%3D+Vec%3A%3Anew%28%29%3B+%2F%2F+initialising+function+for+vector+structs%0A++++vector.push%285%29%3B+%2F%2F+function+for+appending+an+element+to+a+vector%0A++++dbg%21%28vector%29%3B+%2F%2F+macro+that+prints+the+vector+in+debug+format%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             &nbsp;let mut vector: Vec&lt;isize&gt; = Vec::new(); // initialising function for vector structs<br/>
             &nbsp;vector.push(5); // function for appending an element to a vector<br/>
             &nbsp;dbg!(vector); // macro that prints the vector in debug format<br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+            let mut vector: Vec&lt;isize&gt; = Vec::new();
+            vector.push(5); 
+            dbg!(vector); 
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         If a more detailed description is required for a piece of code, Rust allows for <em>doc comments</em>, indicated with a triple forward slash (///):
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++for+i+in+0..30+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+fibonacci%28i%29%29%3B%0A++++%7D%0A%7D%0A%0A%2F%2F%2F+A+function+that+takes+a+signed+32-bit+integer+as+an+argument%0A%2F%2F%2F+and+also+returns+a+signed+32-bit+integer.+%0A%2F%2F%2F%0A%2F%2F%2F+Finds+the+zero-indexed+nth+term+of+the+Fibonacci+sequence.%0A%2F%2F%2F%0A%2F%2F%2F+The+function+is+recursive%3B+if+the+integer+is+not+zero+or+one%2C%0A%2F%2F%2F+it+will+repeatedly+call+itself+with+smaller+numbers+less+than%0A%2F%2F%2F+n+in+order+to+find+the+sum+of+each+term+of+the+sequence+before%0A%2F%2F%2F+the+nth.%0A%2F%2F%2F%0Afn+fibonacci%28n%3A+i32%29+-%3E+i32+%7B%0A++++if+n+%3D%3D+0+%7B%0A++++++++return+0%3B%0A++++%7D+else+if+n+%3D%3D+1+%7B%0A++++++++return+1%3B%0A++++%7D+else+%7B%0A++++++++fibonacci%28n-1%29+%2B+fibonacci%28n-2%29%0A++++%7D%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;for i in 0..30 {<br/>
         &nbsp;&nbsp;println!("{}", fibonacci(i));<br/>
@@ -80,14 +89,32 @@ include __DIR__."/../rustrunner.php";
         &nbsp;&nbsp;fibonacci(n-1) + fibonacci(n-2)<br/>
         &nbsp;}<br/>
         }<br/>
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        for i in 0..30 {
+        println!(\"{}\", fibonacci(i));
+        }
+        }
+        fn fibonacci(n: i32) -> i32 {
+        if n == 0 {
+        return 0;
+        } else if n == 1 {
+        return 1;
+        } else {
+        fibonacci(n-1) + fibonacci(n-2)
+        }
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         <b>Doc comments also support Markdown,</b> allowing for division into titles, subtitles and code block examples if the documentation is being read in a text editor that supports Markdown:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A+for+i+in+0..30+%7B%0A++println%21%28%22%7B%7D%22%2C+fibonacci%28i%29%29%3B%0A+%7D%0A%7D%0A%0A%2F%2F%2F+%23+Fibonacci+function%0A%2F%2F%2F%0A%2F%2F%2F+A+function+that+takes+a+signed+32-bit+integer+as+an+argument%0A%2F%2F%2F+and+also+returns+a+signed+32-bit+integer.%0A%2F%2F%2F%0A%2F%2F%2F+Finds+the+zero-indexed+nth+term+of+the+Fibonacci+sequence.%0A%2F%2F%2F%0A%2F%2F%2F+%23%23+Example%0A%2F%2F%2F%0A%2F%2F%2F+%60%60%60fibonacci%2810%29%60%60%60+will+return+55%2C+the+tenth+term+of+the+%0A%2F%2F%2F+sequence+%28assuming+that+there+is+a+0th+term%29.%0A%2F%2F%2F%0Afn+fibonacci%28n%3A+i32%29+-%3E+i32+%7B%0A+if+n+%3D%3D+0+%7B%0A++return+0%3B%0A+%7D+else+if+n+%3D%3D+1+%7B%0A++return+1%3B%0A+%7D+else+%7B%0A++fibonacci%28n-1%29+%2B+fibonacci%28n-2%29%0A+%7D%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
             &nbsp;for i in 0..30 {<br/>
             &nbsp;&nbsp;println!("{}", fibonacci(i));<br/>
@@ -115,7 +142,25 @@ include __DIR__."/../rustrunner.php";
             &nbsp;&nbsp;fibonacci(n-1) + fibonacci(n-2)<br/>
             &nbsp;}<br/>
             }<br/>
-    </a></p>
+    </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        for i in 0..30 {
+        println!(\"{}\", fibonacci(i));
+        }
+        }
+        fn fibonacci(n: i32) -> i32 {
+        if n == 0 {
+        return 0;
+        } else if n == 1 {
+        return 1;
+        } else {
+        fibonacci(n-1) + fibonacci(n-2)
+        }
+        }", "example3");
+        ?>
+    </div>
 </div>
 
 </div>
@@ -124,6 +169,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/fundamentals/6">&laquo; Control Flow</a>
     <a href="https://fyp.cr0wbar.dev/fundamentals/quiz">Quiz &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

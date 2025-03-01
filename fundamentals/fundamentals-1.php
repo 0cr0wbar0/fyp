@@ -54,10 +54,10 @@ include __DIR__."/../rustrunner.php";
     <p> 
         Rust does not allow for unassigned variables that are not <em>explicitly typed</em>:
     </p>
-    <p class="inlinelink"> <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+variable_name%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let variable_name;<br/>
-        }</a></p>
+        }</p>
     <p class="inline-err">
         error[E0282]: type annotations needed<br/>
          --> src/main.rs:2:9<br/>
@@ -76,12 +76,17 @@ include __DIR__."/../rustrunner.php";
 
 <div class="info">
     <p class="inlinelink">
-        <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+variable_name%3A+char%3B%0A%7D" target="_blank">
             fn main() {<br/>
             &nbsp;let variable_name: char;<br/>
             }
-        </a>
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {\n
+            \tlet _variable_name: char;\n
+            }", "example1");
+        ?>
+    </div>
     <p>
         The "char" after the colon in the above example is <b>not the value of the variable, but the data type.</b>
     </p>
@@ -92,12 +97,17 @@ include __DIR__."/../rustrunner.php";
     In Rust, explicit types for variables are specified after the variable name, separated from it by a colon, after which the actual value is specified with an equals sign:
     </p>
     <p class="inlinelink">
-        <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+variable_name%3A+char+%3D+%27b%27%3B%0A%7D" target="_blank">
             fn main() {<br/>
             &nbsp;let variable_name: char = 'b';<br/>
             }
-        </a>
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {\n
+            \tlet _variable_name: char = 'b';\n
+            }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -112,6 +122,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/fundamentals">&laquo; Fundamentals intro</a>
     <a href="https://fyp.cr0wbar.dev/fundamentals/2">Mutability &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

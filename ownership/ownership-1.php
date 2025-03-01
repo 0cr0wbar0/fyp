@@ -51,7 +51,7 @@ include __DIR__."/../rustrunner.php";
         &nbsp;println!("The unscoped value of n is {}", n);<br/>
         }
     </p>
-    <div class="info" id="example1">
+    <div class="info">
         <?php example_exec("fn main() {\n
         \tlet n: i32 = 10;\n
         \t{\n
@@ -112,7 +112,7 @@ include __DIR__."/../rustrunner.php";
     <p>
         It is completely forbidden to manually call the drop() function on any value whatsoever:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+ToDrop+%7B%0A++++i%3A+i32%0A%7D%0A%0A%2F%2F%2F+This+impl+tries+to+manually+implement+custom+destruction%0A%2F%2F%2F+behaviour+for+ToDrop+struct%0Aimpl+Drop+for+ToDrop+%7B+%0A++++fn+drop%28%26mut+self%29+%7B%0A++++++++%2F%2F+some+code+to+execute+when+struct+is+dropped%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+i+%3D+ToDrop+%7B+i%3A+20+%7D%3B%0A++++i.drop%28%29%3B%0A%7D" target="_blank">
+    <p class="inlinelink">
         struct ToDrop {<br/>
         &nbsp;i: i32<br/>
         }<br/>
@@ -129,7 +129,7 @@ include __DIR__."/../rustrunner.php";
         &nbsp;let i = ToDrop { i: 20 };<br/>
         &nbsp;i.drop();<br/>
         }<br/>
-    </a></p>
+    </p>
     <p class="inline-err">
         error[E0040]: explicit use of destructor method<br/>
         --> src/main.rs:15:7<br/>

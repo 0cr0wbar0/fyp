@@ -66,7 +66,7 @@ include __DIR__."/../rustrunner.php";
         In the case of an Option containing a value, the Some() syntax acts as a wrapper around the value, and can be removed with the built-in <b>unwrap()</b> method. 
         As its name implies, this strips away the Option, in order for the value to be used elsewhere:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+option%28%29+-%3E+Option%3Ci32%3E+%7B%0A++++Some%2810%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+option%28%29.unwrap%28%29%29%0A%7D%0A" target="_blank">
+    <p class="inlinelink">
         fn option() -> Option&lt;i32&gt; {<br/>
         &nbsp;Some(10)<br/>
         }<br/>
@@ -74,10 +74,20 @@ include __DIR__."/../rustrunner.php";
         fn main() {<br/>
         &nbsp;println!("{}", option().unwrap())<br/>
         }<br/>
-    </a></p>
+    </p>
     <p>
         unwrap() is also implemented for a similar type, <b>Result</b>, explained on the next page.
     </p>
+    <div>
+        <?php
+            example_exec("fn option() -> Option&lt;i32&gt; {
+        Some(10)
+        }
+        fn main() {
+        println!(\"{}\", option().unwrap())
+        }", "example1");
+        ?>
+    </div>
 </div>
 
 <div class="info">
@@ -94,7 +104,7 @@ include __DIR__."/../rustrunner.php";
         This also unwraps the enum, assuming it not to be None, with the added functionality of appending a string, defined by the programmer,
         to any error message caused by an instance of None:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+option%28%29+-%3E+Option%3Ci32%3E+%7B%0A++++None%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+option%28%29.expect%28%22shouldn%27t+be+None%22%29%29%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn option() -> Option&lt;i32&gt; {<br/>
         &nbsp;None<br/>
         }<br/>
@@ -102,14 +112,25 @@ include __DIR__."/../rustrunner.php";
         fn main() {<br/>
         &nbsp;println!("{}", option().expect("shouldn't be None"))<br/>
         }
-    </a></p>
+    </p>
+    <div>
+        <?php
+        example_exec("fn option() -> Option&lt;i32&gt; {
+        None
+        }
+        
+        fn main() {
+        println!(\"{}\", option().expect(\"shouldn't be None\"))
+        }", "example2");
+        ?>
+    </div>
 </div>
 
 <div class="info">
     <p>
         In terms of pattern matching, the Option enum can be efficiently used in situations where the existence of a value needs to be confirmed:
     </p>
-    <p class="inlinelink"><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+num%3A+Option%3Ci32%3E+%3D+Some%285%29%3B%0A++++match+num+%7B%0A++++++++Some%28number%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Number+matched%3A+%7B%7D%22%2C+number%29%0A++++++++%7D%0A++++++++None+%3D%3E+%7B%0A++++++++++++println%21%28%22No+value+found%21%22%29%0A++++++++%7D%0A++++%7D%0A%7D" target="_blank">
+    <p class="inlinelink">
         fn main() {<br/>
         &nbsp;let num: Option&lt;i32&gt; = Some(5);<br/>
         &nbsp;match num {<br/>
@@ -121,11 +142,26 @@ include __DIR__."/../rustrunner.php";
         &nbsp;&nbsp;}<br/>
         &nbsp;}<br/>
         }
-    </a></p>
+    </p>
     <p>
         In the above example, the match statement uses a temporary variable <em>number</em> to match with the Option variable <em>num</em>, and prints the matching value.
         Furthermore, since <em>num</em> is explicitly defined to have an optional i32 value, all possible matches are covered (any i32, or no value), and there is no need for a wildcard match.
     </p>
+    <div>
+        <?php
+            example_exec("fn main() {
+        let num: Option&lt;i32&gt; = Some(5);
+        match num {
+        Some(number) => {
+        println!(\"Number matched: {}\", number)
+        }
+        None => {
+        println!(\"No value found!\")
+        }
+        }
+        }", "example3");
+        ?>
+    </div>
 </div>
 
 </div>
@@ -134,6 +170,8 @@ include __DIR__."/../rustrunner.php";
     <a href="https://fyp.cr0wbar.dev/errorhandling/1">&laquo; The panic!() macro</a>
     <a href="https://fyp.cr0wbar.dev/errorhandling/3">The Result enum &raquo;</a>
 </div>
+
+<?php js(); ?>
 
 </body>
 

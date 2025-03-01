@@ -13,6 +13,8 @@
     font-family: "SF Mono";
     font-size: 1.5rem;
     border-radius: 10px;
+    border-width: medium;
+    border-style: outset;
     background-color: #b04510;
     border-color: #572a14;
     color: #f7bc9e;
@@ -32,6 +34,10 @@
 body {
     margin: 0;
     padding: 0;
+}
+
+pre {
+    white-space: pre-wrap;
 }
 
 .navbar a {
