@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Ownership: slices</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -88,15 +90,15 @@ include __DIR__."/../rustrunner.php";
         Arrays can be iterated over with for loops, but they also implement a trait that allows for an <em>iterator</em> to be used on them:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let arr: [usize; 5] = [1, 2, 3, 4, 5];<br/>
-        &nbsp;for n in arr {<br/>
-        &nbsp;&nbsp;println!("{}", n); // conventional for loop<br/>
-        &nbsp;}<br/>
-        <br/>
-        &nbsp;for i in arr.iter() { // iter() method creates an iterator for arr<br/>
-        &nbsp;&nbsp;println!("{}", i)<br/>
-        &nbsp;}<br/>
+        fn main() {<br>
+        &nbsp;let arr: [usize; 5] = [1, 2, 3, 4, 5];<br>
+        &nbsp;for n in arr {<br>
+        &nbsp;&nbsp;println!("{}", n); // conventional for loop<br>
+        &nbsp;}<br>
+        <br>
+        &nbsp;for i in arr.iter() { // iter() method creates an iterator for arr<br>
+        &nbsp;&nbsp;println!("{}", i)<br>
+        &nbsp;}<br>
         }
     </p>
     <div>

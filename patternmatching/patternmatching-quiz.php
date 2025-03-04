@@ -9,11 +9,13 @@ $root_password = "pirhyw-9jyvxa-pavzUj";
 $database = new mysqli($servername, $root_user, $root_password, $db_name);
 ?>
 
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Pattern matching: quiz</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">

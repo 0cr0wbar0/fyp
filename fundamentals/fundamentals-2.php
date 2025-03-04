@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Fundamentals: mutability</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -36,11 +38,11 @@ include __DIR__."/../rustrunner.php";
         <b>All Rust variables are immutable by default.</b> The keyword <em>mut</em> must be used after <em>let</em> during assignment to create a mutable variable:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        let mut number = 5;<br/>
-        println!("{}", number); // prints '5'<br/>
-        number = 10;<br/>
-        println!("{}", number); // prints '10'<br/>
+        fn main() {<br>
+        let mut number = 5;<br>
+        println!("{}", number); // prints '5'<br>
+        number = 10;<br>
+        println!("{}", number); // prints '10'<br>
         }
     </p>
     <div>
@@ -57,7 +59,7 @@ include __DIR__."/../rustrunner.php";
 
 <div class="info">
     <p>
-        The above example also contains some instances of <br/> println!(), one of Rust's <b>macros</b>
+        The above example also contains some instances of <br> println!(), one of Rust's <b>macros</b>
          (covered in more detail later). println!() prints the value of a given variable, depending on its <b>data type</b>.
     </p>
 </div>
@@ -67,10 +69,10 @@ include __DIR__."/../rustrunner.php";
         Using the keyword <em>const</em>, Rust variables can also be defined as constants, forcing complete immutability throughout the entire lifetime of a variable:
     </p>
     <p class="inlinelink">
-        const FORTY_TWO: u8 = 20+12+10;<br/>
-        <br/>
-        fn main() {<br/>
-            &nbsp;println!("{}", FORTY_TWO)<br/>
+        const FORTY_TWO: u8 = 20+12+10;<br>
+        <br>
+        fn main() {<br>
+            &nbsp;println!("{}", FORTY_TWO)<br>
         }
     </p>
     <div>

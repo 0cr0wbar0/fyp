@@ -1,9 +1,11 @@
 <?php session_start(); ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Fundamentals</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">

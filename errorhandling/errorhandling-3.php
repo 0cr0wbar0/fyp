@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Error handling: the Result enum</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -61,19 +63,19 @@ include __DIR__."/../rustrunner.php";
         Similarly to the Option enum, the value of a Result variable can be extracted from its enum wrapper with the <em>unwrap()</em> method:
     </p>
     <p class="inlinelink">
-        fn result() -> Result&lt;i32, String&gt; {<br/>
-        &nbsp;Ok(5)<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;println!("{}", result().unwrap())<br/>
+        fn result() -> Result&lt;i32, String&gt; {<br>
+        &nbsp;Ok(5)<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;println!("{}", result().unwrap())<br>
         }
     </p>
     <p>
         An additional similarity is that this implementation of unwrap() expects an Ok(V) with a valid return value V and a successful execution,
         and will panic if the Result is an Err() of any kind. As with unwrapping an Option, this should only be used with complete confidence in the behaviour of a function or method.
-        <br/>
-        <br/> Result also has the <em>expect()</em> method implemented for it, allowing for the same quick error checking for high-confidence functions and methods that return a Result.
+        <br>
+        <br> Result also has the <em>expect()</em> method implemented for it, allowing for the same quick error checking for high-confidence functions and methods that return a Result.
     </p>
     <div>
         <?php
@@ -100,16 +102,16 @@ include __DIR__."/../rustrunner.php";
         Option and Result are so similar, in fact, that they both have methods that allow one to be converted into the other:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        <br/>
-        &nbsp;let maybe_ten: Option&lt;f32&gt; = Some(10.56);<br/>
-        &nbsp;let success: Result&lt;i32, String&gt; = Ok(4);<br/>
-        <br/>
-        &nbsp;let new_result = maybe_ten.ok_or("fail");<br/>
-        &nbsp;let new_option = success.ok();<br/>
-        <br/>
-        &nbsp;println!("{:?} {:?}", new_result, new_option)<br/>
-        <br/>
+        fn main() {<br>
+        <br>
+        &nbsp;let maybe_ten: Option&lt;f32&gt; = Some(10.56);<br>
+        &nbsp;let success: Result&lt;i32, String&gt; = Ok(4);<br>
+        <br>
+        &nbsp;let new_result = maybe_ten.ok_or("fail");<br>
+        &nbsp;let new_option = success.ok();<br>
+        <br>
+        &nbsp;println!("{:?} {:?}", new_result, new_option)<br>
+        <br>
         }
     </p>
     <p>
@@ -136,7 +138,7 @@ include __DIR__."/../rustrunner.php";
 <div class="info">
     <p>
         The method <em>ok_or()</em> takes ownership of the given Option and returns either an Ok() with the Option's contained value, or an Err() with the value passed into the method, respectively depending on the Option being Some() or None.
-        <br/><br/>The <em>ok()</em> method implemented for Result, meanwhile, takes the given Result and returns an Option on the type of the Result's success type.
+        <br><br>The <em>ok()</em> method implemented for Result, meanwhile, takes the given Result and returns an Option on the type of the Result's success type.
     </p>
 </div>
 
@@ -146,15 +148,15 @@ include __DIR__."/../rustrunner.php";
         When this is added to such a statement, it will match on the output, unwrap the value if it is a Some() or Ok() value respectively, and return early with a None or Err() otherwise:
     </p>
     <p class="inlinelink">
-        use std::collections::HashMap;<br/>
-        <br/>
-        fn option_on_hashmap() -> Option<&'static str> {<br/>
-        &nbsp;let map: HashMap&lt;i32, &'static str&gt; = HashMap::new();<br/>
-        &nbsp;Some(map.get(&5)?)<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;println!("{:?}", option_on_hashmap())<br/>
+        use std::collections::HashMap;<br>
+        <br>
+        fn option_on_hashmap() -> Option<&'static str> {<br>
+        &nbsp;let map: HashMap&lt;i32, &'static str&gt; = HashMap::new();<br>
+        &nbsp;Some(map.get(&5)?)<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;println!("{:?}", option_on_hashmap())<br>
         }
     </p>
     <p>

@@ -57,7 +57,7 @@ function js() {
                 console.log(json);
                 const code = form.querySelector("pre");
                 code.className = json.exit_code === 0 ? "inlinelink" : "inline-err";
-                code.innerHTML = json.output;
+                code.textContent = json.output;
             } catch (e) {
                 console.error(e);
             }

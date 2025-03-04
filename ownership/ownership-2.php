@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Ownership: references</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -107,13 +109,13 @@ include __DIR__."/../rustrunner.php";
         <br>
         /// Takes *mutable* reference to a String,<br>
         /// returns last character of String,<br>
-        /// provided the String's length is >= 1<br><br/>
+        /// provided the String's length is >= 1<br><br>
         fn get_last_char(string: &mut String) -> char {<br>
         &nbsp;string.pop().unwrap() // this method explained later!<br>
         }<br>
         <br>
-        /// Takes reference to a String,<br/>
-        /// returns current length<br/><br/>
+        /// Takes reference to a String,<br>
+        /// returns current length<br><br>
         fn get_length(string: &String) -> usize {<br>
         &nbsp;string.len()<br>
         }<br>

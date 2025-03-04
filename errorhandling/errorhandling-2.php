@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Error handling: the Option enum</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -67,13 +69,13 @@ include __DIR__."/../rustrunner.php";
         As its name implies, this strips away the Option, in order for the value to be used elsewhere:
     </p>
     <p class="inlinelink">
-        fn option() -> Option&lt;i32&gt; {<br/>
-        &nbsp;Some(10)<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;println!("{}", option().unwrap())<br/>
-        }<br/>
+        fn option() -> Option&lt;i32&gt; {<br>
+        &nbsp;Some(10)<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;println!("{}", option().unwrap())<br>
+        }<br>
     </p>
     <p>
         unwrap() is also implemented for a similar type, <b>Result</b>, explained on the next page.
@@ -105,12 +107,12 @@ include __DIR__."/../rustrunner.php";
         to any error message caused by an instance of None:
     </p>
     <p class="inlinelink">
-        fn option() -> Option&lt;i32&gt; {<br/>
-        &nbsp;None<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;println!("{}", option().expect("shouldn't be None"))<br/>
+        fn option() -> Option&lt;i32&gt; {<br>
+        &nbsp;None<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;println!("{}", option().expect("shouldn't be None"))<br>
         }
     </p>
     <div>
@@ -131,16 +133,16 @@ include __DIR__."/../rustrunner.php";
         In terms of pattern matching, the Option enum can be efficiently used in situations where the existence of a value needs to be confirmed:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let num: Option&lt;i32&gt; = Some(5);<br/>
-        &nbsp;match num {<br/>
-        &nbsp;&nbsp;Some(number) => {<br/>
-        &nbsp;&nbsp;&nbsp;println!("Number matched: {}", number)<br/>
-        &nbsp;&nbsp;}<br/>
-        &nbsp;&nbsp;None => {<br/>
-        &nbsp;&nbsp;&nbsp;println!("No value found!")<br/>
-        &nbsp;&nbsp;}<br/>
-        &nbsp;}<br/>
+        fn main() {<br>
+        &nbsp;let num: Option&lt;i32&gt; = Some(5);<br>
+        &nbsp;match num {<br>
+        &nbsp;&nbsp;Some(number) => {<br>
+        &nbsp;&nbsp;&nbsp;println!("Number matched: {}", number)<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;None => {<br>
+        &nbsp;&nbsp;&nbsp;println!("No value found!")<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;}<br>
         }
     </p>
     <p>

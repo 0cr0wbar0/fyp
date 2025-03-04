@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Error handling: the panic!() macro</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -43,24 +45,24 @@ include __DIR__."/../rustrunner.php";
     </p>
     <p class="inlinelink">
         fn main() {<br>
-        &nbsp;panic!("Error!")<br/>
+        &nbsp;panic!("Error!")<br>
         }
     </p>
     <p>
         It then prints the exact line and column numbers for where the panic occurred, and (optionally) prints a string, passed to it as a parameter, to error output explaining the reason, as well as a full backtrace of the runtime call stack (the record of processes executed during runtime):
     </p>
     <p class="inline-err">
-        thread 'main' panicked at <b>src/main.rs:2:5:</b><br/>
-        <b>Error!</b><br/>
-        <b>stack backtrace</b>:<br/>
-        &nbsp;0: rust_begin_unwind<br/>
+        thread 'main' panicked at <b>src/main.rs:2:5:</b><br>
+        <b>Error!</b><br>
+        <b>stack backtrace</b>:<br>
+        &nbsp;0: rust_begin_unwind<br>
         &nbsp;&nbsp;at /rustc/.../library/std/src/panicking.rs:665:5<br>
-        &nbsp;1: core::panicking::panic_fmt<br/>
+        &nbsp;1: core::panicking::panic_fmt<br>
         &nbsp;&nbsp;at /rustc/.../library/core/src/panicking.rs:76:14<br>
-        &nbsp;2: playground::main<br/>
-        &nbsp;&nbsp;at ./src/main.rs:2:5<br/>
-        &nbsp;3: core::ops::function::FnOnce::call_once<br/>
-        &nbsp;&nbsp;at ./.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5<br/>
+        &nbsp;2: playground::main<br>
+        &nbsp;&nbsp;at ./src/main.rs:2:5<br>
+        &nbsp;3: core::ops::function::FnOnce::call_once<br>
+        &nbsp;&nbsp;at ./.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5<br>
     </p>
 </div>
 
@@ -72,16 +74,16 @@ include __DIR__."/../rustrunner.php";
 
 <div class="info">
     <p>
-        For example, the method <em>remove()</em>, implemented for vectors, will call the <br/>panic!() macro if an attempt is made to remove an element on an out-of-bounds index:
+        For example, the method <em>remove()</em>, implemented for vectors, will call the <br>panic!() macro if an attempt is made to remove an element on an out-of-bounds index:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let mut v = vec![1,2,3,4,5];<br/>
-        &nbsp;v.remove(6);<br/>
+        fn main() {<br>
+        &nbsp;let mut v = vec![1,2,3,4,5];<br>
+        &nbsp;v.remove(6);<br>
         }
     </p>
     <p class="inline-err">
-        thread 'main' panicked at src/main.rs:3:7:<br/>
+        thread 'main' panicked at src/main.rs:3:7:<br>
         removal index (is 6) should be < len (is 5)
     </p>
 </div>
@@ -97,13 +99,13 @@ include __DIR__."/../rustrunner.php";
         Since this macro allows for full string formatting, relevant variables and values can be passed into the error output string for maximum contextual clarity:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let big_num = i128::MAX;<br/>
-        &nbsp;panic!("Number {num} is too big!", num = big_num)<br/>
+        fn main() {<br>
+        &nbsp;let big_num = i128::MAX;<br>
+        &nbsp;panic!("Number {num} is too big!", num = big_num)<br>
         }
     </a></p>
     <p class="inline-err">
-        thread 'main' panicked at src/main.rs:3:5:<br/>
+        thread 'main' panicked at src/main.rs:3:5:<br>
         Number 170141183460469231731687303715884105727 is too big!
     </p>
 </div>

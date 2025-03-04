@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Fundamentals: structs & enums</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -42,18 +44,18 @@ include __DIR__."/../rustrunner.php";
         Structs are made up of <em>fields</em>, internal pieces of data that also need their own data types:
     </p>
     <p class="inlinelink">
-        struct Train {<br/>
-            &nbsp;colour: String, // Field definitions are separated by commas<br/>
-            &nbsp;num_of_coaches: i32,<br/>
-            &nbsp;max_speed_kmh: f64<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let t = Train {<br/>
-        &nbsp;&nbsp;colour: String::from("Green"),<br/>
-        &nbsp;&nbsp;num_of_coaches: 12,<br/>
-        &nbsp;&nbsp;max_speed_kmh: 109.125<br/>
-        &nbsp;};<br/>
+        struct Train {<br>
+            &nbsp;colour: String, // Field definitions are separated by commas<br>
+            &nbsp;num_of_coaches: i32,<br>
+            &nbsp;max_speed_kmh: f64<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let t = Train {<br>
+        &nbsp;&nbsp;colour: String::from("Green"),<br>
+        &nbsp;&nbsp;num_of_coaches: 12,<br>
+        &nbsp;&nbsp;max_speed_kmh: 109.125<br>
+        &nbsp;};<br>
         }
     </p>
     <div>
@@ -87,32 +89,32 @@ include __DIR__."/../rustrunner.php";
         Struct fields can also be other structs:
     </p>
     <p class="inlinelink">
-        struct Driver {<br/>
-            &nbsp;name: String,<br/>
-            &nbsp;years_of_exp: i32,<br/>
-            &nbsp;can_drive_diesel_trains: bool<br/>
-        }<br/>
-        <br/>
-        struct Train {<br/>
-            &nbsp;driver: Driver, // A driver assigned to a train<br/>
-            &nbsp;colour: String,<br/>
-            &nbsp;num_of_coaches: i32,<br/>
-            &nbsp;max_speed_kmh: f64<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-            &nbsp;let d = Driver {<br/>
-            &nbsp;&nbsp;name: String::from("Dave"),<br/>
-            &nbsp;&nbsp;years_of_exp: 5,<br/>
-            &nbsp;&nbsp;can_drive_diesel_trains: false<br/>
-            &nbsp;};<br/>
-        <br/>
-            &nbsp;let new_t = Train {<br/>
-            &nbsp;&nbsp;driver: d,<br/>
-            &nbsp;&nbsp;colour: String::from("Red"),<br/>
-            &nbsp;&nbsp;num_of_coaches: 5,<br/>
-            &nbsp;&nbsp;max_speed_kmh: 149.55<br/>
-            &nbsp;};<br/>
+        struct Driver {<br>
+            &nbsp;name: String,<br>
+            &nbsp;years_of_exp: i32,<br>
+            &nbsp;can_drive_diesel_trains: bool<br>
+        }<br>
+        <br>
+        struct Train {<br>
+            &nbsp;driver: Driver, // A driver assigned to a train<br>
+            &nbsp;colour: String,<br>
+            &nbsp;num_of_coaches: i32,<br>
+            &nbsp;max_speed_kmh: f64<br>
+        }<br>
+        <br>
+        fn main() {<br>
+            &nbsp;let d = Driver {<br>
+            &nbsp;&nbsp;name: String::from("Dave"),<br>
+            &nbsp;&nbsp;years_of_exp: 5,<br>
+            &nbsp;&nbsp;can_drive_diesel_trains: false<br>
+            &nbsp;};<br>
+        <br>
+            &nbsp;let new_t = Train {<br>
+            &nbsp;&nbsp;driver: d,<br>
+            &nbsp;&nbsp;colour: String::from("Red"),<br>
+            &nbsp;&nbsp;num_of_coaches: 5,<br>
+            &nbsp;&nbsp;max_speed_kmh: 149.55<br>
+            &nbsp;};<br>
         }
     </p>
     <div>
@@ -155,17 +157,17 @@ include __DIR__."/../rustrunner.php";
         <em>Enums</em>, short for enumerations, are tiny pieces of data that, similar to structs, are defined entirely by the programmer as a custom data structure, and can only be one of multiple <em>variants</em> (sometimes called <em>discriminants</em>):
     </p>
     <p class="inlinelink">
-        enum Reviews {<br/>
-            &nbsp;Excellent,<br/>
-            &nbsp;Great,<br/>
-            &nbsp;Good,<br/>
-            &nbsp;Okay,<br/>
-            &nbsp;Bad,<br/>
-            &nbsp;Terrible<br/>
-        }<br/><br/>
+        enum Reviews {<br>
+            &nbsp;Excellent,<br>
+            &nbsp;Great,<br>
+            &nbsp;Good,<br>
+            &nbsp;Okay,<br>
+            &nbsp;Bad,<br>
+            &nbsp;Terrible<br>
+        }<br><br>
         
-        fn main() {<br/>
-        &nbsp;let bad_review = Reviews::Bad;<br/>
+        fn main() {<br>
+        &nbsp;let bad_review = Reviews::Bad;<br>
         }
     </p>
     <div>
@@ -195,40 +197,40 @@ include __DIR__."/../rustrunner.php";
         In a similar way to structs, enums can have multiple fields of different types and data structures:
     </p>
     <p class="inlinelink">
-        enum OpcodeInts { <br/>
-            &nbsp;RRQ = 1, // Variants can represent hardcoded values... <br/>
-            &nbsp;WRQ = 2, <br/>
-            &nbsp;DATA = 3, <br/>
-            &nbsp;ACK = 4, <br/>
-            &nbsp;ERR = 5 <br/>
-        }<br/>
-        <br/>
-        enum Lengths { <br/>
-            &nbsp;One(i32), // ...tuples of different lengths... <br/>
-            &nbsp;Two(i32, i32), <br/>
-            &nbsp;Three(i32, i32, i32), <br/>
-            &nbsp;Four(i32, i32, i32, i32), <br/>
-            &nbsp;Five(i32, i32, i32, i32, i32) <br/>
-        }<br/>
-        <br/>
-        enum Structs {<br/>
-            &nbsp;Point {x: i32, y: i32}, // ...and structs!<br/>
-            &nbsp;Precise3DPoint {x: f32, y: f32, z: f32},<br/>
-        }<br/>
-        <br/>
-        enum Mix {<br/>
-            &nbsp;Tuple(f64, f64), // Enums can mix these types together as well<br/>
-            &nbsp;Vehicle {colour: String, num_of_wheels: i32}<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-            &nbsp;let opcode = OpcodeInts::DATA;<br/>
-            &nbsp;let three_d_point = Structs::Precise3DPoint {<br/>
-                &nbsp;&nbsp;x: 28.17,<br/>
-                &nbsp;&nbsp;y: 34.78,<br/>
-                &nbsp;&nbsp;z: 97.12<br/>
-                &nbsp;};<br/>
-            &nbsp;let tuple_example = Mix::Tuple(54.982, 34.195);<br/>
+        enum OpcodeInts { <br>
+            &nbsp;RRQ = 1, // Variants can represent hardcoded values... <br>
+            &nbsp;WRQ = 2, <br>
+            &nbsp;DATA = 3, <br>
+            &nbsp;ACK = 4, <br>
+            &nbsp;ERR = 5 <br>
+        }<br>
+        <br>
+        enum Lengths { <br>
+            &nbsp;One(i32), // ...tuples of different lengths... <br>
+            &nbsp;Two(i32, i32), <br>
+            &nbsp;Three(i32, i32, i32), <br>
+            &nbsp;Four(i32, i32, i32, i32), <br>
+            &nbsp;Five(i32, i32, i32, i32, i32) <br>
+        }<br>
+        <br>
+        enum Structs {<br>
+            &nbsp;Point {x: i32, y: i32}, // ...and structs!<br>
+            &nbsp;Precise3DPoint {x: f32, y: f32, z: f32},<br>
+        }<br>
+        <br>
+        enum Mix {<br>
+            &nbsp;Tuple(f64, f64), // Enums can mix these types together as well<br>
+            &nbsp;Vehicle {colour: String, num_of_wheels: i32}<br>
+        }<br>
+        <br>
+        fn main() {<br>
+            &nbsp;let opcode = OpcodeInts::DATA;<br>
+            &nbsp;let three_d_point = Structs::Precise3DPoint {<br>
+                &nbsp;&nbsp;x: 28.17,<br>
+                &nbsp;&nbsp;y: 34.78,<br>
+                &nbsp;&nbsp;z: 97.12<br>
+                &nbsp;};<br>
+            &nbsp;let tuple_example = Mix::Tuple(54.982, 34.195);<br>
         }
     </p>
     <div>

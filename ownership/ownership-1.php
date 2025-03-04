@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Ownership: scopes</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -42,13 +44,13 @@ include __DIR__."/../rustrunner.php";
         Separately from functions, scopes can be explicitly defined in Rust code with curly brackets:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let n: i32 = 10;<br/>
-        &nbsp;{<br/>
-        &nbsp;&nbsp;let n: i32 = 10 * 20;<br/>
-        &nbsp;&nbsp;println!("The scoped value of n is {}", n);<br/>
-        &nbsp;}<br/>
-        &nbsp;println!("The unscoped value of n is {}", n);<br/>
+        fn main() {<br>
+        &nbsp;let n: i32 = 10;<br>
+        &nbsp;{<br>
+        &nbsp;&nbsp;let n: i32 = 10 * 20;<br>
+        &nbsp;&nbsp;println!("The scoped value of n is {}", n);<br>
+        &nbsp;}<br>
+        &nbsp;println!("The unscoped value of n is {}", n);<br>
         }
     </p>
     <div class="info">
@@ -64,7 +66,7 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
-    <p><b>Exercise:<br/></b>Try executing this</p>
+    <p><b>Exercise:<br></b>Try executing this</p>
 <?php exercise_exec("fn main() {\r\n \tprintln!(\"hi\")\n }", 'test'); ?>
 </div>
 
@@ -113,36 +115,36 @@ include __DIR__."/../rustrunner.php";
         It is completely forbidden to manually call the drop() function on any value whatsoever:
     </p>
     <p class="inlinelink">
-        struct ToDrop {<br/>
-        &nbsp;i: i32<br/>
-        }<br/>
-        <br/>
-        /// This impl tries to manually implement custom destruction<br/>
-        /// behaviour for ToDrop struct<br/>
-        impl Drop for ToDrop { <br/>
-        &nbsp;fn drop(&mut self) {<br/>
-        &nbsp;&nbsp;// some code to execute when struct is dropped<br/>
-        &nbsp;}<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let i = ToDrop { i: 20 };<br/>
-        &nbsp;i.drop();<br/>
-        }<br/>
+        struct ToDrop {<br>
+        &nbsp;i: i32<br>
+        }<br>
+        <br>
+        /// This impl tries to manually implement custom destruction<br>
+        /// behaviour for ToDrop struct<br>
+        impl Drop for ToDrop { <br>
+        &nbsp;fn drop(&mut self) {<br>
+        &nbsp;&nbsp;// some code to execute when struct is dropped<br>
+        &nbsp;}<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let i = ToDrop { i: 20 };<br>
+        &nbsp;i.drop();<br>
+        }<br>
     </p>
     <p class="inline-err">
-        error[E0040]: explicit use of destructor method<br/>
-        --> src/main.rs:15:7<br/>
-        |<br/>
-        15 |  i.drop();<br/>
-        |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^^^^ explicit destructor calls not allowed<br/>
-        |<br/>
-        help: consider using `drop` function<br/>
-        |<br/>
-        15 |     drop(i);<br/>
-        |&nbsp;&nbsp;&nbsp;&nbsp;+++++ ~<br/>
-        <br/>
-        For more information about this error, try `rustc --explain E0040`.<br/>
+        error[E0040]: explicit use of destructor method<br>
+        --> src/main.rs:15:7<br>
+        |<br>
+        15 |  i.drop();<br>
+        |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^^^^ explicit destructor calls not allowed<br>
+        |<br>
+        help: consider using `drop` function<br>
+        |<br>
+        15 |     drop(i);<br>
+        |&nbsp;&nbsp;&nbsp;&nbsp;+++++ ~<br>
+        <br>
+        For more information about this error, try `rustc --explain E0040`.<br>
         error: could not compile `temp` (bin "temp") due to 1 previous error
     </p>
 </div>
@@ -198,4 +200,4 @@ include __DIR__."/../rustrunner.php";
 </audio>
 
 </html>
-<br/>
+<br>

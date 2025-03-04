@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
   <title>cr0wbar's Rust course - Beyond the basics: lifetimes</title>
   <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
   <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
   <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -41,7 +43,7 @@ include __DIR__."/../rustrunner.php";
 <div class="info">
   <p>
     When working with references as parameters and return types in functions and methods, it's not always obvious to the compiler whether it's memory safe to use them all.
-    If the original values the references were pointing to were to go out of scope and get dropped from memory, the references would be <em>dangling,</em> that is, pointing to uninitialised memory. <br/>Until it is confirmed that the compiling program isn't threatening
+    If the original values the references were pointing to were to go out of scope and get dropped from memory, the references would be <em>dangling,</em> that is, pointing to uninitialised memory. <br>Until it is confirmed that the compiling program isn't threatening
     to allow this, the compiler will refuse.
   </p>
 </div>
@@ -51,12 +53,12 @@ include __DIR__."/../rustrunner.php";
     In the following example, the function takes a string slice and explicitly returns a string slice:
   </p>
   <p class="inlinelink">
-    fn f(fst: &str) -> &str {<br/>
-    &nbsp;fst<br/>
-    }<br/>
-    <br/>
-    fn main() {<br/>
-    &nbsp;println!("{}", f("h"))<br/>
+    fn f(fst: &str) -> &str {<br>
+    &nbsp;fst<br>
+    }<br>
+    <br>
+    fn main() {<br>
+    &nbsp;println!("{}", f("h"))<br>
     }
   </p>
   <p>
@@ -77,27 +79,27 @@ include __DIR__."/../rustrunner.php";
     The following example, however, is not so simple:
   </p>
   <p class="inlinelink">
-    fn f(fst: &str, snd: &str) -> &str {<br/>
-    &nbsp;fst.to_owned() + snd // string concat requires left-hand string to be owned<br/>
-    }<br/>
-    <br/>
-    fn main() {<br/>
-    &nbsp;println!("{}", f("h", "i"))<br/>
+    fn f(fst: &str, snd: &str) -> &str {<br>
+    &nbsp;fst.to_owned() + snd // string concat requires left-hand string to be owned<br>
+    }<br>
+    <br>
+    fn main() {<br>
+    &nbsp;println!("{}", f("h", "i"))<br>
     }
   </p>
   <p class="inline-err">
-    error[E0106]: <b>missing lifetime specifier</b><br/>
-    --> src/main.rs:1:31<br/>
-    |<br/>
-    1 | fn f(fst: &str, snd: &str) -> &str {<br/>
-    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ expected named lifetime parameter<br/>
-    |<br/>
-    = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `fst` or `snd`<br/>
-    help: consider introducing a named lifetime parameter<br/>
-    |<br/>
-    1 | fn f<'a>(fst: &'a str, snd: &'a str) -> &'a str {<br/>
-    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++<br/>
-    <br/>
+    error[E0106]: <b>missing lifetime specifier</b><br>
+    --> src/main.rs:1:31<br>
+    |<br>
+    1 | fn f(fst: &str, snd: &str) -> &str {<br>
+    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ expected named lifetime parameter<br>
+    |<br>
+    = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `fst` or `snd`<br>
+    help: consider introducing a named lifetime parameter<br>
+    |<br>
+    1 | fn f<'a>(fst: &'a str, snd: &'a str) -> &'a str {<br>
+    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++<br>
+    <br>
     For more information about this error, try `rustc --explain E0106`.
   </p>
   <p>
@@ -122,31 +124,31 @@ include __DIR__."/../rustrunner.php";
     A similar error also arises if a function is specified as returning a reference, but takes no parameters:
   </p>
   <p class="inlinelink">
-    fn f() -> &str {<br/>
-    &nbsp;"hi"<br/>
-    }<br/>
-    <br/>
-    fn main() {<br/>
-    &nbsp;println!("{}", f())<br/>
+    fn f() -> &str {<br>
+    &nbsp;"hi"<br>
+    }<br>
+    <br>
+    fn main() {<br>
+    &nbsp;println!("{}", f())<br>
     }
   </p>
   <p class="inline-err">
-    error[E0106]: missing lifetime specifier<br/>
-    --> src/main.rs:1:11<br/>
-    |<br/>
-    1 | fn f() -> &str {<br/>
-    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ expected named lifetime parameter<br/>
-    |<br/>
-    = help: this function's return type contains a borrowed value, but there is no value for it to be borrowed from<br/>
-    help: consider using the `'static` lifetime, but this is uncommon unless you're returning a borrowed value from a `const` or a `static`<br/>
-    |<br/>
-    1 | fn f() -> &'static str {<br/>
-    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+++++++<br/>
-    help: instead, you are more likely to want to return an owned value<br/>
-    |<br/>
-    1 | fn f() -> String {<br/>
-    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~~~~~~<br/>
-    <br/>
+    error[E0106]: missing lifetime specifier<br>
+    --> src/main.rs:1:11<br>
+    |<br>
+    1 | fn f() -> &str {<br>
+    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ expected named lifetime parameter<br>
+    |<br>
+    = help: this function's return type contains a borrowed value, but there is no value for it to be borrowed from<br>
+    help: consider using the `'static` lifetime, but this is uncommon unless you're returning a borrowed value from a `const` or a `static`<br>
+    |<br>
+    1 | fn f() -> &'static str {<br>
+    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+++++++<br>
+    help: instead, you are more likely to want to return an owned value<br>
+    |<br>
+    1 | fn f() -> String {<br>
+    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~~~~~~<br>
+    <br>
     For more information about this error, try `rustc --explain E0106`.
   </p>
   <p>
@@ -166,12 +168,12 @@ include __DIR__."/../rustrunner.php";
     these need to be defined in the same brackets:
   </p>
   <p class="inlinelink">
-    fn f<'a, T>(arr: &'a [T]) -> &'a T where T: Copy {<br/>
-    &nbsp;&arr[0]<br/>
-    }<br/>
-    <br/>
-    fn main() {<br/>
-    &nbsp;println!("{}", f(&[1; 5]))<br/>
+    fn f<'a, T>(arr: &'a [T]) -> &'a T where T: Copy {<br>
+    &nbsp;&arr[0]<br>
+    }<br>
+    <br>
+    fn main() {<br>
+    &nbsp;println!("{}", f(&[1; 5]))<br>
     }
   </p>
   <p>
@@ -202,12 +204,12 @@ include __DIR__."/../rustrunner.php";
     This example takes two generic parameters of explicitly different lifetimes, meaning that the parameter <em>val</em> can potentially last for a differing period of time than the parameter <em>arr</em> during execution:
   </p>
   <p class="inlinelink">
-    fn f<'a, 'b:'a, T, U>(arr: &'a [T], val: &'b U) -> (&'a T, &'b U) <br/> where T: Copy, U: ?Sized {<br/>
-    &nbsp;(&arr[0], val)<br/>
-    }<br/>
-    <br/>
-    fn main() {<br/>
-    &nbsp;println!("{:?}", f(&[1; 5], "hello"))<br/>
+    fn f<'a, 'b:'a, T, U>(arr: &'a [T], val: &'b U) -> (&'a T, &'b U) <br> where T: Copy, U: ?Sized {<br>
+    &nbsp;(&arr[0], val)<br>
+    }<br>
+    <br>
+    fn main() {<br>
+    &nbsp;println!("{:?}", f(&[1; 5], "hello"))<br>
     }
   </p>
   <p>

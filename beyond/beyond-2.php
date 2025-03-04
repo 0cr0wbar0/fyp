@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Beyond the basics: traits</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -42,7 +44,7 @@ include __DIR__."/../rustrunner.php";
 <div class="info">
     <p>
         For instance, the <em>Copy</em> trait seen earlier implements methods on types that are small enough to be
-        safely copied, rather than borrowed.<br/>The <em>Clone</em> trait, conversely, implements a method on types that can't be safely
+        safely copied, rather than borrowed.<br>The <em>Clone</em> trait, conversely, implements a method on types that can't be safely
         copied, called <em>clone()</em>, which copies the entire value from one space to another in heap memory, which may negate
         the need to borrow the value in some cases, but can slow down execution.
     </p>
@@ -61,26 +63,26 @@ include __DIR__."/../rustrunner.php";
         This is written on the line before the definition of the data type in question, and multiple traits can be implemented at once:
     </p>
     <p class="inlinelink">
-        #[derive(Clone, Debug)]<br/>
-        struct Cloneable {<br/>
-        &nbsp;string: String,<br/>
-        &nbsp;integer: i32,<br/>
-        &nbsp;float: f64,<br/>
-        &nbsp;character: char,<br/>
-        &nbsp;boolean: bool<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let cln = Cloneable {<br/>
-        &nbsp;&nbsp;string: String::from("hello"),<br/>
-        &nbsp;&nbsp;integer: 28,<br/>
-        &nbsp;&nbsp;float: 169.3487,<br/>
-        &nbsp;&nbsp;character: 'A',<br/>
-        &nbsp;&nbsp;boolean: true<br/>
-        &nbsp;};<br/>
-        &nbsp;println!("{:?}", dbg!(&cln)); // displayable with debugging macro<br/>
-        &nbsp;println!("{:?}", cln.clone()) // cloneable<br/>
-        }<br/>
+        #[derive(Clone, Debug)]<br>
+        struct Cloneable {<br>
+        &nbsp;string: String,<br>
+        &nbsp;integer: i32,<br>
+        &nbsp;float: f64,<br>
+        &nbsp;character: char,<br>
+        &nbsp;boolean: bool<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let cln = Cloneable {<br>
+        &nbsp;&nbsp;string: String::from("hello"),<br>
+        &nbsp;&nbsp;integer: 28,<br>
+        &nbsp;&nbsp;float: 169.3487,<br>
+        &nbsp;&nbsp;character: 'A',<br>
+        &nbsp;&nbsp;boolean: true<br>
+        &nbsp;};<br>
+        &nbsp;println!("{:?}", dbg!(&cln)); // displayable with debugging macro<br>
+        &nbsp;println!("{:?}", cln.clone()) // cloneable<br>
+        }<br>
     </p>
     <div>
         <?php
@@ -114,36 +116,36 @@ include __DIR__."/../rustrunner.php";
         Of course, the programmer can write and implement their own structs, using the <em>trait and impl keywords</em>:
     </p>
     <p class="inlinelink">
-        struct Cloneable {<br/>
-        &nbsp;string: &'static str,<br/>
-        &nbsp;integer: i32,<br/>
-        &nbsp;float: f64,<br/>
-        &nbsp;character: char,<br/>
-        &nbsp;boolean: bool<br/>
-        }<br/>
-        <br/>
-        trait ChangeString {<br/>
-        &nbsp;fn change_string(&mut self, val: &'static str) -> &'static str ;<br/>
-        }<br/>
-        <br/>
-        <br/>
-        impl ChangeString for Cloneable {<br/>
-        &nbsp;&nbsp;fn change_string(&mut self, val: &'static str) -> &'static str {<br/>
-        &nbsp;&nbsp;&nbsp;self.string = val;<br/>
-        &nbsp;&nbsp;&nbsp;self.string<br/>
-        &nbsp;}<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let mut cln = Cloneable {<br/>
-        &nbsp;&nbsp;string: "hello",<br/>
-        &nbsp;&nbsp;integer: 28,<br/>
-        &nbsp;&nbsp;float: 169.3487,<br/>
-        &nbsp;&nbsp;character: 'A',<br/>
-        &nbsp;&nbsp;boolean: true<br/>
-        &nbsp;};<br/>
-        &nbsp;println!("{}", cln.change_string("hi!"))<br/>
-        }<br/>
+        struct Cloneable {<br>
+        &nbsp;string: &'static str,<br>
+        &nbsp;integer: i32,<br>
+        &nbsp;float: f64,<br>
+        &nbsp;character: char,<br>
+        &nbsp;boolean: bool<br>
+        }<br>
+        <br>
+        trait ChangeString {<br>
+        &nbsp;fn change_string(&mut self, val: &'static str) -> &'static str ;<br>
+        }<br>
+        <br>
+        <br>
+        impl ChangeString for Cloneable {<br>
+        &nbsp;&nbsp;fn change_string(&mut self, val: &'static str) -> &'static str {<br>
+        &nbsp;&nbsp;&nbsp;self.string = val;<br>
+        &nbsp;&nbsp;&nbsp;self.string<br>
+        &nbsp;}<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let mut cln = Cloneable {<br>
+        &nbsp;&nbsp;string: "hello",<br>
+        &nbsp;&nbsp;integer: 28,<br>
+        &nbsp;&nbsp;float: 169.3487,<br>
+        &nbsp;&nbsp;character: 'A',<br>
+        &nbsp;&nbsp;boolean: true<br>
+        &nbsp;};<br>
+        &nbsp;println!("{}", cln.change_string("hi!"))<br>
+        }<br>
     </p>
     <p>
         Methods in traits are usually defined without bodies, only type definitions, and they have code written for them per implementation.

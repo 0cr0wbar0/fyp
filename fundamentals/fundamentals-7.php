@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Fundamentals: comments & docs</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -42,10 +44,10 @@ include __DIR__."/../rustrunner.php";
         Quick, single-line comments are denoted with a double forward slash (//):
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            &nbsp;let mut vector: Vec&lt;isize&gt; = Vec::new(); // initialising function for vector structs<br/>
-            &nbsp;vector.push(5); // function for appending an element to a vector<br/>
-            &nbsp;dbg!(vector); // macro that prints the vector in debug format<br/>
+        fn main() {<br>
+            &nbsp;let mut vector: Vec&lt;isize&gt; = Vec::new(); // initialising function for vector structs<br>
+            &nbsp;vector.push(5); // function for appending an element to a vector<br>
+            &nbsp;dbg!(vector); // macro that prints the vector in debug format<br>
         }
     </p>
     <div>
@@ -64,31 +66,31 @@ include __DIR__."/../rustrunner.php";
         If a more detailed description is required for a piece of code, Rust allows for <em>doc comments</em>, indicated with a triple forward slash (///):
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;for i in 0..30 {<br/>
-        &nbsp;&nbsp;println!("{}", fibonacci(i));<br/>
-        &nbsp;}<br/>
-        }<br/>
-        <br/>
-        /// A function that takes a signed 32-bit integer as an argument<br/>
-        /// and also returns a signed 32-bit integer. <br/>
-        ///<br/>
-        /// Finds the zero-indexed nth term of the Fibonacci sequence.<br/>
-        ///<br/>
-        /// The function is recursive; if the integer is not zero or one,<br/>
-        /// it will repeatedly call itself with smaller numbers less than<br/>
-        /// n in order to find the sum of each term of the sequence before<br/>
-        /// the nth.<br/>
-        ///<br/>
-        fn fibonacci(n: i32) -> i32 {<br/>
-        &nbsp;if n == 0 {<br/>
-        &nbsp;&nbsp;return 0;<br/>
-        &nbsp;} else if n == 1 {<br/>
-        &nbsp;&nbsp;return 1;<br/>
-        &nbsp;} else {<br/>
-        &nbsp;&nbsp;fibonacci(n-1) + fibonacci(n-2)<br/>
-        &nbsp;}<br/>
-        }<br/>
+        fn main() {<br>
+        &nbsp;for i in 0..30 {<br>
+        &nbsp;&nbsp;println!("{}", fibonacci(i));<br>
+        &nbsp;}<br>
+        }<br>
+        <br>
+        /// A function that takes a signed 32-bit integer as an argument<br>
+        /// and also returns a signed 32-bit integer. <br>
+        ///<br>
+        /// Finds the zero-indexed nth term of the Fibonacci sequence.<br>
+        ///<br>
+        /// The function is recursive; if the integer is not zero or one,<br>
+        /// it will repeatedly call itself with smaller numbers less than<br>
+        /// n in order to find the sum of each term of the sequence before<br>
+        /// the nth.<br>
+        ///<br>
+        fn fibonacci(n: i32) -> i32 {<br>
+        &nbsp;if n == 0 {<br>
+        &nbsp;&nbsp;return 0;<br>
+        &nbsp;} else if n == 1 {<br>
+        &nbsp;&nbsp;return 1;<br>
+        &nbsp;} else {<br>
+        &nbsp;&nbsp;fibonacci(n-1) + fibonacci(n-2)<br>
+        &nbsp;}<br>
+        }<br>
     </p>
     <div>
         <?php
@@ -115,33 +117,33 @@ include __DIR__."/../rustrunner.php";
         <b>Doc comments also support Markdown,</b> allowing for division into titles, subtitles and code block examples if the documentation is being read in a text editor that supports Markdown:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            &nbsp;for i in 0..30 {<br/>
-            &nbsp;&nbsp;println!("{}", fibonacci(i));<br/>
-            &nbsp;}<br/>
-            }<br/>
-            <br/>
-           /// # Fibonacci function<br/>
-           ///<br/>
-           /// A function that takes a signed 32-bit integer as an argument<br/>
-           /// and also returns a signed 32-bit integer.<br/>
-           ///<br/>
-           /// Finds the zero-indexed nth term of the Fibonacci sequence.<br/>
-           ///<br/>
-           /// ## Example<br/>
-           ///<br/>
-           /// ```fibonacci(10)``` will return 55, the tenth term of the<br/>
-           /// sequence (assuming that there is a 0th term).<br/>
-           ///<br/>
-           fn fibonacci(n: i32) -> i32 {<br/>
-            &nbsp;if n == 0 {<br/>
-            &nbsp;&nbsp;return 0;<br/>
-            &nbsp;} else if n == 1 {<br/>
-            &nbsp;&nbsp;return 1;<br/>
-            &nbsp;} else {<br/>
-            &nbsp;&nbsp;fibonacci(n-1) + fibonacci(n-2)<br/>
-            &nbsp;}<br/>
-            }<br/>
+        fn main() {<br>
+            &nbsp;for i in 0..30 {<br>
+            &nbsp;&nbsp;println!("{}", fibonacci(i));<br>
+            &nbsp;}<br>
+            }<br>
+            <br>
+           /// # Fibonacci function<br>
+           ///<br>
+           /// A function that takes a signed 32-bit integer as an argument<br>
+           /// and also returns a signed 32-bit integer.<br>
+           ///<br>
+           /// Finds the zero-indexed nth term of the Fibonacci sequence.<br>
+           ///<br>
+           /// ## Example<br>
+           ///<br>
+           /// ```fibonacci(10)``` will return 55, the tenth term of the<br>
+           /// sequence (assuming that there is a 0th term).<br>
+           ///<br>
+           fn fibonacci(n: i32) -> i32 {<br>
+            &nbsp;if n == 0 {<br>
+            &nbsp;&nbsp;return 0;<br>
+            &nbsp;} else if n == 1 {<br>
+            &nbsp;&nbsp;return 1;<br>
+            &nbsp;} else {<br>
+            &nbsp;&nbsp;fibonacci(n-1) + fibonacci(n-2)<br>
+            &nbsp;}<br>
+            }<br>
     </p>
     <div>
         <?php

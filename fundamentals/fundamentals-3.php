@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Fundamentals: data types</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -42,9 +44,9 @@ include __DIR__."/../rustrunner.php";
         Rust is statically typed, but the type can be inferred at compile-time, negating the need to specify the type in some cases:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let i = 10; // i inferred as type i32 (explained below)<br/>
-        &nbsp;println!("{}", i);<br/>
+        fn main() {<br>
+        &nbsp;let i = 10; // i inferred as type i32 (explained below)<br>
+        &nbsp;println!("{}", i);<br>
         }
     </p>
     <div>
@@ -93,22 +95,22 @@ include __DIR__."/../rustrunner.php";
         Data types can't always be inferred, such as when the built-in <b>into()</b> method is used to convert a variable of one type to another:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let x = "10";<br/>
-        &nbsp;let y = x.into();<br/>
-        println!("{}", y);<br/>
+        fn main() {<br>
+        &nbsp;let x = "10";<br>
+        &nbsp;let y = x.into();<br>
+        println!("{}", y);<br>
         }
     </p>
-    <p class="inline-err">error[E0283]: type annotations needed<br/>
+    <p class="inline-err">error[E0283]: type annotations needed<br>
         |<br>
-        3 |     let y = x.into();<br/>
-          |          type must be known at this point<br/>
-          |<br/>
-          = note: cannot satisfy `_: From<&str>`<br/>
-          = note: required for `&str` to implement `Into<_>`<br/>
-        help: consider giving `y` an explicit type<br/>
-          |<br/>
-        3 |     let y: /* Type */ = x.into();<br/>
+        3 |     let y = x.into();<br>
+          |          type must be known at this point<br>
+          |<br>
+          = note: cannot satisfy `_: From<&str>`<br>
+          = note: required for `&str` to implement `Into<_>`<br>
+        help: consider giving `y` an explicit type<br>
+          |<br>
+        3 |     let y: /* Type */ = x.into();<br>
     </p>
     <p>Since there's no information on what type variable <em>y</em> is, the compiler doesn't know how to convert to it from a string variable <em>x</em>.</p>
 </div>
@@ -137,9 +139,9 @@ include __DIR__."/../rustrunner.php";
         There is no "fsize" data type in Rust, but if no type is specified for a float, the compiler will default to <b>f64</b>:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let f_big = 3.33; // f64<br/>
-        &nbsp;let f_small: f32 = 3.3; // f32<br/>
+        fn main() {<br>
+        &nbsp;let f_big = 3.33; // f64<br>
+        &nbsp;let f_small: f32 = 3.3; // f32<br>
         }
     </p>
     <div>
@@ -181,8 +183,8 @@ include __DIR__."/../rustrunner.php";
         Booleans in Rust are lower-case, and require very little type annotation:
     </p>
     <p class="inlinelink">
-        fn main () {<br/>
-        &nbsp;let t = true; // inferred as bool<br/>
+        fn main () {<br>
+        &nbsp;let t = true; // inferred as bool<br>
         }
     </p>
     <div>
@@ -199,10 +201,10 @@ include __DIR__."/../rustrunner.php";
         Expressions involving comparison of numerical values are also evaluated, and assigned as, bools:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let num = 5;<br/>
-        &nbsp;let is_zero = (num == 0); // inferred as bool<br/>
-        &nbsp;println!("{}", is_zero);<br/>
+        fn main() {<br>
+        &nbsp;let num = 5;<br>
+        &nbsp;let is_zero = (num == 0); // inferred as bool<br>
+        &nbsp;println!("{}", is_zero);<br>
         }
     </p>
     <p>
@@ -224,10 +226,10 @@ include __DIR__."/../rustrunner.php";
         Characters in Rust are representations of Unicode, and accept all kinds of different characters and emoticons:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let letter = 'b';<br/>
-        &nbsp;let j: char = 'あ'; // Japanese character<br/>
-        &nbsp;let c: char = '好'; // Chinese character<br/>
+        fn main() {<br>
+        &nbsp;let letter = 'b';<br>
+        &nbsp;let j: char = 'あ'; // Japanese character<br>
+        &nbsp;let c: char = '好'; // Chinese character<br>
         }
     </p>
     <div>

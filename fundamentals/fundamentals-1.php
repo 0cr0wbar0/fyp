@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Fundamentals: variables</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -55,29 +57,29 @@ include __DIR__."/../rustrunner.php";
         Rust does not allow for unassigned variables that are not <em>explicitly typed</em>:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let variable_name;<br/>
+        fn main() {<br>
+        &nbsp;let variable_name;<br>
         }</p>
     <p class="inline-err">
-        error[E0282]: type annotations needed<br/>
-         --> src/main.rs:2:9<br/>
-          |<br/>
-        2 |     let variable_name;<br/>
-          |<br/>
-          |<br/>
-        help: consider giving `variable_name` an explicit type<br/>
-          |<br/>
-        2 |     let variable_name: /* Type */;<br/>
-          |<br/>                      
-          <br/>
-        For more information about this error, try `rustc --explain E0282`.<br/>
+        error[E0282]: type annotations needed<br>
+         --> src/main.rs:2:9<br>
+          |<br>
+        2 |     let variable_name;<br>
+          |<br>
+          |<br>
+        help: consider giving `variable_name` an explicit type<br>
+          |<br>
+        2 |     let variable_name: /* Type */;<br>
+          |<br>                      
+          <br>
+        For more information about this error, try `rustc --explain E0282`.<br>
         error: could not compile `playground` (bin "playground") due to 1 previous error</p>
 </div>
 
 <div class="info">
     <p class="inlinelink">
-            fn main() {<br/>
-            &nbsp;let variable_name: char;<br/>
+            fn main() {<br>
+            &nbsp;let variable_name: char;<br>
             }
     </p>
     <div>
@@ -97,8 +99,8 @@ include __DIR__."/../rustrunner.php";
     In Rust, explicit types for variables are specified after the variable name, separated from it by a colon, after which the actual value is specified with an equals sign:
     </p>
     <p class="inlinelink">
-            fn main() {<br/>
-            &nbsp;let variable_name: char = 'b';<br/>
+            fn main() {<br>
+            &nbsp;let variable_name: char = 'b';<br>
             }
     </p>
     <div>

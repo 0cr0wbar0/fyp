@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Fundamentals: functions & control flow</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -36,9 +38,9 @@ include __DIR__."/../rustrunner.php";
         <b>Rust functions are private by default,</b> and are defined with the keyword <em>fn</em>:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            &nbsp;println!("Hello, world!")<br/>
-        }<br/>
+        fn main() {<br>
+            &nbsp;println!("Hello, world!")<br>
+        }<br>
     </p>
     <p>The keyword <em>pub</em> must be used before <em>fn</em> in order to make a function public, and therefore accessible in other Rust programs.</p>
     <div>
@@ -55,12 +57,12 @@ include __DIR__."/../rustrunner.php";
         Every Rust program needs a main function, which contains the only part of the program that will be executed. All other separately defined functions need to be included, or <em>called</em>, inside this function:  
     </p>
     <p class="inlinelink">
-        fn main() { <br/>
-            &nbsp;println!("This is a string")<br/>
-        }<br/>
-        <br/>
-        fn hidden_string() {<br/>
-            &nbsp;println!("Ooh, secret string!") // Compiles, does not execute<br/>
+        fn main() { <br>
+            &nbsp;println!("This is a string")<br>
+        }<br>
+        <br>
+        fn hidden_string() {<br>
+            &nbsp;println!("Ooh, secret string!") // Compiles, does not execute<br>
         }
     </p>
     <div>
@@ -82,32 +84,32 @@ include __DIR__."/../rustrunner.php";
         Rust functions can implicitly return the last found value in the function body as an expression, as long as the return value is explicitly typed:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            &nbsp;println!("{}", character())<br/>
-        }<br/>
-        <br/>
-        fn character() {<br/>
-            &nbsp;'f' // Return value of function without semicolon, recognised as expression<br/>
-        }<br/>
+        fn main() {<br>
+            &nbsp;println!("{}", character())<br>
+        }<br>
+        <br>
+        fn character() {<br>
+            &nbsp;'f' // Return value of function without semicolon, recognised as expression<br>
+        }<br>
     </p>
     <p class="inline-err">
-        error[E0277]: `()` doesn't implement `std::fmt::Display`<br/>
-        --> src/main.rs:2:20<br/>
-        |<br/>
-        2 |     println!("{}", character())<br/>
-        |                    `()` cannot be formatted with the default formatter<br/>
-        |<br/>
-        = help: the trait `std::fmt::Display` is not implemented for `()`<br/>
-        <br/>
-        error[E0308]: mismatched types<br/>
-        --> src/main.rs:6:5<br/>
-        |<br/>
-        5 | fn character() {<br/>
-        |               - help: try adding a return type: `-> char`<br/>
-        6 |     'f' // Return value of function without semicolon<br/>
-        |     ^^^ expected `()`, found `char`<br/>
-        <br/>
-        Some errors have detailed explanations: E0277, E0308.<br/>
+        error[E0277]: `()` doesn't implement `std::fmt::Display`<br>
+        --> src/main.rs:2:20<br>
+        |<br>
+        2 |     println!("{}", character())<br>
+        |                    `()` cannot be formatted with the default formatter<br>
+        |<br>
+        = help: the trait `std::fmt::Display` is not implemented for `()`<br>
+        <br>
+        error[E0308]: mismatched types<br>
+        --> src/main.rs:6:5<br>
+        |<br>
+        5 | fn character() {<br>
+        |               - help: try adding a return type: `-> char`<br>
+        6 |     'f' // Return value of function without semicolon<br>
+        |     ^^^ expected `()`, found `char`<br>
+        <br>
+        Some errors have detailed explanations: E0277, E0308.<br>
         For more information about an error, try `rustc --explain E0277`.
     </p>
 </div>
@@ -123,16 +125,16 @@ include __DIR__."/../rustrunner.php";
         In Rust, the results of functions can immediately be assigned to variables:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            &nbsp;let x: i32 = {<br/>
-                &nbsp;&nbsp;let mut y: i32 = 0;<br/>
-                &nbsp;&nbsp;&nbsp;while y < 5 {<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;y += 1;<br/>
-                    &nbsp;&nbsp;&nbsp;}<br/>
-                    &nbsp;&nbsp;y<br/>
-                &nbsp;};<br/>
-            &nbsp;println!("{}", x)<br/>
-        }<br/>
+        fn main() {<br>
+            &nbsp;let x: i32 = {<br>
+                &nbsp;&nbsp;let mut y: i32 = 0;<br>
+                &nbsp;&nbsp;&nbsp;while y < 5 {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;y += 1;<br>
+                    &nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;y<br>
+                &nbsp;};<br>
+            &nbsp;println!("{}", x)<br>
+        }<br>
     </p>
     <div>
         <?php
@@ -155,12 +157,12 @@ include __DIR__."/../rustrunner.php";
         Functions can be written to take parameters, variables defined in the brackets next to the function name that can then be used in the body of a function:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            &nbsp;println!("{:?}", reverse_nums(9, 10))<br/>
-        }<br/>
-        <br/>
-        fn reverse_nums(i: i32, j: i32) -> (i32, i32) {<br/>
-            &nbsp;(j, i)<br/>
+        fn main() {<br>
+            &nbsp;println!("{:?}", reverse_nums(9, 10))<br>
+        }<br>
+        <br>
+        fn reverse_nums(i: i32, j: i32) -> (i32, i32) {<br>
+            &nbsp;(j, i)<br>
         }
     </p>
     <p>
@@ -190,26 +192,26 @@ include __DIR__."/../rustrunner.php";
         Functions can also be <em>implemented on structs and enums,</em> as methods, with the <em>impl</em> keyword:
     </p>
     <p class="inlinelink">
-        struct Train {<br/>
-            &nbsp;colour: String,<br/>
-            &nbsp;num_of_coaches: i32,<br/>
-            &nbsp;max_speed_kmh: f64<br/>
-        }<br/>
-        <br/>
-        impl Train {<br/>
-            &nbsp;pub fn how_many_coaches(&self) {<br/>
-                &nbsp;&nbsp;println!("{}", &self.num_of_coaches);<br/>
-            &nbsp;}<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-            &nbsp;let t = Train {<br/>
-                &nbsp;&nbsp;colour: String::from("Green"),<br/>
-                &nbsp;&nbsp;num_of_coaches: 5,<br/>
-                &nbsp;&nbsp;max_speed_kmh: 120.05<br/>
-            &nbsp;};<br/>
-            <br/>
-            &nbsp;t.how_many_coaches();<br/>
+        struct Train {<br>
+            &nbsp;colour: String,<br>
+            &nbsp;num_of_coaches: i32,<br>
+            &nbsp;max_speed_kmh: f64<br>
+        }<br>
+        <br>
+        impl Train {<br>
+            &nbsp;pub fn how_many_coaches(&self) {<br>
+                &nbsp;&nbsp;println!("{}", &self.num_of_coaches);<br>
+            &nbsp;}<br>
+        }<br>
+        <br>
+        fn main() {<br>
+            &nbsp;let t = Train {<br>
+                &nbsp;&nbsp;colour: String::from("Green"),<br>
+                &nbsp;&nbsp;num_of_coaches: 5,<br>
+                &nbsp;&nbsp;max_speed_kmh: 120.05<br>
+            &nbsp;};<br>
+            <br>
+            &nbsp;t.how_many_coaches();<br>
         }
     </p>
     <div>
@@ -277,17 +279,17 @@ include __DIR__."/../rustrunner.php";
         The main feature that sets function-like macros apart from functions is that macros can take <b>variable numbers of arguments as input:</b>
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            &nbsp;println!("Hello, world!"); <br/>&nbsp;// One argument given to println!()<br/>
-            <br/>
-            &nbsp;let x = 5;<br/>
-            &nbsp;println!("The value of x is {}", x); <br/>&nbsp;// Two arguments given:<br/>
-            &nbsp;// Formatted string and one variable to print with string<br/>
-            <br/>
-            &nbsp;let y = vec![10, 100, 1000];<br/>&nbsp;// Creating a vector (mutable Rust array) with vec!<br/>
-            <br/>
-            &nbsp;println!("The values of vector y are {}, {} and {}", y[0], y[1], y[2]); <br/>&nbsp;// Four arguments given:<br/>
-            &nbsp;// Formatted string with three inputs, and three vector elements<br/>
+        fn main() {<br>
+            &nbsp;println!("Hello, world!"); <br>&nbsp;// One argument given to println!()<br>
+            <br>
+            &nbsp;let x = 5;<br>
+            &nbsp;println!("The value of x is {}", x); <br>&nbsp;// Two arguments given:<br>
+            &nbsp;// Formatted string and one variable to print with string<br>
+            <br>
+            &nbsp;let y = vec![10, 100, 1000];<br>&nbsp;// Creating a vector (mutable Rust array) with vec!<br>
+            <br>
+            &nbsp;println!("The values of vector y are {}, {} and {}", y[0], y[1], y[2]); <br>&nbsp;// Four arguments given:<br>
+            &nbsp;// Formatted string with three inputs, and three vector elements<br>
         }
     </p>
     <div>

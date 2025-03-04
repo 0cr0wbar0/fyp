@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Beyond the basics: generic types</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -46,17 +48,17 @@ include __DIR__."/../rustrunner.php";
         that allow functions, methods, enums and structs to handle parameters or fields, respectively, regardless of their actual data type:
     </p>
     <p class="inlinelink">
-        fn first_of_vec&lt;T: Copy&gt;(v: Vec&lt;T&gt;) -> T {<br/>
-        &nbsp;v[0] // of type T, where T is copyable<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;println!(<br/>
-        &nbsp;&nbsp;"{} {} {}",<br/>
-        &nbsp;&nbsp;first_of_vec(vec![1, 2, 3]),<br/>
-        &nbsp;&nbsp;first_of_vec(vec!["a", "b", "c"]),<br/>
-        &nbsp;&nbsp;first_of_vec(vec![true, false, false])<br/>
-        &nbsp;)<br/>
+        fn first_of_vec&lt;T: Copy&gt;(v: Vec&lt;T&gt;) -> T {<br>
+        &nbsp;v[0] // of type T, where T is copyable<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;println!(<br>
+        &nbsp;&nbsp;"{} {} {}",<br>
+        &nbsp;&nbsp;first_of_vec(vec![1, 2, 3]),<br>
+        &nbsp;&nbsp;first_of_vec(vec!["a", "b", "c"]),<br>
+        &nbsp;&nbsp;first_of_vec(vec![true, false, false])<br>
+        &nbsp;)<br>
         }
     </p>
     <p>
@@ -87,10 +89,10 @@ include __DIR__."/../rustrunner.php";
         they are defined to take any type, as long as that type implements the required traits:
     </p>
     <p class="inlinelink">
-        // The actual library definition of the Result enum:<br/>
-        pub enum Result&lt;T, E&gt; {<br/>
-        &nbsp;Ok(T),<br/>
-        &nbsp;Err(E),<br/>
+        // The actual library definition of the Result enum:<br>
+        pub enum Result&lt;T, E&gt; {<br>
+        &nbsp;Ok(T),<br>
+        &nbsp;Err(E),<br>
         }
     </p>
     <p>
@@ -113,18 +115,18 @@ include __DIR__."/../rustrunner.php";
         because the compiler can't infer enough about the parameter's typing or traits to know if its elements can be cloned or copied:
     </p>
     <p class="inline-err">
-        error[E0507]: cannot move out of index of `Vec&lt;T&gt;`<br/>
-        --> src/main.rs:2:5<br/>
-        |<br/>
-        2 |     v[0]<br/>
-        |     &nbsp;&nbsp;^^^^ move occurs because value has type `T`, which does not implement the `Copy` trait<br/>
-        |<br/>
-        help: if `T` implemented `Clone`, you could clone the value<br/>
-        --> src/main.rs:1:17<br/>
-        |<br/>
-        1 | fn first_of_vec&lt;T&gt;(v: Vec&lt;T&gt;) -> T {<br/>
-        |                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ consider constraining this type parameter with `Clone`<br/>
-        2 |     v[0] // of type T, where T is copyable<br/>
+        error[E0507]: cannot move out of index of `Vec&lt;T&gt;`<br>
+        --> src/main.rs:2:5<br>
+        |<br>
+        2 |     v[0]<br>
+        |     &nbsp;&nbsp;^^^^ move occurs because value has type `T`, which does not implement the `Copy` trait<br>
+        |<br>
+        help: if `T` implemented `Clone`, you could clone the value<br>
+        --> src/main.rs:1:17<br>
+        |<br>
+        1 | fn first_of_vec&lt;T&gt;(v: Vec&lt;T&gt;) -> T {<br>
+        |                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ consider constraining this type parameter with `Clone`<br>
+        2 |     v[0] // of type T, where T is copyable<br>
         |     &nbsp;&nbsp;---- you could clone this value
     </p>
 </div>
@@ -135,17 +137,17 @@ include __DIR__."/../rustrunner.php";
         with the <b>where</b> keyword:
     </p>
     <p class="inlinelink">
-        fn first_of_vec&lt;T&gt;(v: Vec&lt;T&gt;) -> T <b>where T: Copy</b> {<br/>
-        &nbsp;v[0]<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;println!(<br/>
-        &nbsp;&nbsp;"{} {} {}",<br/>
-        &nbsp;&nbsp;first_of_vec(vec![1, 2, 3]),<br/>
-        &nbsp;&nbsp;first_of_vec(vec!["a", "b", "c"]),<br/>
-        &nbsp;&nbsp;first_of_vec(vec![true, false, false])<br/>
-        &nbsp;)<br/>
+        fn first_of_vec&lt;T&gt;(v: Vec&lt;T&gt;) -> T <b>where T: Copy</b> {<br>
+        &nbsp;v[0]<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;println!(<br>
+        &nbsp;&nbsp;"{} {} {}",<br>
+        &nbsp;&nbsp;first_of_vec(vec![1, 2, 3]),<br>
+        &nbsp;&nbsp;first_of_vec(vec!["a", "b", "c"]),<br>
+        &nbsp;&nbsp;first_of_vec(vec![true, false, false])<br>
+        &nbsp;)<br>
         }
     </p>
     <div>

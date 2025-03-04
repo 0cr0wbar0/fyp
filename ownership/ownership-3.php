@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Ownership: stack & heap memory</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -113,19 +115,19 @@ include __DIR__."/../rustrunner.php";
         Specifically, String structs are allocated on the heap during their lifetimes, but the actual body of the string is <em>stored on the stack</em>, and the struct has a memory pointer to the first character of the string.
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            <br/>
-        &nbsp;/// The below string struct is built using from(),<br/>
-        &nbsp;/// a built-in method that attempts to convert <br/>
-        &nbsp;/// a variable of one type into another type.<br/>
-        &nbsp;/// <br/>
-        &nbsp;/// Here, a string literal (a.k.a. a value of type &str)<br/>
-        &nbsp;/// is pushed onto the stack character by character, <br/>
-        &nbsp;/// and the struct is then allocated in <br/>
-        &nbsp;/// heap memory and has its pointer set to the string literal.<br/>
-        <br/>
-        &nbsp;let str_struct = String::from("This is a struct!");<br/>
-        <br/>
+        fn main() {<br>
+            <br>
+        &nbsp;/// The below string struct is built using from(),<br>
+        &nbsp;/// a built-in method that attempts to convert <br>
+        &nbsp;/// a variable of one type into another type.<br>
+        &nbsp;/// <br>
+        &nbsp;/// Here, a string literal (a.k.a. a value of type &str)<br>
+        &nbsp;/// is pushed onto the stack character by character, <br>
+        &nbsp;/// and the struct is then allocated in <br>
+        &nbsp;/// heap memory and has its pointer set to the string literal.<br>
+        <br>
+        &nbsp;let str_struct = String::from("This is a struct!");<br>
+        <br>
         }
     </p>
     <div>
@@ -142,18 +144,18 @@ include __DIR__."/../rustrunner.php";
         When the struct is assigned a new set of characters, these characters are simply pushed onto the stack, and the String struct's pointer is moved to those new characters. The old sequence of characters subsequently goes out of scope, and is eventually popped from the stack.
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            <br/>
-        &nbsp;/// When the below struct is given<br/>
-        &nbsp;/// a new value on the second line, <br/>
-        &nbsp;/// its pointer is moved to the new <br/>
-        &nbsp;/// string literal, and the previous<br/>
-        &nbsp;/// string literal goes out of scope.<br/>
-            <br/>
-        &nbsp;let mut str_struct = String::from("This is a struct!");<br/>
-            <br/>
-        &nbsp;str_struct = String::from("This is a new string!");<br/>
-        <br/>
+        fn main() {<br>
+            <br>
+        &nbsp;/// When the below struct is given<br>
+        &nbsp;/// a new value on the second line, <br>
+        &nbsp;/// its pointer is moved to the new <br>
+        &nbsp;/// string literal, and the previous<br>
+        &nbsp;/// string literal goes out of scope.<br>
+            <br>
+        &nbsp;let mut str_struct = String::from("This is a struct!");<br>
+            <br>
+        &nbsp;str_struct = String::from("This is a new string!");<br>
+        <br>
         }
     </p>
     <div>
@@ -171,19 +173,19 @@ include __DIR__."/../rustrunner.php";
         However, in the case of one String struct being assigned to another, the one taking the value will have its pointer moved to the <em>same memory as the struct being assigned</em>. This is to save memory, and prevent bloat on the stack.
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-            <br/>
-        &nbsp;/// Assigning the first variable<br/>
-        &nbsp;/// to the second will move ownership<br/>
-        &nbsp;/// of the first, making it inaccessible,<br/>
-        &nbsp;/// but will also cause both structs to<br/>
-        &nbsp;/// point to the same sequence of memory<br/>
-        &nbsp;/// cells on the stack.<br/>
-            <br/>
-        &nbsp;let str_struct = String::from("This is a struct!");<br/>
-            <br/>
-        &nbsp;let second_struct = str_struct;<br/>
-            <br/>
+        fn main() {<br>
+            <br>
+        &nbsp;/// Assigning the first variable<br>
+        &nbsp;/// to the second will move ownership<br>
+        &nbsp;/// of the first, making it inaccessible,<br>
+        &nbsp;/// but will also cause both structs to<br>
+        &nbsp;/// point to the same sequence of memory<br>
+        &nbsp;/// cells on the stack.<br>
+            <br>
+        &nbsp;let str_struct = String::from("This is a struct!");<br>
+            <br>
+        &nbsp;let second_struct = str_struct;<br>
+            <br>
         }
     </p>
     <div>

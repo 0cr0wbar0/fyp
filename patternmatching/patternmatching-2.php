@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Pattern matching: if-let statements</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -48,13 +50,13 @@ include __DIR__."/../rustrunner.php";
         An if-let statement is a control flow statement that defines a <em>single</em> matching pattern and then checks whether or not a given variable matches it:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let num: i32 = 5;<br/>
-        &nbsp;if let 5 = num {<br/>
-        &nbsp;&nbsp;println!("Correct value!")<br/>
-        &nbsp;} else {<br/>
-        &nbsp;&nbsp;println!("Incorrect value!")<br/>
-        &nbsp;}<br/>
+        fn main() {<br>
+        &nbsp;let num: i32 = 5;<br>
+        &nbsp;if let 5 = num {<br>
+        &nbsp;&nbsp;println!("Correct value!")<br>
+        &nbsp;} else {<br>
+        &nbsp;&nbsp;println!("Incorrect value!")<br>
+        &nbsp;}<br>
         }
     </p>
     <p>The above example is similar to the first example given for match statements on the previous page, with the exception that this is exclusively checking if the variable <em>num</em> exactly matches the value 5, and for no other matching pattern.</p>
@@ -77,20 +79,20 @@ include __DIR__."/../rustrunner.php";
         If-let statements can, of course, work with discriminants in enums as well. The below example is a modified example regarding enums from the previous page:
     </p>
     <p class="inlinelink">
-        enum Vehicles {<br/>
-        &nbsp;Car,<br/>
-        &nbsp;Boat,<br/>
-        &nbsp;Train,<br/>
-        &nbsp;Plane<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let v = Vehicles::Train;<br/>
-        &nbsp;if let Vehicles::Car = v {<br/>
-        &nbsp;&nbsp;println!("This is a car!")<br/>
-        &nbsp;} else {<br/>
-        &nbsp;&nbsp;println!("This isn't a car!")<br/>
-        &nbsp;}<br/>
+        enum Vehicles {<br>
+        &nbsp;Car,<br>
+        &nbsp;Boat,<br>
+        &nbsp;Train,<br>
+        &nbsp;Plane<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let v = Vehicles::Train;<br>
+        &nbsp;if let Vehicles::Car = v {<br>
+        &nbsp;&nbsp;println!("This is a car!")<br>
+        &nbsp;} else {<br>
+        &nbsp;&nbsp;println!("This isn't a car!")<br>
+        &nbsp;}<br>
         }
     </p>
     <div>
@@ -120,24 +122,24 @@ include __DIR__."/../rustrunner.php";
         Regarding enum structs (discriminants of an enum defined as structs), the primary way to <em>access or edit their fields</em> is through pattern matching:
     </p>
     <p class="inlinelink">
-        enum Structs {<br/>
-        &nbsp;Point { x: i32, y: i32 },<br/>
-        &nbsp;Precise3DPoint { x: f64, y: f64, z: f64 },<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let strct = Structs::Precise3DPoint {<br/>
-        &nbsp;&nbsp;x: 23.5567,<br/>
-        &nbsp;&nbsp;y: 43.2343,<br/>
-        &nbsp;&nbsp;z: 98.7987<br/>
-        &nbsp;};<br/>
-        &nbsp;if let Structs::Precise3DPoint {<br/>
-        &nbsp;&nbsp;x: match_x,<br/>
-        &nbsp;&nbsp;y: match_y,<br/>
-        &nbsp;&nbsp;z: match_z<br/>
-        &nbsp;} = strct {<br/>
-        &nbsp;&nbsp;println!("{} {} {}", match_x, match_y, match_z)<br/>
-        &nbsp;}<br/>
+        enum Structs {<br>
+        &nbsp;Point { x: i32, y: i32 },<br>
+        &nbsp;Precise3DPoint { x: f64, y: f64, z: f64 },<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let strct = Structs::Precise3DPoint {<br>
+        &nbsp;&nbsp;x: 23.5567,<br>
+        &nbsp;&nbsp;y: 43.2343,<br>
+        &nbsp;&nbsp;z: 98.7987<br>
+        &nbsp;};<br>
+        &nbsp;if let Structs::Precise3DPoint {<br>
+        &nbsp;&nbsp;x: match_x,<br>
+        &nbsp;&nbsp;y: match_y,<br>
+        &nbsp;&nbsp;z: match_z<br>
+        &nbsp;} = strct {<br>
+        &nbsp;&nbsp;println!("{} {} {}", match_x, match_y, match_z)<br>
+        &nbsp;}<br>
         }
         
     </p>
@@ -175,22 +177,22 @@ include __DIR__."/../rustrunner.php";
         Additionally, when matching on enum structs, some of the fields being matched on can be <em>optionally omitted with range syntax</em> (double full stop) if they are irrelevant to the desired match:
     </p>
     <p class="inlinelink">
-        enum Structs {<br/>
-        &nbsp;Point { x: i32, y: i32 },<br/>
-        &nbsp;Precise3DPoint { x: f64, y: f64, z: f64 },<br/>
-        }<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let strct = Structs::Point {<br/>
-        &nbsp;&nbsp;x: 23,<br/>
-        &nbsp;&nbsp;y: 43<br/>
-        &nbsp;};<br/>
-        &nbsp;if let Structs::Point {<br/>
-        &nbsp;&nbsp;x: match_x,<br/>
-        &nbsp;&nbsp;..<br/>
-        &nbsp;} = strct {<br/>
-        &nbsp;&nbsp;println!("{}", match_x)<br/>
-        &nbsp;}<br/>
+        enum Structs {<br>
+        &nbsp;Point { x: i32, y: i32 },<br>
+        &nbsp;Precise3DPoint { x: f64, y: f64, z: f64 },<br>
+        }<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let strct = Structs::Point {<br>
+        &nbsp;&nbsp;x: 23,<br>
+        &nbsp;&nbsp;y: 43<br>
+        &nbsp;};<br>
+        &nbsp;if let Structs::Point {<br>
+        &nbsp;&nbsp;x: match_x,<br>
+        &nbsp;&nbsp;..<br>
+        &nbsp;} = strct {<br>
+        &nbsp;&nbsp;println!("{}", match_x)<br>
+        &nbsp;}<br>
         }
     </p>
     <div>

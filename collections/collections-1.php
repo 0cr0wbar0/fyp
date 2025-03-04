@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Collections: vectors</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -42,14 +44,14 @@ include __DIR__."/../rustrunner.php";
         Vectors can be initialised in two main ways:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let mut fstvec: Vec&lt;i32&gt; = Vec::new(); // Constructor method<br/>
-        &nbsp;fstvec.push(10);<br/>
-        &nbsp;fstvec.push(5);<br/>
-            <br/>
-        &nbsp;let sndvec: Vec&lt;f64&gt; = vec![2.643, 4.219, 9.263]; // vec! macro<br/>
-            <br/>
-        &nbsp;println!("{:?} {:?}", fstvec, sndvec)<br/>
+        fn main() {<br>
+        &nbsp;let mut fstvec: Vec&lt;i32&gt; = Vec::new(); // Constructor method<br>
+        &nbsp;fstvec.push(10);<br>
+        &nbsp;fstvec.push(5);<br>
+            <br>
+        &nbsp;let sndvec: Vec&lt;f64&gt; = vec![2.643, 4.219, 9.263]; // vec! macro<br>
+            <br>
+        &nbsp;println!("{:?} {:?}", fstvec, sndvec)<br>
         }  
     </p>
     <div>
@@ -73,9 +75,9 @@ include __DIR__."/../rustrunner.php";
         The shorthand syntax that can be used with arrays can also be used with this macro:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let vec: Vec&lt;f64&gt; = vec![23.45673; 10]; // creates vector with ten elements equal to this float<br/>
-        &nbsp;println!("{:?}", vec)<br/>
+        fn main() {<br>
+        &nbsp;let vec: Vec&lt;f64&gt; = vec![23.45673; 10]; // creates vector with ten elements equal to this float<br>
+        &nbsp;println!("{:?}", vec)<br>
         }
     </p>
     <div>
@@ -93,9 +95,9 @@ include __DIR__."/../rustrunner.php";
         As with arrays, individual elements of vectors can be accessed with indexing...:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let vec: Vec&lt;i32&gt; = vec![56, 23, 78, 92, 108];<br/>
-        &nbsp;println!("{}", vec[2]) // prints 78 (zero-indexed)<br/>
+        fn main() {<br>
+        &nbsp;let vec: Vec&lt;i32&gt; = vec![56, 23, 78, 92, 108];<br>
+        &nbsp;println!("{}", vec[2]) // prints 78 (zero-indexed)<br>
         }
     </p>
     <div>
@@ -113,12 +115,12 @@ include __DIR__."/../rustrunner.php";
         ...and iterated over with loops:
     </p>
     <p class="inlinelink">
-        fn main() {<br/>
-        &nbsp;let vec: Vec&lt;i32&gt; = vec![12, 43, 5, 78, 32];<br/>
-        <br/>
-        &nbsp;for v in vec {<br/>
-        &nbsp;&nbsp;println!("{}", v);<br/>
-        &nbsp;}<br/>
+        fn main() {<br>
+        &nbsp;let vec: Vec&lt;i32&gt; = vec![12, 43, 5, 78, 32];<br>
+        <br>
+        &nbsp;for v in vec {<br>
+        &nbsp;&nbsp;println!("{}", v);<br>
+        &nbsp;}<br>
         }
     </p>
     <div>

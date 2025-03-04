@@ -2,11 +2,13 @@
 session_start();
 include __DIR__."/../rustrunner.php";
 ?>
+<!doctype html>
 <html lang="en" class="background">
 
 <head>
     <title>cr0wbar's Rust course - Collections: hash maps</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
     <link rel="icon" type="image/x-icon" href="../static/shocked_hugh.ico">
@@ -43,16 +45,16 @@ include __DIR__."/../rustrunner.php";
         In a similar manner to vectors, hash maps can be initialised with their constructor method <b>new()</b>:
     </p>
     <p class="inlinelink">
-        use std::collections::HashMap;<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let mut map: HashMap&lt;isize, &str&gt; = HashMap::new();<br/>
-        <br/>
-        &nbsp;map.insert(1, "h"); // 1 is the key, "h" is the value<br/>
-        &nbsp;map.insert(2, "i");<br/>
-        &nbsp;map.insert(3, "!");<br/>
-        <br/>
-        &nbsp;println!("{}{}{}", map[&1], map[&2], map[&3])<br/>
+        use std::collections::HashMap;<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let mut map: HashMap&lt;isize, &str&gt; = HashMap::new();<br>
+        <br>
+        &nbsp;map.insert(1, "h"); // 1 is the key, "h" is the value<br>
+        &nbsp;map.insert(2, "i");<br>
+        &nbsp;map.insert(3, "!");<br>
+        <br>
+        &nbsp;println!("{}{}{}", map[&1], map[&2], map[&3])<br>
         }
     </p>
     <p>
@@ -130,24 +132,24 @@ include __DIR__."/../rustrunner.php";
     </p>
     <p class="inlinelink">
         use std::collections::HashMap;
-        <br/>
-        fn main() {<br/>
-        &nbsp;let mut map = HashMap::new();<br/>
-        <br/>
-        &nbsp;map.insert(1, "h");<br/>
-        &nbsp;map.insert(2, "e");<br/>
-        &nbsp;map.insert(3, "l");<br/>
-        &nbsp;map.insert(4, "l");<br/>
-        &nbsp;map.insert(5, "o");<br/>
-        &nbsp;map.insert(6, "!");<br/>
-        <br/>
-        &nbsp;for i in map.keys() {<br/>
-        &nbsp;&nbsp;println!("{}", i)<br/>
-        &nbsp;}<br/>
-        &nbsp;println!();<br/>
-        &nbsp;for c in map.values() {<br/>
-        &nbsp;&nbsp;println!("{}", c)<br/>
-        &nbsp;}<br/>
+        <br>
+        fn main() {<br>
+        &nbsp;let mut map = HashMap::new();<br>
+        <br>
+        &nbsp;map.insert(1, "h");<br>
+        &nbsp;map.insert(2, "e");<br>
+        &nbsp;map.insert(3, "l");<br>
+        &nbsp;map.insert(4, "l");<br>
+        &nbsp;map.insert(5, "o");<br>
+        &nbsp;map.insert(6, "!");<br>
+        <br>
+        &nbsp;for i in map.keys() {<br>
+        &nbsp;&nbsp;println!("{}", i)<br>
+        &nbsp;}<br>
+        &nbsp;println!();<br>
+        &nbsp;for c in map.values() {<br>
+        &nbsp;&nbsp;println!("{}", c)<br>
+        &nbsp;}<br>
         }
     </p>
     <p>Note that <em>keys()</em> and <em>values()</em> return their results in a random order every time they are used.</p>
@@ -182,25 +184,25 @@ include __DIR__."/../rustrunner.php";
         <em>iter()</em> returns all key-value pairs in the hash map, while <em>iter_mut() returns a mutable reference to the value of each pair</em>, which can be very helpful if any edits need to be made to the values in respect to the keys:
     </p>
     <p class="inlinelink">
-        use std::collections::HashMap;<br/>
-        <br/>
-        fn main() {<br/>
-        &nbsp;let mut map = HashMap::new();<br/>
-        <br/>
-        &nbsp;map.insert(1, "h");<br/>
-        &nbsp;map.insert(2, "e");<br/>
-        &nbsp;map.insert(3, "l");<br/>
-        &nbsp;map.insert(4, "l");<br/>
-        &nbsp;map.insert(5, "o");<br/>
-        &nbsp;map.insert(6, "!");<br/>
-        <br/>
-        &nbsp;for (k, v) in map.iter_mut() {<br/>
-        &nbsp;&nbsp;if k % 2 != 0 {<br/>
-        &nbsp;&nbsp;&nbsp;*v = "_";<br/>
-        &nbsp;&nbsp;}<br/>
-        &nbsp;}<br/>
-        <br/>
-        &nbsp;println!("{:?}", map)<br/>
+        use std::collections::HashMap;<br>
+        <br>
+        fn main() {<br>
+        &nbsp;let mut map = HashMap::new();<br>
+        <br>
+        &nbsp;map.insert(1, "h");<br>
+        &nbsp;map.insert(2, "e");<br>
+        &nbsp;map.insert(3, "l");<br>
+        &nbsp;map.insert(4, "l");<br>
+        &nbsp;map.insert(5, "o");<br>
+        &nbsp;map.insert(6, "!");<br>
+        <br>
+        &nbsp;for (k, v) in map.iter_mut() {<br>
+        &nbsp;&nbsp;if k % 2 != 0 {<br>
+        &nbsp;&nbsp;&nbsp;*v = "_";<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;}<br>
+        <br>
+        &nbsp;println!("{:?}", map)<br>
         <br>
         }
     </p>
