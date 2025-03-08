@@ -53,7 +53,7 @@ include __DIR__."/../rustrunner.php";
 <div class="info">
     <p>
         Think back to one of the very first examples of Rust code given in this course - if a variable is defined with an alias, but not given a value,
-        many languages will give it a null value, whereas Rust will refuse to compile any code containing this.
+        many languages will give it a null value, whereas Rust will refuse to compile any code containing this if the variable in question is used anywhere beyond its definition.
     </p>
 </div>
 
@@ -164,6 +164,12 @@ include __DIR__."/../rustrunner.php";
         }", "example3");
         ?>
     </div>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br></b>Refactor the following code so that the Option is handled without<br>a call to panic!():</p>
+    <?php exercise_exec("fn main() {\r\n\tlet maybe_int: Option&lt;i32&gt; = None;\n\tprintln!(\"{}\", maybe_int.expect(\"This shouldn't be None!\"))\n}", 'exercise1'); ?>
+    <p><b>Hint:</b> A match statement is likely to be useful.</p>
 </div>
 
 </div>

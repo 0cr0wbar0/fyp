@@ -135,6 +135,11 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Fix the typing error with the following code:</p>
+    <?php exercise_exec("fn main() {\n\tlet pi: i32 = 3.142;\n\tprintln!(\"{}\", pi)\n}", 'exercise1'); ?>
+</div>
+
+<div class="info">
     <p> 
         There is no "fsize" data type in Rust, but if no type is specified for a float, the compiler will default to <b>f64</b>:
     </p>

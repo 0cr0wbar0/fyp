@@ -250,6 +250,16 @@ include __DIR__."/../rustrunner.php";
     </p>
 </div>
 
+<div class="info">
+    <p><b>Exercise:<br></b>Define a function <em>get_reverse()</em> for the hash map below that, given a hash map and a &str value, returns its i32 key, or zero if the key can't be found:</p>
+    <?php exercise_exec("use std::collections::HashMap;\n\nfn main() {\r\n\tlet map: &lt;i32, &str&gt; = HashMap::new();\n\tmap.insert(1, \"s\");\t
+        map.insert(2, \"t\");\t
+        map.insert(3, \"r\");\t
+        map.insert(4, \"i\");\t
+        map.insert(5, \"n\");\t
+        map.insert(6, \"g\");\n\n\tprintln!(\"{}\", get_reverse(map, \"i\"))\n}", 'exercise1'); ?>
+    <p><br><b>Hint:</b> if you use iter_mut(), you may have to dereference the keys and values being iterated over! Pay close attention to any error messages, many of them will offer direct inline fixes.</p>
+</div>
 
 </div>
 

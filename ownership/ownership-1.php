@@ -65,10 +65,6 @@ include __DIR__."/../rustrunner.php";
     </div>
 </div>
 
-<div class="info">
-    <p><b>Exercise:<br></b>Try executing this</p>
-<?php exercise_exec("fn main() {\r\n \tprintln!(\"hi\")\n }", 'test'); ?>
-</div>
 
 <div class="info">
     <p>
@@ -154,6 +150,11 @@ include __DIR__."/../rustrunner.php";
         The second drop() function being suggested in the error output for the above code example is a different function entirely, and is part of <b>std::mem</b>, the built in memory management module for Rust.
         The functions in this module require considerably advanced knowledge of low-level Rust, and as such will not be explained further in this course.
     </p>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br></b>Try adding a scope of your own to the function below, before the println!(), with a variable that shadows the existing variable:</p>
+    <?php exercise_exec("fn main() {\n\tlet outer: u32 = 15;\n\tprintln!(\"{}\", outer)\n}", 'exercise1'); ?>
 </div>
 
 </div>

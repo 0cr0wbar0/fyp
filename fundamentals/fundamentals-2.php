@@ -39,10 +39,10 @@ include __DIR__."/../rustrunner.php";
     </p>
     <p class="inlinelink">
         fn main() {<br>
-        let mut number = 5;<br>
-        println!("{}", number); // prints '5'<br>
-        number = 10;<br>
-        println!("{}", number); // prints '10'<br>
+        &nbsp;let mut number = 5;<br>
+        &nbsp;println!("{}", number); // prints '5'<br>
+        &nbsp;number = 10;<br>
+        &nbsp;println!("{}", number); // prints '10'<br>
         }
     </p>
     <div>
@@ -62,6 +62,11 @@ include __DIR__."/../rustrunner.php";
         The above example also contains some instances of <br> println!(), one of Rust's <b>macros</b>
          (covered in more detail later). println!() prints the value of a given variable, depending on its <b>data type</b>.
     </p>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br></b>Fix the problem with the code below (try running it first to see why it won't compile):</p>
+    <?php exercise_exec("fn main() {\n\tlet new_num = 20;\n\tnew_num = new_num * 5;\n\tprintln!(\"{}\", new_num)\n}", 'exercise1'); ?>
 </div>
 
 <div class="info">

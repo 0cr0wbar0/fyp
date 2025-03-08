@@ -95,6 +95,11 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Try defining a variable of your own with the data type <em>char</em>:</p>
+    <?php exercise_exec("fn main() {\r\n\t\n}", 'exercise1'); ?>
+</div>
+
+<div class="info">
     <p>
     In Rust, explicit types for variables are specified after the variable name, separated from it by a colon, after which the actual value is specified with an equals sign:
     </p>

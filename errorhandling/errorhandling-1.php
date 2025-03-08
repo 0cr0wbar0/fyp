@@ -110,6 +110,12 @@ include __DIR__."/../rustrunner.php";
     </p>
 </div>
 
+<div class="info">
+    <p><b>Exercise:<br></b>Cause the below code to panic with the following message:</p>
+    <p class="inline-err">removal index (is 100) should be < len (is 10)</p>
+    <?php exercise_exec("fn main() {\r\n\tlet mut vector: Vec&lt;i32&gt; = Vec::new();\n\tfor i in 1..=10 {\n\t\tvector.push(i);\t\n\t}\n\tprintln!(\"{}\", vector.remove(9))\n}", 'exercise1'); ?>
+</div>
+
 </div>
 
 <div class="nav">

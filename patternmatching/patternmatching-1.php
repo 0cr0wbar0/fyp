@@ -148,6 +148,11 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Complete the below match statement such that the <em>hundred</em> of variable <em>num</em> gets printed (e.g. 398 means that "300" is printed), assuming that num < 1000:</p>
+    <?php exercise_exec("fn main() {\n\tlet num = 247;\n\tmatch num {\n\t\n\t}\n}", 'exercise1'); ?>
+</div>
+
+<div class="info">
     <p>
         For matching on a variable with an enum type, either all possible discriminants must be included, or the wildcard must be included if this is not the case: 
     </p>

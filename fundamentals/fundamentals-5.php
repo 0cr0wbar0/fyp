@@ -6,7 +6,7 @@ include __DIR__."/../rustrunner.php";
 <html lang="en" class="background">
 
 <head>
-    <title>cr0wbar's Rust course - Fundamentals: functions & control flow</title>
+    <title>cr0wbar's Rust course - Fundamentals: functions</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
@@ -185,6 +185,11 @@ include __DIR__."/../rustrunner.php";
     <p>
         Note the syntax between the curly brackets in the string formatting of the println!() call in the above example. This prints the result of the supplied function call in a <em>debug</em> view, allowing for the printing of data structures like structs, enums and tuples (explained later).
     </p>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br></b>Add a function below named <em>num</em> that takes a u32 and returns it unchanged, <b>without using the return keyword</b>:</p>
+    <?php exercise_exec("fn main() {\n\tprintln!(\"{}\", num(10))\n}", 'exercise1'); ?>
 </div>
 
 <div class="info">

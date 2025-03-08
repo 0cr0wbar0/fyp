@@ -95,6 +95,7 @@ include __DIR__."/../rustrunner.php";
         &nbsp;for n in arr {<br>
         &nbsp;&nbsp;println!("{}", n); // conventional for loop<br>
         &nbsp;}<br>
+        &nbsp;println!();
         <br>
         &nbsp;for i in arr.iter() { // iter() method creates an iterator for arr<br>
         &nbsp;&nbsp;println!("{}", i)<br>
@@ -108,6 +109,7 @@ include __DIR__."/../rustrunner.php";
         for n in arr {
         println!(\"{}\", n);
         }
+        println!();
         for i in arr.iter() {
         println!(\"{}\", i)
         }
@@ -120,6 +122,11 @@ include __DIR__."/../rustrunner.php";
     <p>
         Iterators are implemented for most, if not all, of Rust's built-in collection types, like arrays, vectors and hash maps (the latter two are further explained in the Collections chapter).
     </p>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br></b>Add appropriate type annotations to the incorrectly typed code below:</p>
+    <?php exercise_exec("fn main() {\n\tlet arr: [char; 10] = [6,7,8,9,10];\n\tlet chars: String = \"String struct!\";\n}", 'exercise1'); ?>
 </div>
 
 </div>
@@ -156,7 +163,6 @@ include __DIR__."/../rustrunner.php";
         slice.play( {
             fps: 5,
             from: 1,
-            to: 24,
             n: 0
         });
     }
@@ -173,7 +179,6 @@ include __DIR__."/../rustrunner.php";
         array.play( {
             fps: 5,
             from: 1,
-            to: 24,
             n: 0
         });
     }

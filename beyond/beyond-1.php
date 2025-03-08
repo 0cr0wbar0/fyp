@@ -169,6 +169,12 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Fix the following code by adding the missing trait binding(s):</p>
+    <?php exercise_exec("fn main() {\r\n\tlet string = \"String!\";\n\tdebug(string);\n}\n\nfn debug&lt;T&gt;(val: T) {\n\tprintln!(\"{}\", dbg!(val))\n}", 'exercise1'); ?>
+    <p><b>Hint:</b> Pay attention to the error message. Multiple trait bindings for one generic are separated with the addition symbol (+).</p>
+</div>
+
+<div class="info">
     <p>
         Traits are very important to work with when implementing generics, and how they define behaviour will be explained in more detail on the next page.
     </p>

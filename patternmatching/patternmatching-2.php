@@ -118,6 +118,11 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Try defining an enum of your own with variants of one type (tuples, structs or units), then write an if-let statement to match on one of these variants:</p>
+    <?php exercise_exec("enum Variants {\n\n}\n\nfn main() {\n\t\n}", 'exercise1'); ?>
+</div>
+
+<div class="info">
     <p>
         Regarding enum structs (discriminants of an enum defined as structs), the primary way to <em>access or edit their fields</em> is through pattern matching:
     </p>

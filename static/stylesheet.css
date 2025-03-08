@@ -21,6 +21,13 @@
     padding: 15px;
 }
 
+.textsubmit:hover {
+    cursor: pointer;
+    border-style: inset;
+    background-color: #752e0b;
+    border-color: #a84e21;
+}
+
 .navbar {
     display: flex;
     justify-content: space-around;

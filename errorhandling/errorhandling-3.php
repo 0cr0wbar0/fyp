@@ -98,6 +98,12 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Refactor the following code so that the Result is handled without<br>a call to panic!():</p>
+    <?php exercise_exec("fn main() {\r\n\tlet output: Result&lt;i32, String&gt; = result();\n\tprintln!(\"{}\", output.expect(\"This should be successful!\"))\n}\n\nfn result() -> Result<i32, String> {\n\tErr(\"unsuccessful!\".to_string())\n}", 'exercise1'); ?>
+    <p><b>Hint:</b> A match statement is likely to be useful.</p>
+</div>
+
+<div class="info">
     <p>
         Option and Result are so similar, in fact, that they both have methods that allow one to be converted into the other:
     </p>

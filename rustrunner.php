@@ -4,9 +4,7 @@ function exercise_exec($input, $exercise_id): void
 {
     ?>
     <form method="post" action="response.php" id="<?= $exercise_id ?>">
-        <textarea name="code_block" class="codeinput" cols="50" rows="15">
-            <?= $input ?>
-        </textarea>
+        <textarea name="code_block" class="codeinput" cols="50" rows="15"><?=$input?></textarea>
         <div class="nav"><button class="textsubmit" type="submit">Execute</button></div>
         <pre class="response"></pre>
     </form>

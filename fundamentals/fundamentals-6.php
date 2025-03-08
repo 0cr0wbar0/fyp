@@ -177,6 +177,11 @@ include __DIR__."/../rustrunner.php";
     </div>
 </div>
 
+<div class="info">
+    <p><b>Exercise:<br></b>Using a for-loop, while-loop, or the infinite loop explained above (or all three!), make the function below print the fifteen times table up to 50:</p>
+    <?php exercise_exec("fn main() {\n\tprintln!()\n}", 'exercise1'); ?>
+</div>
+
 </div>
 
 <div class="nav">

@@ -153,6 +153,11 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Try adding a field of type <em>char</em> with the alias "character" to the struct defined below, before printing it:</p>
+    <?php exercise_exec("struct Types {\n\t\n}\nfn main() {\n\tlet t = Types {  };\n\tprintln!(\"{}\", t)\n}", 'exercise1'); ?>
+</div>
+
+<div class="info">
     <p> 
         <em>Enums</em>, short for enumerations, are tiny pieces of data that, similar to structs, are defined entirely by the programmer as a custom data structure, and can only be one of multiple <em>variants</em> (sometimes called <em>discriminants</em>):
     </p>
@@ -276,6 +281,11 @@ include __DIR__."/../rustrunner.php";
         }", "example4");
         ?>
     </div>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br></b>Try adding a tuple variant of length 6 with the alias "Types", and six different data types within, to the enum defined below:</p>
+    <?php exercise_exec("enum Program {\n\t\n}\nfn main() {\n\tlet p = Program::Types( );\n\tprintln!(\"{:?}\", p)\n}", 'exercise2'); ?>
 </div>
 
 </div>

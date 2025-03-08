@@ -102,7 +102,7 @@ include __DIR__."/../rustrunner.php";
         }<br>
         <br>
         /// Takes reference to a String struct,<br>
-        /// returns capacity in bytes<br>
+        /// returns capacity in bytes<br><br>
         fn get_string_capacity(string: &String) -> usize {<br>
         &nbsp;string.capacity()<br>
         }<br>
@@ -176,6 +176,11 @@ include __DIR__."/../rustrunner.php";
     <p>
         Since they take up very small, fixed amounts of memory space, they have a trait called <em>Copy</em>, which allows them to be simply copied, instead of moved, to the variable or function they might be used with. More technical details of why primitive types behave this way can be found on the next page.
     </p>
+</div>
+
+<div class="info">
+    <p><b>Exercise:<br></b>Fix the ownership-related compile error with the following code:</p>
+    <?php exercise_exec("fn main() {\n\tlet s: String = String::from(\"String!\");\n\ttake_string(s);\n\tprintln!(\"{}\", s)\n}\n\nfn take_string(mut _string: String) -> String {\n\t_string = String::from(\"This is a different string!\");\n\t_string\n}", 'exercise1'); ?>
 </div>
 
 </div>

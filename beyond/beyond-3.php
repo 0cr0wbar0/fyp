@@ -228,6 +228,16 @@ include __DIR__."/../rustrunner.php";
     </div>
 </div>
 
+
+<div class="info">
+    <p><b>Exercise:<br></b>The following function <em>concat()</em> takes three string slices and returns a string struct. Refactor this function so that:</p>
+    <ul class="list">
+        <li><em>one</em>, <em>two</em> and <em>three</em> are all of different lifetime lengths</li>
+        <li><em>three</em> explicitly lasts longer than <em>two</em></li>
+    </ul>
+    <?php exercise_exec("fn main() {\r\n\tprintln!(\"{}\", concat(\"st\", \"ri\", \"ng\"))\n}\n\nfn concat(one: &str, two: &str, three: &str) -> String {\n\tone.to_owned() + &two.to_owned() + three\n}", 'exercise1'); ?>
+</div>
+
 </div>
 
 <div class="nav">

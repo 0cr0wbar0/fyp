@@ -137,6 +137,11 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="info">
+    <p><b>Exercise:<br></b>Try initialising a vector of <em>chars</em>, before iterating over it with <b>.iter()</b> (remember the page on arrays and slices?):</p>
+    <?php exercise_exec("fn main() {\r\n\t\n}", 'exercise1'); ?>
+</div>
+
+<div class="info">
     <p>
         Vectors also have a multitude of useful built-in methods (such as <b>push()</b>, demonstrated above) that allow for easily accessible operations on them and their elements. For example:
         <ul class="list">
