@@ -15,24 +15,24 @@
     border-radius: 10px;
     border-width: medium;
     border-style: outset;
-    background-color: #b04510;
-    border-color: #572a14;
-    color: #f7bc9e;
+    background-color: #1a9300;
+    border-color: #114d00;
+    color: #c4ffb7;
     padding: 15px;
 }
 
 .textsubmit:hover {
     cursor: pointer;
     border-style: inset;
-    background-color: #752e0b;
-    border-color: #a84e21;
+    background-color: #114d00;
+    border-color: #114d00;
 }
 
 .navbar {
     display: flex;
     justify-content: space-around;
     position: sticky;
-    background-color: #87411e;
+    background-color: #186900;
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 0 0 30px;
@@ -48,17 +48,17 @@ pre {
 }
 
 .navbar a {
-    color: #ffb692;
+    color: #7dff61;
 }
 
 .navbar a:hover {
-    color: #ffd1bb;
+    color: #ffffff;
 }
 
 .dropbtn {
     font-family: "SF Mono";
-    background-color: #87411e;
-    color: #ffb692;
+    background-color: #186900;
+    color: #7dff61;
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -72,7 +72,7 @@ pre {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #ffd1bb;
+    background-color: #bcffad;
     min-width: 160px;
     z-index: 1;
 }
@@ -80,16 +80,16 @@ pre {
 .dropdown-content button {
     font-family: "SF Mono";
     font-size: 1rem;
-    background-color: #87411e;
-    color: #ffb692;
+    background-color: #186900;
+    color: #7dff61;
     border-style: none;
     padding: 12px 16px;
     display: block;
 }
 
 .dropdown-content button:hover {
-    background-color: #ffd1bb;
-    color: #87411e;
+    background-color: #bcffad;
+    color: #1a9300;
 }
 
 .dropdown:hover .dropdown-content {
@@ -101,7 +101,7 @@ pre {
     display: grid;
     grid: auto-flow / 1fr 1fr;
     border-radius: 5px;
-    background-color: #fca77c;
+    background-color: #2c5425;
     margin: 25px;
     padding: 10px;
     gap: 20px 10px;
@@ -110,27 +110,28 @@ pre {
 .buttonlist a {
     text-decoration: none;
     border-radius: 10px;
-    background-color: #b04510;
-    border-color: #d05e26;
+    background-color: #33ab1f;
+    border-color: #569f47;
     border-style: outset;
-    color: #f7bc9e;
+    color: #deffd6;
     font-size: 15px;
     padding: 15px;
 }
 
 .buttonlist a:hover {
-    background-color: #752e0b;
+    background-color: #2c5425;
     border-style: inset;
-    border-color: #a84e21;
+    border-color: #2c5425;
+    color: #deffd6;
 }
 
 #text {
     display: block;
     font-size: 1rem;
     font-family: ui-monospace;
-    background-color: #fca77c;
-    border-color: #87411e;
-    color: #87411e;
+    background-color: #00b914;
+    border-color: #1a9300;
+    color: #deffd6;
     resize: none;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -141,9 +142,9 @@ pre {
 #answertext {
     font-size: 1rem;
     font-family: "SF Mono";
-    background-color: #87411e;
-    border-color: #87411e;
-    color: #ffd1bb;
+    background-color: #1a9300;
+    border-color: #1a9300;
+    color: #bcffad;
     resize: none;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -154,10 +155,10 @@ pre {
 .codeinput {
     font-size: 1rem;
     font-family: "SF Mono";
-    background-color: #87411e;
-    border-color: #87411e;
+    background-color: #1a9300;
+    border-color: #1a9300;
     border-radius: 10px;
-    color: #ffd1bb;
+    color: #bcffad;
     resize: vertical;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -170,18 +171,18 @@ pre {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fca77c;
+    background-color: #005208;
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: 50px;
 }
 
 .header {
-    color: #87411e;
+    color: #bcffad;
 }
 
 .subheader {
-    color: #87411e;
+    color: #bcffad;
     max-width: 960px;
 }
 
@@ -190,12 +191,13 @@ pre {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #fca77c;
+        background-color: #005208;
         padding-left: 20px;
         padding-right: 20px;
         margin-bottom: 50px;
         font-size: x-large;
     }
+
 
     .subheader {
         max-width: fit-content;
@@ -205,14 +207,14 @@ pre {
 
 .info {
     margin: 20px;
-    background-color: #fca77c;
+    background-color: #00b914;
     padding: 20px;
     max-width: 800px;
 }
 
 .paddedinfo {
     margin: 20px;
-    background-color: #fca77c;
+    background-color: #00b914;
     padding: 40px;
     max-width: 600px;
 }
@@ -222,8 +224,8 @@ pre {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
-    background-color: #87411e;
-    color: #facab1;
+    background-color: #1a9300;
+    color: #dcffd6;
     max-width: 300px;
     margin: 10px auto;
 }
@@ -240,8 +242,8 @@ pre {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
-    background-color: #87411e;
-    color: #facab1;
+    background-color: #114d00;
+    color: #dcffd6;
     max-width: 300px;
     margin: 15px auto auto;
 }
@@ -254,28 +256,28 @@ pre {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
-    background-color: #facab1;
+    background-color: #dcffd6;
 }
 
 .inlinelink {
-    background-color: #572a14;
+    background-color: #114d00;
     text-align: left;
     font-size: 1rem;
     font-family: "SF Mono";
     border-radius: 10px;
-    color: #fca77c;
+    color: #00b914;
     padding: 10px;
     tab-size: 4;
     overflow-x: scroll;
 }
 
 .inlinelink a {
-    color: #fca77c;
+    color: #00b914;
     text-decoration: none;
 }
 
 .inlinelink a:hover {
-    color: #ffd1bb;
+    color: #bcffad;
 }
 
 
@@ -296,7 +298,7 @@ pre {
     flex-direction: column;
     justify-content: center;
     margin: 20px;
-    background-color: #ff935d;
+    background-color: #33ab1f;
     padding: 20px;
     max-width: 800px;
 }
@@ -307,7 +309,7 @@ pre {
         flex-direction: column;
         justify-content: center;
         margin: 10px;
-        background-color: #ff935d;
+        background-color: #59a849;
         padding: 20px;
     }
 
@@ -318,9 +320,9 @@ pre {
 
 .replaybutton {
     border-radius: 10px;
-    background-color: #b04510;
-    border-color: #d05e26;
-    color: #f7bc9e;
+    background-color: #59a849;
+    border-color: #569f47;
+    color: #c4ffb7;
     font-size: 15px;
     padding: 15px;
 }
@@ -333,8 +335,8 @@ pre {
 
 #background {
     font-family: "SF Mono";
-    background-color: #facab1;
-    border: 20px #87411e;
+    background-color: #dcffd6;
+    border: 20px #1a9300;
 }
 
 #ImageBox {
@@ -342,14 +344,14 @@ pre {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #fca77c;
+    background-color: #00b914;
     border-radius: 10px;
     margin: 10px;
 }
 
 #ImageBox img {
     margin: 10px;
-    border: 10px #572a14;
+    border: 10px #114d00;
     transition: all .2s ease-in-out;
 }
 
@@ -367,18 +369,18 @@ pre {
 .nav a {
     text-decoration: none;
     border-radius: 10px;
-    background-color: #b04510;
-    border-color: #d05e26;
+    background-color: #59a849;
+    border-color: #2c5425;
     border-style: outset;
-    color: #f7bc9e;
+    color: #c4ffb7;
     font-size: 15px;
     padding: 15px;
 }
 
 .nav a:hover {
-    background-color: #752e0b;
+    background-color: #2c5425;
     border-style: inset;
-    border-color: #a84e21;
+    border-color: #114d00;
 }
 
 @media (max-width: 680px) {
@@ -386,10 +388,10 @@ pre {
     .nav a {
         text-decoration: none;
         border-radius: 10px;
-        background-color: #b04510;
-        border-color: #d05e26;
+        background-color: #59a849;
+        border-color: #114d00;
         border-style: outset;
-        color: #f7bc9e;
+        color: #c4ffb7;
         font-size: 30px;
         padding: 5px;
     }
