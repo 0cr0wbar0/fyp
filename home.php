@@ -22,9 +22,9 @@
     <div class="dropdown">
         <button class="dropbtn">Change Theme &darr;</button>
         <div class="dropdown-content">
-            <button onclick="styleToggle('./static/stylesheet.css')">Rusty</button>
-            <button onclick="styleToggle('./static/lush.css')">Lush</button>
-            <button onclick="styleToggle('./static/mono.css')">Monochrome</button>
+            <button onclick="styleToggle('/static/stylesheet.css')">Rusty</button>
+            <button onclick="styleToggle('/static/lush.css')">Lush</button>
+            <button onclick="styleToggle('/static/mono.css')">Monochrome</button>
         </div>
     </div>
     <a href="https://fyp.cr0wbar.dev/login">Login</a>
