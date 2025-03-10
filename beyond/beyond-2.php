@@ -8,8 +8,12 @@ include __DIR__."/../rustrunner.php";
 <head>
     <title>cr0wbar's Rust course - Beyond the basics: traits</title>
     <script src="../static/styletoggle.js"></script>
+    <script>
+        window.onload = function () {
+            init_style();
+        };
+    </script>
     <link rel="stylesheet" href="">
-    <script>init_style();</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">

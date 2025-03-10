@@ -10,7 +10,11 @@ include __DIR__."/../rustrunner.php";
     <meta charset="UTF-8">
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href="">
-    <script>init_style();</script>
+    <script>
+        window.onload = function () {
+        init_style();
+    };
+</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">

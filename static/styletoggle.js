@@ -1,12 +1,12 @@
 function styleToggle(str) {
+    document.cookie = "theme=" + str + "; SameSite=lax; path=/;";
     let sheets= document.getElementsByTagName('link');
     sheets[0].href = str;
-    document.cookie = "theme=" + str + "; SameSite=lax; path=/;";
 }
 
 function init_style() {
     const style = document.cookie.split("; ").find((row) => row.startsWith("theme="))?.split("=")[1];
-    if (style === null) {
+    if (style === null || style === undefined) {
         styleToggle('/static/stylesheet.css');
     } else {
         switch (style) {
