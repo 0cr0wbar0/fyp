@@ -224,7 +224,7 @@ pre {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
-    background-color: #1a9300;
+    background-color: #116100;
     color: #dcffd6;
     max-width: 300px;
     margin: 10px auto;
@@ -369,8 +369,8 @@ pre {
 .nav a {
     text-decoration: none;
     border-radius: 10px;
-    background-color: #59a849;
-    border-color: #2c5425;
+    background-color: #2c5425;
+    border-color: #78d767;
     border-style: outset;
     color: #c4ffb7;
     font-size: 15px;
@@ -378,9 +378,9 @@ pre {
 }
 
 .nav a:hover {
-    background-color: #2c5425;
+    background-color: #101f0e;
     border-style: inset;
-    border-color: #114d00;
+    border-color: #78d767;
 }
 
 @media (max-width: 680px) {
@@ -388,8 +388,8 @@ pre {
     .nav a {
         text-decoration: none;
         border-radius: 10px;
-        background-color: #59a849;
-        border-color: #114d00;
+        background-color: #2c5425;
+        border-color: #78d767;
         border-style: outset;
         color: #c4ffb7;
         font-size: 30px;

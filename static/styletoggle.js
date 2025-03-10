@@ -6,7 +6,7 @@ function styleToggle(str) {
 
 function init_style() {
     const style = document.cookie.split("; ").find((row) => row.startsWith("theme="))?.split("=")[1];
-    if (!document.cookie.startsWith("theme=")) {
+    if (style === null) {
         styleToggle('/static/stylesheet.css');
     } else {
         switch (style) {
