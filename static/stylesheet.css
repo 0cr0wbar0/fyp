@@ -47,6 +47,15 @@ pre {
     white-space: pre-wrap;
 }
 
+table, thead, tbody, th {
+    font-family: "SF Mono";
+    color: #2d160a;
+    border: 2px solid;
+    padding: 5px;
+    border-collapse: collapse;
+    background-color: #da6f36;
+}
+
 .navbar a {
     color: #ffb692;
 }
@@ -88,6 +97,22 @@ pre {
 }
 
 .dropdown-content button:hover {
+    background-color: #ffd1bb;
+    color: #87411e;
+}
+
+.dropdown-content a {
+    font-family: "SF Mono";
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: #87411e;
+    color: #ffb692;
+    border-style: none;
+    padding: 12px 16px;
+    display: block;
+}
+
+.dropdown-content a:hover {
     background-color: #ffd1bb;
     color: #87411e;
 }
@@ -237,9 +262,7 @@ pre {
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 5px;
+    padding: 15px;
     background-color: #87411e;
     color: #facab1;
     max-width: 300px;
@@ -329,6 +352,21 @@ pre {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+@media (max-width: 680px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 #background {

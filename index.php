@@ -32,6 +32,10 @@
         require __DIR__ . '/' . $page . '/' . $page . '-quiz.php';
     });
 
+    $router->map('GET', '/profile', function() {
+        require __DIR__ . '/profile.php';
+    });
+
     $router->map('GET', '/static/*', function() {
         require __DIR__ . '/home.php';
     });

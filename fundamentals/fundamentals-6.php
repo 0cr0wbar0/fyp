@@ -33,7 +33,20 @@ include __DIR__."/../rustrunner.php";
             <button onclick="styleToggle('/static/mono.css')">Monochrome</button>
         </div>
     </div>
-    <a href="https://fyp.cr0wbar.dev/login">Login</a>
+    <?php if (!isset($_SESSION["user_id"])) {?>
+        <a href="https://fyp.cr0wbar.dev/login">Login</a>
+    <?php
+    } else {
+        $username = $_SESSION["username"];?>
+        <div class="dropdown">
+            <button class="dropbtn">Welcome, <?=$username?></button>
+            <div class="dropdown-content">
+                <a href="https://fyp.cr0wbar.dev/profile">User profile</a>
+                <a href="/logout.php">Log out</a>
+            </div>
+        </div>
+    <?php }
+    ?>
 </div>
 
 <div class="box">

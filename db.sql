@@ -5,11 +5,14 @@ drop table if exists Quizzes;
 create table Users (
                        user_id integer auto_increment primary key,
                        username varchar(30) unique,
-                       password varchar(2048)
+                       password varchar(2048),
+                       last_login bigint default 0,
+                       num_of_attempts integer default 0
 );
 
 create table Quizzes (
                          quiz_id integer primary key,
+                         quiz_topic varchar(30),
                          question_1 varchar(2000),
                          answer_1 varchar(300),
                          question_2 varchar(2000),
@@ -35,8 +38,8 @@ create table Attempts (
                           foreign key (quiz_id) references Quizzes(quiz_id) on update cascade on delete cascade
 );
 
-insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
-    1,
+insert into Quizzes (quiz_id, quiz_topic, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
+    1, 'Fundamentals',
 
     '<div class="info">
                 <h3>Question 1</h3>
@@ -114,8 +117,9 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
                 </div>', '=12 13'
 );
 
-insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
+insert into Quizzes (quiz_id, quiz_topic, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
                                                                                                                                                     2,
+                                                                                                                                                                'Ownership',
 '<div class="info">
     <h3>Question 1</h3>
     <p>
@@ -141,8 +145,8 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
     <p>
         String slices are stored on the heap.
     </p>
-    <input id="question_2_true" name="question_2" type="radio"><label for="question_2_true">True</label>
-    <input id="question_2_false" name="question_2" type="radio"><label for="question_2_false">False</label>
+    <input id="question_2_true" name="question_2" type="radio" value="True"><label for="question_2_true">True</label>
+    <input id="question_2_false" name="question_2" type="radio" value="False"><label for="question_2_false">False</label>
         </div>',
 'False',
 '<div class="info">
@@ -163,8 +167,8 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         &nbsp;}<br>
         }
     </p>
-    <input id="question_3_true" name="question_3" type="radio"><label for="question_3_true">Yes</label>
-    <input id="question_3_false" name="question_3" type="radio"><label for="question_3_false">No</label>
+    <input id="question_3_true" name="question_3" type="radio" value="Yes"><label for="question_3_true">Yes</label>
+    <input id="question_3_false" name="question_3" type="radio" value="No"><label for="question_3_false">No</label>
 </div>',
 'No',
 '<div class="info">
@@ -196,22 +200,23 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
     </p>
 
     <label>
-        <input  name="question_5" type="radio"> There is a type mismatch
+        <input  name="question_5" type="radio" value="There is a type mismatch"> There is a type mismatch
     </label><br>
     <label>
-        <input  name="question_5" type="radio"> It is impossible for <em>x</em>, <em>y</em> and <em>z</em> to be declared like this
+        <input  name="question_5" type="radio" value="It is impossible for <em>x</em>, <em>y</em> and <em>z</em> to be declared like this"> It is impossible for <em>x</em>, <em>y</em> and <em>z</em> to be declared like this
     </label><br>
     <label>
-        <input  name="question_5" type="radio"> The println!() macro call is incorrectly formatted
+        <input  name="question_5" type="radio" value="The println!() macro call is incorrectly formatted"> The println!() macro call is incorrectly formatted
     </label><br>
     <label>
-        <input  name="question_5" type="radio"> The assignment to <em>x</em>, <em>y</em> and <em>z</em> would make race conditions possible
+        <input  name="question_5" type="radio" value="The assignment to <em>x</em>, <em>y</em> and <em>z</em> would make race conditions possible"> The assignment to <em>x</em>, <em>y</em> and <em>z</em> would make race conditions possible
     </label>
 </div>',
 'The assignment to <em>x</em>, <em>y</em> and <em>z</em> would make race conditions possible');
 
-insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
+insert into Quizzes (quiz_id, quiz_topic, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
                                                                                                                                                        3,
+                                                                                                                                                    'Pattern matching',
 '<div class="info">
     <h3>Question 1</h3>
     <p>
@@ -235,13 +240,13 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
     </p>
 
     <label>
-        <input  name="question_1" type="radio"> The match statement is missing a wildcard branch
+        <input  name="question_1" type="radio" value="The match statement is missing a wildcard branch"> The match statement is missing a wildcard branch
     </label><br>
     <label>
-        <input  name="question_1" type="radio"> The branches of the match statement are missing ranges
+        <input  name="question_1" type="radio" value="The branches of the match statement are missing ranges"> The branches of the match statement are missing ranges
     </label><br>
     <label>
-        <input  name="question_1" type="radio"> The println!() statements are missing semicolons
+        <input  name="question_1" type="radio" value="The println!() statements are missing semicolons"> The println!() statements are missing semicolons
     </label>
 </div>',
 'The match statement is missing a wildcard branch',
@@ -254,10 +259,10 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         It is impossible to exhaustively match on enum variants/discriminants without a wildcard branch.
     </p>
     <label>
-        <input name="question_2" type="radio"> True
+        <input name="question_2" type="radio" value="True"> True
     </label>
     <label>
-        <input name="question_2" type="radio"> False
+        <input name="question_2" type="radio" value="False"> False
     </label>
 </div>',
 'False',
@@ -303,7 +308,7 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         }
     </p>
 </div>',
-'i32::MAX..0 println!("Small!")',
+'i32::MIN..0 println!("Small!")',
 '<div class="info">
     <h3>Question 5</h3>
     <p>
@@ -344,16 +349,17 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         }
     </p>
     <label>
-        <input type="radio" name="question_5"> Yes
+        <input type="radio" name="question_5" value="Yes"> Yes
     </label>
     <label>
-        <input type="radio" name="question_5"> No
+        <input type="radio" name="question_5" value="No"> No
     </label>
 </div>',
 'Yes');
 
-insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
+insert into Quizzes (quiz_id, quiz_topic, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
                                                                                                                                                        4,
+                                                                                                                                                    'Collections',
 '<div class="info">
     <h3>Question 1</h3>
     <p>
@@ -363,10 +369,10 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         <em>iter()</em> is a method implemented for hash maps that returns all key-value pairs in the order they were added.
     </p>
     <label>
-        <input name="question_1" type="radio"> True
+        <input name="question_1" type="radio" value="True"> True
     </label>
     <label>
-        <input name="question_1" type="radio"> False
+        <input name="question_1" type="radio" value="False"> False
     </label>
 </div>',
 'False',
@@ -423,32 +429,33 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
           In light of your knowledge of how <em>iter()</em> behaves on hash maps, how does it behave for vectors?
        </p>
        <label>
-           <input name="question_5" type="radio"> Returns all indices of elements<br>
+           <input name="question_5" type="radio" value="Returns all indices of elements"> Returns all indices of elements<br>
        </label>
        <label>
-           <input name="question_5" type="radio"> Returns references to all elements<br>
+           <input name="question_5" type="radio" value="Returns references to all elements"> Returns references to all elements<br>
        </label>
        <label>
-           <input name="question_5" type="radio"> Returns values of all elements<br>
+           <input name="question_5" type="radio" value="Returns values of all elements"> Returns values of all elements<br>
        </label>
    </div>',
 'Returns values of all elements');
 
-insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
+insert into Quizzes (quiz_id, quiz_topic, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
                                                                                                                                                        5,
+                                                                                                                                                    'Error handling',
 '<div class="info">
     <h3>Question 1</h3>
     <p>
       What is the primary difference between panic!() and Result?
     </p>
     <label>
-        <input name="question_1" type="radio"> Only panic!() allows for error handling with strings<br>
+        <input name="question_1" type="radio" value="Only panic!() allows for error handling with strings"> Only panic!() allows for error handling with strings<br>
     </label>
     <label>
-        <input name="question_1" type="radio"> An unsuccessful Result can be caught and managed<br>
+        <input name="question_1" type="radio" value="An unsuccessful Result can be caught and managed"> An unsuccessful Result can be caught and managed<br>
     </label>
     <label>
-        <input name="question_1" type="radio"> There is no difference at all<br>
+        <input name="question_1" type="radio" value="There is no difference at all"> There is no difference at all<br>
     </label>
 </div>',
 'An unsuccessful Result can be caught and managed',
@@ -463,10 +470,10 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         }
     </p>
     <label>
-        <input name="question_2" type="radio"> Yes
+        <input name="question_2" type="radio" value="Yes"> Yes
     </label>
     <label>
-        <input name="question_2" type="radio"> No
+        <input name="question_2" type="radio" value="No"> No
     </label>
 </div>',
 'No',
@@ -485,16 +492,16 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         }
     </p>
     <label>
-        <input name="question_3" type="radio"> <em>unwrap()</em> panics<br>
+        <input name="question_3" type="radio" value="em>unwrap()</em> panics"> <em>unwrap()</em> panics<br>
     </label>
     <label>
-        <input name="question_3" type="radio"> None is not a valid return value<br>
+        <input name="question_3" type="radio" value="None is not a valid return value"> None is not a valid return value<br>
     </label>
     <label>
-        <input name="question_3" type="radio"> There is a type mismatch between None and the explicit return type of none()
+        <input name="question_3" type="radio" value="There is a type mismatch between None and the explicit return type of none()"> There is a type mismatch between None and the explicit return type of none()
     </label>
 </div>',
-'<em>unwrap() panics</em>',
+'<em>unwrap()</em> panics',
 '<div class="info">
     <h3>Question 4</h3>
     <p>
@@ -528,8 +535,9 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
 </div>',
 'None');
 
-insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
+insert into Quizzes (quiz_id, quiz_topic, question_1, answer_1, question_2, answer_2, question_3, answer_3, question_4, answer_4, question_5, answer_5) values (
                                                                                                                                                        6,
+                                                                                                                                                    'Beyond the basics',
 '<div class="info">
     <h3>Question 1</h3>
     <p>
@@ -545,10 +553,10 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         }
     </p>
     <label>
-        <input type="radio" name="question_1"> Yes
+        <input type="radio" name="question_1" value="Yes"> Yes
     </label>
     <label>
-        <input type="radio" name="question_1"> No
+        <input type="radio" name="question_1" value="No"> No
     </label>
 </div>',
 'Yes',
@@ -563,13 +571,13 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         }<br>
     </p>
     <label>
-        <input type="radio" name="question_2"> The function <em>f()</em> is never used<br>
+        <input type="radio" name="question_2" value="The function <em>f()</em> is never used"> The function <em>f()</em> is never used<br>
     </label>
     <label>
-        <input type="radio" name="question_2"> The lifetime of the returned string in <em>f()</em> is guaranteed to be valid<br>
+        <input type="radio" name="question_2" value="The lifetime of the returned string in <em>f()</em> is guaranteed to be valid"> The lifetime of the returned string in <em>f()</em> is guaranteed to be valid<br>
     </label>
     <label>
-        <input type="radio" name="question_2"> It doesn''t
+        <input type="radio" name="question_2" value="It doesn''t"> It doesn''t
     </label>
 </div>',
 'The lifetime of the returned string in <em>f()</em> is guaranteed to be valid',
@@ -597,10 +605,10 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
         The lifetime of a reference is independent of its original variable''s lifetime.
     </p>
     <label>
-        <input name="question_4" type="radio"> True
+        <input name="question_4" type="radio" value="True"> True
     </label>
     <label>
-        <input name="question_4" type="radio"> False
+        <input name="question_4" type="radio" value="False"> False
     </label>
 </div>',
 'False',
@@ -622,10 +630,10 @@ insert into Quizzes (quiz_id, question_1, answer_1, question_2, answer_2, questi
 
     </p>
     <label>
-        <input name="question_5" type="radio"> Yes
+        <input name="question_5" type="radio" value="Yes"> Yes
     </label>
     <label>
-        <input name="question_5" type="radio"> No
+        <input name="question_5" type="radio" value="No"> No
     </label>
 </div>',
 'No');
