@@ -1,12 +1,11 @@
 <?php
+require __DIR__ . '/init_database.php';
 session_start();
 
-$servername = "127.0.0.1";
-$root_user = "root";
-$db_name = "rust_course";
-$root_password = "pirhyw-9jyvxa-pavzUj";
-
-$database = new mysqli($servername, $root_user, $root_password, $db_name);
+global $database;
+if (!isset($router)) {
+  $database = init_database();
+}
 
 $username = htmlspecialchars($_POST["username"]);
 $password = htmlspecialchars($_POST["password"]);
@@ -108,16 +107,16 @@ if (!$error) {
     $stmt = $database->prepare("insert into Users (username, password) values (?, ?)");
     $stmt->bind_param("ss", $username, $p_hash);
     if ($stmt->execute()) {
-        echo "<p class='inlinelink'>Successfully registered!</p><br><div class='nav'><a href='https://fyp.cr0wbar.dev/login'>Go to login</a></div>";
+        echo "<p class='inlinelink'>Successfully registered!</p><br><div class='nav'><a href='./login.php'>Go to login</a></div>";
     } else {
         echo "<p class='inline-err'>Error registering your account!<br></p>";
-        echo "<div class='nav'><a href='/register.html'>Try again</a></div>";
+        echo "<div class='nav'><a href='/register.php'>Try again</a></div>";
     }
 } else {
-    echo "<div class='nav'><a href='/register.html'>Try again</a></div>";
+    echo "<div class='nav'><a href='/register.php'>Try again</a></div>";
 }
 
-$database->close();
+
 
 ?>
 

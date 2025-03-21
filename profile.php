@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/init_database.php';
+require __DIR__ . '/init_style.php';
 session_start();
 
 if (!isset($_SESSION["user_id"])):?>
@@ -9,12 +11,7 @@ if (!isset($_SESSION["user_id"])):?>
 <head>
     <title>cr0wbar's Rust course</title>
     <script src="./static/styletoggle.js"></script>
-    <script>
-        window.onload = function () {
-            init_style();
-        };
-    </script>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href=<?=init_style()?>>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="./static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="./static/shocked_hugh.png">
@@ -24,7 +21,7 @@ if (!isset($_SESSION["user_id"])):?>
 <body id="background">
 
 <div class="navbar">
-    <a href="https://fyp.cr0wbar.dev">Homepage</a>
+    <a href="./home.php">Homepage</a>
     <div class="dropdown">
         <button class="dropbtn">Change Theme &darr;</button>
         <div class="dropdown-content">
@@ -33,7 +30,7 @@ if (!isset($_SESSION["user_id"])):?>
             <button onclick="styleToggle('/static/mono.css')">Monochrome</button>
         </div>
     </div>
-    <a href="https://fyp.cr0wbar.dev/login">Login</a>
+    <a href="./login.php">Login</a>
 </div>
 
 <div class="box">
@@ -47,7 +44,7 @@ if (!isset($_SESSION["user_id"])):?>
 <div class="info">
     <h1 class="inline-err">You're not logged in!</h1>
     <div class="nav">
-        <a href="https://fyp,cr0wbar.dev">Back</a>
+        <a href="home.php">Back</a>
     </div>
 </div>
 
@@ -55,18 +52,21 @@ if (!isset($_SESSION["user_id"])):?>
 
 </body>
 
+<audio autoplay id="mouseclick">
+    <source src="./static/mouse-click.mp3" type="audio/mpeg">
+    <source src="./static/mouse-click.ogg" type="audio/ogg">
+</audio>
+
 </html>
 
 <?php else:
 $user_id = $_SESSION["user_id"];
 $username = $_SESSION["username"];
 
-$servername = "127.0.0.1";
-$root_user = "root";
-$db_name = "rust_course";
-$root_password = "pirhyw-9jyvxa-pavzUj";
-
-$database = new mysqli($servername, $root_user, $root_password, $db_name);
+global $database;
+if (!isset($router)) {
+  $database = init_database();
+}
 
 $attempt_list = $database->query("select Attempts.user_id,
    Quizzes.quiz_id,
@@ -83,12 +83,8 @@ $attempt_list = $database->query("select Attempts.user_id,
 <head>
     <title>cr0wbar's Rust course</title>
     <script src="./static/styletoggle.js"></script>
-    <script>
-        window.onload = function () {
-            init_style();
-        };
-    </script>
-    <link rel="stylesheet" href="">
+    
+    <link rel="stylesheet" href=<?=init_style()?>>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="./static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="./static/shocked_hugh.png">
@@ -98,7 +94,7 @@ $attempt_list = $database->query("select Attempts.user_id,
 <body id="background">
 
 <div class="navbar">
-    <a href="https://fyp.cr0wbar.dev">Homepage</a>
+    <a href="./home.php">Homepage</a>
     <div class="dropdown">
         <button class="dropbtn">Change Theme &darr;</button>
         <div class="dropdown-content">
@@ -110,8 +106,8 @@ $attempt_list = $database->query("select Attempts.user_id,
         <div class="dropdown">
             <button class="dropbtn">Welcome, <?=$username?></button>
             <div class="dropdown-content">
-                <a href="https://fyp.cr0wbar.dev/profile">User profile</a>
-                <a href="/logout.php">Log out</a>
+                <a href="profile.php">User profile</a>
+                <a href="logout.php">Log out</a>
             </div>
         </div>
 </div>
@@ -221,7 +217,12 @@ while ($row = $attempt_list->fetch_assoc()) {
 
 </body>
 
+<audio autoplay id="mouseclick">
+    <source src="./static/mouse-click.mp3" type="audio/mpeg">
+    <source src="./static/mouse-click.ogg" type="audio/ogg">
+</audio>
+
 </html>
 <?php
-$database->close();
+
 endif;

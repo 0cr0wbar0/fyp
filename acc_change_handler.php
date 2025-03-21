@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-$servername = "127.0.0.1";
-$root_user = "root";
-$db_name = "rust_course";
-$root_password = "pirhyw-9jyvxa-pavzUj";
+require __DIR__ . '/init_database.php';
+require __DIR__ . '/init_style.php';
 
-$database = new mysqli($servername, $root_user, $root_password, $db_name);
+global $database;
+if (!isset($router)) {
+  $database = init_database();
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,27 +20,8 @@ $database = new mysqli($servername, $root_user, $root_password, $db_name);
             let sheets= document.getElementsByTagName('link');
             sheets[0].href = str;
         }
-
-        function init_style() {
-            const style = document.cookie.split("; ").find((row) => row.startsWith("theme="))?.split("=")[1] ?? "/static/stylesheet.css";
-            switch (style) {
-                case "/static/stylesheet.css":
-                    styleToggle('/static/stylesheet.css');
-                    break;
-                case "/static/lush.css":
-                    styleToggle('/static/lush.css');
-                    break;
-                case "/static/mono.css":
-                    styleToggle('/static/mono.css');
-                    break;
-            }
-        }
-
-        window.onload = function () {
-            init_style();
-        };
     </script>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href=<?=init_style()?>>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="./static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="./static/shocked_hugh.png">
@@ -57,7 +39,7 @@ if (!isset($_SESSION["user_id"])) {?>
 
     <h1 class="inline-err">You're not logged in!</h1>
     <div class="nav">
-        <a href="https://fyp,cr0wbar.dev">Back</a>
+        <a href="home.php">Back</a>
     </div>
 
 <?php } else {
@@ -91,12 +73,12 @@ if (isset($_POST["usrnm_old"]) and isset($_POST["usrnm_new"])) {
     if (!$error) {
         if ($database->query("update Users set username = '$new' where user_id = '$user_id'")) {
             $_SESSION["username"] = $new;
-            echo "<p class='inlinelink'>Successfully changed username!</p><br><div class='nav'><a href='https://fyp.cr0wbar.dev/profile'>Back</a></div>";
+            echo "<p class='inlinelink'>Successfully changed username!</p><br><div class='nav'><a href='profile.php'>Back</a></div>";
         } else {
-            echo "<p class='inline-err'>Error changing your username!<br></p><br><div class='nav'><a href='https://fyp.cr0wbar.dev/profile'>Back</a></div>";
+            echo "<p class='inline-err'>Error changing your username!<br></p><br><div class='nav'><a href='profile.php'>Back</a></div>";
         }
     } else {
-        echo "<div class='nav'><a href='https://fyp.cr0wbar.dev/profile'>Try again</a></div>";
+        echo "<div class='nav'><a href='profile.php'>Try again</a></div>";
     }
 
 } else if (isset($_POST["pass_old"]) and isset($_POST["pass_new"]) and isset($_POST["pass_conf"])) {
@@ -139,14 +121,13 @@ if (isset($_POST["usrnm_old"]) and isset($_POST["usrnm_new"])) {
     if (!$error) {
         $hash = password_hash($new, PASSWORD_DEFAULT);
         if ($database->query("update Users set password = '$hash' where user_id = '$user_id'")) {
-            unset($_SESSION["user_id"]);
-            unset($_SESSION["username"]);
-            echo "<p class='inlinelink'>Successfully changed password!</p><br><div class='nav'><a href='https://fyp.cr0wbar.dev/login'>Log in</a></div>";
+            session_destroy();
+            echo "<p class='inlinelink'>Successfully changed password!</p><br><div class='nav'><a href='login.php'>Log in</a></div>";
         } else {
-            echo "<p class='inline-err'>Error changing your password!<br></p><br><div class='nav'><a href='https://fyp.cr0wbar.dev/profile'>Back</a></div>";
+            echo "<p class='inline-err'>Error changing your password!<br></p><br><div class='nav'><a href='profile.php'>Back</a></div>";
         }
     } else {
-        echo "<div class='nav'><a href='https://fyp.cr0wbar.dev/profile'>Try again</a></div>";
+        echo "<div class='nav'><a href='profile.php'>Try again</a></div>";
     }
 
  } else if (isset($_POST["del_pass"]) and isset($_POST["del_conf"])) {
@@ -173,28 +154,27 @@ if (isset($_POST["usrnm_old"]) and isset($_POST["usrnm_new"])) {
 
     if (!$error) {
         if ($database->query("delete from Users where user_id = '$user_id'")) {
-            unset($_SESSION["user_id"]);
-            unset($_SESSION["username"]);
-            echo "<p class='inlinelink'>Successfully deleted account! See you later!</p><br><div class='nav'><a href='https://fyp.cr0wbar.dev'>Home page</a></div>";
+            session_destroy();
+            echo "<p class='inlinelink'>Successfully deleted account! See you later!</p><br><div class='nav'><a href='./home.php'>Home page</a></div>";
         } else {
-            echo "<p class='inline-err'>Error deleting your account!<br></p><br><div class='nav'><a href='https://fyp.cr0wbar.dev/profile'>Back</a></div>";
+            echo "<p class='inline-err'>Error deleting your account!<br></p><br><div class='nav'><a href='profile.php'>Back</a></div>";
         }
     } else {
-        echo "<div class='nav'><a href='https://fyp.cr0wbar.dev/profile'>Try again</a></div>";
+        echo "<div class='nav'><a href='profile.php'>Try again</a></div>";
     }
 
 } else { ?>
 
     <h1 class="inline-err">Unknown error!</h1>
     <div class="nav">
-        <a href="https://fyp.cr0wbar.dev/profile">Back</a>
+        <a href="./profile.php">Back</a>
     </div>
 
 <?php }
 
 }
 
-$database->close();
+
 ?>
 
 </div>
@@ -202,6 +182,11 @@ $database->close();
 </div>
 
 </body>
+
+<audio autoplay id="mouseclick">
+    <source src="./static/mouse-click.mp3" type="audio/mpeg">
+    <source src="./static/mouse-click.ogg" type="audio/ogg">
+</audio>
 
 </html>
 

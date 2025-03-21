@@ -1,12 +1,12 @@
 <?php
+require __DIR__.'/../init_database.php';
+require __DIR__.'/../init_style.php';
 session_start();
 
-$servername = "127.0.0.1";
-$root_user = "root";
-$db_name = "rust_course";
-$root_password = "pirhyw-9jyvxa-pavzUj";
-
-$database = new mysqli($servername, $root_user, $root_password, $db_name);
+global $database;
+if (!isset($router)) {
+  $database = init_database();
+}
 
 if (empty($_POST)):
 ?>
@@ -17,12 +17,8 @@ if (empty($_POST)):
 <head>
     <title>cr0wbar's Rust course - Ownership: quiz</title>
     <script src="../static/styletoggle.js"></script>
-    <link rel="stylesheet" href="">
-    <script>
-        window.onload = function () {
-        init_style();
-    };
-</script>
+    <link rel="stylesheet" href=<?=init_style()?>>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -32,7 +28,7 @@ if (empty($_POST)):
 <body id="background">
 
 <div class="navbar">
-    <a href="https://fyp.cr0wbar.dev">Homepage</a>
+    <a href="../home.php">Homepage</a>
 <div class="dropdown">
         <button class="dropbtn">Change Theme &darr;</button>
         <div class="dropdown-content">
@@ -42,15 +38,15 @@ if (empty($_POST)):
         </div>
     </div>
     <?php if (!isset($_SESSION["user_id"])) {?>
-        <a href="https://fyp.cr0wbar.dev/login">Login</a>
+        <a href="../login.php">Login</a>
     <?php
     } else {
         $username = $_SESSION["username"];?>
         <div class="dropdown">
             <button class="dropbtn">Welcome, <?=$username?></button>
             <div class="dropdown-content">
-                <a href="https://fyp.cr0wbar.dev/profile">User profile</a>
-                <a href="/logout.php">Log out</a>
+                <a href="../profile.php">User profile</a>
+                <a href="../logout.php">Log out</a>
             </div>
         </div>
     <?php }
@@ -89,11 +85,16 @@ if (empty($_POST)):
 
 </div>
 
+<div class="nav">
+    <a href="./ownership-4.php">&laquo; Slices</a>
+</div>
+
 </body>
 
-<div class="nav">
-    <a href="https://fyp.cr0wbar.dev/ownership/4">&laquo; Slices</a>
-</div>
+<audio autoplay id="mouseclick">
+    <source src="../static/mouse-click.mp3" type="audio/mpeg">
+    <source src="../static/mouse-click.ogg" type="audio/ogg">
+</audio>
 
 </html>
 <?php else:
@@ -129,12 +130,8 @@ if (empty($_POST)):
 <head>
     <title>cr0wbar's Rust course - Ownership: quiz results</title>
     <script src="../static/styletoggle.js"></script>
-    <link rel="stylesheet" href="">
-    <script>
-        window.onload = function () {
-            init_style();
-        };
-    </script>
+    <link rel="stylesheet" href=<?=init_style()?>>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -144,7 +141,7 @@ if (empty($_POST)):
 <body id="background">
 
 <div class="navbar">
-    <a href="https://fyp.cr0wbar.dev">Homepage</a>
+    <a href="../home.php">Homepage</a>
     <div class="dropdown">
         <button class="dropbtn">Change Theme &darr;</button>
         <div class="dropdown-content">
@@ -154,15 +151,15 @@ if (empty($_POST)):
         </div>
     </div>
     <?php if (!isset($_SESSION["user_id"])) {?>
-        <a href="https://fyp.cr0wbar.dev/login">Login</a>
+        <a href="../login.php">Login</a>
         <?php
     } else {
         $username = $_SESSION["username"];?>
         <div class="dropdown">
             <button class="dropbtn">Welcome, <?=$username?></button>
             <div class="dropdown-content">
-                <a href="https://fyp.cr0wbar.dev/profile">User profile</a>
-                <a href="/logout.php">Log out</a>
+                <a href="../profile.php">User profile</a>
+                <a href="../logout.php">Log out</a>
             </div>
         </div>
     <?php }
@@ -223,6 +220,11 @@ if (empty($_POST)):
 </div>
 
 </body>
+
+<audio autoplay id="mouseclick">
+    <source src="../static/mouse-click.mp3" type="audio/mpeg">
+    <source src="../static/mouse-click.ogg" type="audio/ogg">
+</audio>
 
 </html>
 

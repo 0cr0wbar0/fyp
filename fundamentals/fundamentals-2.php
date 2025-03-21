@@ -1,6 +1,7 @@
 <?php
 session_start();
-include __DIR__."/../rustrunner.php";
+require __DIR__."/../rustrunner.php";
+require __DIR__."/../init_style.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -8,12 +9,8 @@ include __DIR__."/../rustrunner.php";
 <head>
     <title>cr0wbar's Rust course - Fundamentals: mutability</title>
     <script src="../static/styletoggle.js"></script>
-    <link rel="stylesheet" href="">
-    <script>
-        window.onload = function () {
-        init_style();
-    };
-</script>
+    <link rel="stylesheet" href=<?=init_style()?>>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -23,7 +20,7 @@ include __DIR__."/../rustrunner.php";
 <body id="background">
 
 <div class="navbar">
-    <a href="https://fyp.cr0wbar.dev">Homepage</a>
+    <a href="../home.php">Homepage</a>
     <div class="dropdown">
         <button class="dropbtn">Change Theme &darr;</button>
         <div class="dropdown-content">
@@ -33,15 +30,15 @@ include __DIR__."/../rustrunner.php";
         </div>
     </div>
     <?php if (!isset($_SESSION["user_id"])) {?>
-        <a href="https://fyp.cr0wbar.dev/login">Login</a>
+        <a href="../login.php">Login</a>
     <?php
     } else {
         $username = $_SESSION["username"];?>
         <div class="dropdown">
             <button class="dropbtn">Welcome, <?=$username?></button>
             <div class="dropdown-content">
-                <a href="https://fyp.cr0wbar.dev/profile">User profile</a>
-                <a href="/logout.php">Log out</a>
+                <a href="../profile.php">User profile</a>
+                <a href="../logout.php">Log out</a>
             </div>
         </div>
     <?php }
@@ -135,8 +132,8 @@ include __DIR__."/../rustrunner.php";
 </div>
 
 <div class="nav">
-    <a href="https://fyp.cr0wbar.dev/fundamentals/1">&laquo; Variables</a>
-    <a href="https://fyp.cr0wbar.dev/fundamentals/3">Primitive Data Types &raquo;</a>
+    <a href="./fundamentals-1.php">&laquo; Variables</a>
+    <a href="./fundamentals-3.php">Primitive Data Types &raquo;</a>
 </div>
 
 <?php js(); ?>

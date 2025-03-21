@@ -1,16 +1,15 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require __DIR__ . "/../init_style.php";
+?>
 <!doctype html>
 <html lang="en">
 
 <head>
     <title>cr0wbar's Rust course - Collections</title>
     <script src="../static/styletoggle.js"></script>
-    <link rel="stylesheet" href="">
-    <script>
-        window.onload = function () {
-        init_style();
-    };
-</script>
+    <link rel="stylesheet" href=<?=init_style()?>>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -20,7 +19,7 @@
 <body id="background">
 
 <div class="navbar">
-    <a href="https://fyp.cr0wbar.dev">Homepage</a>
+    <a href="../home.php">Homepage</a>
 <div class="dropdown">
         <button class="dropbtn">Change Theme &darr;</button>
         <div class="dropdown-content">
@@ -30,15 +29,15 @@
         </div>
     </div>
     <?php if (!isset($_SESSION["user_id"])) {?>
-        <a href="https://fyp.cr0wbar.dev/login">Login</a>
+        <a href="../login.php">Login</a>
     <?php
     } else {
         $username = $_SESSION["username"];?>
         <div class="dropdown">
             <button class="dropbtn">Welcome, <?=$username?></button>
             <div class="dropdown-content">
-                <a href="https://fyp.cr0wbar.dev/profile">User profile</a>
-                <a href="/logout.php">Log out</a>
+                <a href="../profile.php">User profile</a>
+                <a href="../logout.php">Log out</a>
             </div>
         </div>
     <?php }
@@ -70,8 +69,8 @@
 </div>
 
 <div class="nav">
-    <a href="https://fyp.cr0wbar.dev">&laquo; Back to Homepage</a>
-    <a href="https://fyp.cr0wbar.dev/collections/1">Vectors &raquo;</a>
+    <a href="../home.php">&laquo; Back to Homepage</a>
+    <a href="./collections-1.php">Vectors &raquo;</a>
 </div>
 
 </body>

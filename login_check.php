@@ -1,12 +1,11 @@
 <?php
+require __DIR__ . '/init_database.php';
 session_start();
 
-$servername = "127.0.0.1";
-$root_user = "root";
-$db_name = "rust_course";
-$root_password = "pirhyw-9jyvxa-pavzUj";
-
-$database = new mysqli($servername, $root_user, $root_password, $db_name);
+global $database;
+if (!isset($router)) {
+  $database = init_database();
+}
 
 $username = htmlspecialchars($_POST["username"]);
 $password = htmlspecialchars($_POST["password"]);
@@ -98,7 +97,7 @@ if (!$error) {
                 $database->query("update Users set num_of_attempts = 0 where username = '$username'");
                 $_SESSION["user_id"] = $row["user_id"];
                 $_SESSION["username"] = $row["username"];
-                echo "<p class='inlinelink'>" . $row["username"] . " successfully logged in, welcome!</p><br><div class='nav'><a href='https://fyp.cr0wbar.dev'>Continue to website</a></div>";
+                echo "<p class='inlinelink'>" . $row["username"] . " successfully logged in, welcome!</p><br><div class='nav'><a href='./home.php'>Continue to website</a></div>";
             } else {
                 echo "<p class='inline-err'>Error logging in!<br></p>";
             }
@@ -107,13 +106,13 @@ if (!$error) {
 
     if (!$user_found) {
         echo "<p class='inline-err'>user not found<br></p>";
-        echo "<a href='/login.html'>Try again</a>";
+        echo "<a href='/login.php'>Try again</a>";
     }
 } else {
-    echo "<a href='/login.html'>Try again</a>";
+    echo "<a href='/login.php'>Try again</a>";
 }
 
-$database->close();
+
 
 ?>
 

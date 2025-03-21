@@ -1,19 +1,24 @@
 
 <?php
     require __DIR__ . '/vendor/autoload.php';
+    require __DIR__ . '/init_database.php';
 
     $router = new AltoRouter();
+
+    if (getenv('DATABASE_URL') === null) {
+        $database = init_database();
+    }
 
     $router->map('GET', '/', function() {
         require __DIR__ . '/home.php';
     });
 
     $router->map('GET', '/login', function() {
-        require __DIR__ . '/login.html';
+        require __DIR__ . '/login.php';
     });
 
     $router->map('GET', '/register', function() {
-        require __DIR__ . '/register.html';
+        require __DIR__ . '/register.php';
     });
 
     // [a:page] is a regex match on alphanumerics that creates a variable $page
