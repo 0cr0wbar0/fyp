@@ -69,8 +69,8 @@ require __DIR__ . "/../init_style.php";
 </div>
 
 <div class="nav">
-    <a href="../home.php">&laquo; Back to Homepage</a>
-    <a href="./collections-1.php">Vectors &raquo;</a>
+    <a href="/home.php">&laquo; Back to Homepage</a>
+    <a href="/collections/collections-1.php">Vectors &raquo;</a>
 </div>
 
 </body>

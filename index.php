@@ -37,10 +37,6 @@
         require __DIR__ . '/' . $page . '/' . $page . '-' . $id . '.php';
     });
 
-    $router->map('GET', '/[a:page]/quiz', function($page) {
-        require __DIR__ . '/' . $page . '/' . $page . '-quiz.php';
-    });
-
     $match = $router->match();
 
     if( is_array($match) && is_callable( $match['target'] ) ) {

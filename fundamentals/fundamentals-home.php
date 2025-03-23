@@ -73,8 +73,8 @@ require __DIR__ . "/../init_style.php";
 </div>
 
 <div class="nav">
-    <a href="../home.php">&laquo; Back to Homepage</a>
-    <a href="./fundamentals-1.php">Variables &raquo;</a>
+    <a href="/home.php">&laquo; Back to Homepage</a>
+    <a href="/fundamentals/fundamentals-1.php">Variables &raquo;</a>
 </div>
 
 </body>
