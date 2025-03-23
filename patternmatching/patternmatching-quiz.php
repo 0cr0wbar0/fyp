@@ -99,11 +99,11 @@ if (empty($_POST)):
 </html>
 <?php else:
 
-    $answer_1 = $_POST["question_1"];
-    $answer_2 = $_POST["question_2"];
-    $answer_3 = $_POST["question_3"];
-    $answer_4 = implode(" ", array($_POST["question_4_1"], $_POST["question_4_2"]));
-    $answer_5 = $_POST["question_5"];
+    $answer_1 = $_POST["question_1"] ?? "No input...";
+    $answer_2 = $_POST["question_2"] ?? "No input...";
+    $answer_3 = trim($_POST["question_3"]) !== "" ? $_POST["question_3"] : "No input...";
+    $answer_4 = trim($_POST["question_4"]) !== "" ? $_POST["question_4"] : "No input...";
+    $answer_5 = $_POST["question_5"] ?? "No input...";
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -120,6 +120,8 @@ if (empty($_POST)):
         "The constant <em>MIN,</em> implemented for all integers in Rust, represents the smallest possible number that can be represented in the bit size for each integer type.",
         "The match statement may look confusing, but tuples can be used in this way to match multiple variables against different values simultaneously."
     );
+
+    $multiple_correct_answers = array(false, false, true, false, false);
 
     $results = array(0, 0, 0, 0, 0);
     ?>
@@ -186,11 +188,26 @@ if (empty($_POST)):
 
     $iter = 0;
     $total = 0;
-    foreach ($row as $i) {?>
+    foreach ($row as $i) {
+    if (!$multiple_correct_answers[$iter]) { ?>
+    <div class="info">
+        <h3>Question <?=$iter+1?></h3>
+        <p class="inlinelink">Correct answer(s): <?=$i?></p>
+        <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
+            <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
+            <?php
+            $total += 1;
+            $results[$iter] = 1;
+            ?>
+        <?php else:?>
+            <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
+        <?php endif;
+        } else {
+        $multi = explode(" ", $i);?>
         <div class="info">
             <h3>Question <?=$iter+1?></h3>
-            <p class="inlinelink">Correct answer(s): <?=$i?></p>
-            <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+            <p class="inlinelink">Correct answer(s): <?=implode(", or ", $multi)?></p>
+            <?php if (in_array(strtolower($answers[$iter]), array_map(fn($str): string => strtolower($str), $multi))): ?>
                 <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                 <?php
                 $total += 1;
@@ -198,8 +215,8 @@ if (empty($_POST)):
                 ?>
             <?php else:?>
                 <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
-            <?php endif;?>
-            <p><?=$explanations[$iter]?></p>
+            <?php endif;
+            } ?><p><?=$explanations[$iter]?></p>
         </div>
         <?php $iter += 1;
     }

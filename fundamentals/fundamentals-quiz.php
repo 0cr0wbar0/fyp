@@ -2,6 +2,7 @@
 require __DIR__.'/../init_database.php';
 require __DIR__.'/../init_style.php';
 session_start();
+error_reporting(0);
 
 global $database;
 if (!isset($router)) {
@@ -99,11 +100,11 @@ foreach ($row as $i) {
 </html>
 <?php else:
 
-    $answer_1 = $_POST["question1_select"];
-    $answer_2 = implode(" ", array($_POST["question_2_1"], $_POST["question_2_2"], $_POST["question_2_3"], $_POST["question_2_4"]));
-    $answer_3 = $_POST["question3"];
-    $answer_4 = $_POST["question4_select"];
-    $answer_5 = $_POST["question_5"];
+    $answer_1 = $_POST["question1_select"] ?? "No input...";
+    $answer_2 = implode(" ", array(trim($_POST["question_2_1"]) !== "" ? $_POST["question_2_1"] : "No input...", trim($_POST["question_2_2"]) !== "" ? $_POST["question_2_2"] : "No input...", trim($_POST["question_2_3"]) !== "" ? $_POST["question_2_3"] : "No input...", trim($_POST["question_2_4"]) !== "" ? $_POST["question_2_4"] : "No input..."));
+    $answer_3 = trim($_POST["question_3"]) !== "" ? $_POST["question_3"] : "No input...";
+    $answer_4 = $_POST["question4_select"] ?? "No input...";
+    $answer_5 = trim($_POST["question_5"]) !== "" ? $_POST["question_5"] : "No input...";
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -120,6 +121,8 @@ foreach ($row as $i) {
             "Even though this function has an explicit return type of two integers in a tuple, parameters <em>i</em> and <em>j</em> still need explicit type hints!",
             "Recall that ranges in this language can be explicitly inclusive or exclusive, and if a range up to a certain number is needed, it will need to end at the number <em>above the required number</em> if it is exclusive."
     );
+
+    $multiple_correct_answers = array(false, false, false, false, true);
 
     $results = array(0, 0, 0, 0, 0);
     ?>
@@ -186,11 +189,26 @@ foreach ($row as $i) {
 
     $iter = 0;
     $total = 0;
-    foreach ($row as $i) {?>
+    foreach ($row as $i) {
+    if (!$multiple_correct_answers[$iter]) { ?>
+    <div class="info">
+        <h3>Question <?=$iter+1?></h3>
+        <p class="inlinelink">Correct answer(s): <?=$i?></p>
+        <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+            <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
+            <?php
+            $total += 1;
+            $results[$iter] = 1;
+            ?>
+        <?php else:?>
+            <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
+        <?php endif;
+        } else {
+        $multi = explode(" ", $i);?>
         <div class="info">
             <h3>Question <?=$iter+1?></h3>
-            <p class="inlinelink">Correct answer(s): <?=$i?></p>
-            <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+            <p class="inlinelink">Correct answer(s): <?=implode(", or ", $multi)?></p>
+            <?php if (in_array(strtolower($answers[$iter]), array_map(fn($str): string => strtolower($str), $multi))): ?>
                 <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                 <?php
                 $total += 1;
@@ -198,11 +216,11 @@ foreach ($row as $i) {
                 ?>
             <?php else:?>
                 <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
-            <?php endif;?>
-            <p><?=$explanations[$iter]?></p>
+            <?php endif;
+            } ?><p><?=$explanations[$iter]?></p>
         </div>
-    <?php $iter += 1;
-    }
+        <?php $iter += 1;
+        }
 
     if (isset($_SESSION["user_id"])) {
         $user_id = $_SESSION["user_id"];

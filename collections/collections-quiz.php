@@ -99,19 +99,14 @@ if (empty($_POST)):
 </html>
 <?php else:
 
-$answer_1 = $_POST["question_1"];
-$answer_2 = $_POST["question_2"];
-$answer_3 = $_POST["question_3"];
-$answer_4 = implode(" ", array($_POST["question_4_1"], $_POST["question_4_2"]));
-$answer_5 = $_POST["question_5"];
+$answer_1 = $_POST["question_1"] ?? "No input...";
+$answer_2 = trim($_POST["question_2"]) !== "" ? $_POST["question_2"] : "No input...";
+$answer_3 = trim($_POST["question_3"]) !== "" ? $_POST["question_3"] : "No input...";
+$answer_4 = implode(" ", array(trim($_POST["question_4_1"]) !== "" ? $_POST["question_4_1"] : "No input...", trim($_POST["question_4_2"]) !== "" ? $_POST["question_4_2"] : "No input..."));
+$answer_5 = $_POST["question_5"] ?? "No input...";
 
 $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
-foreach ($answers as $a) {
-    if (trim($a) == "") {
-        $a = "No input...";
-    }
-}
 
 $explanations = array(
     "<em>iter()</em> returns all key-value pairs for a given hash map in a <em>random order.</em>",
@@ -190,7 +185,7 @@ $results = array(0, 0, 0, 0, 0);
         <div class="info">
             <h3>Question <?=$iter+1?></h3>
             <p class="inlinelink">Correct answer(s): <?=$i?></p>
-            <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+            <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
                 <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                 <?php
                 $total += 1;

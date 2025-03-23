@@ -21,6 +21,10 @@
         require __DIR__ . '/register.php';
     });
 
+    $router->map('GET', '/profile', function() {
+        require __DIR__ . '/profile.php';
+    });
+
     // [a:page] is a regex match on alphanumerics that creates a variable $page
 
     $router->map('GET', '/[a:page]', function($page) {
@@ -35,18 +39,6 @@
 
     $router->map('GET', '/[a:page]/quiz', function($page) {
         require __DIR__ . '/' . $page . '/' . $page . '-quiz.php';
-    });
-
-    $router->map('GET', '/profile', function() {
-        require __DIR__ . '/profile.php';
-    });
-
-    $router->map('GET', '/static/*', function() {
-        require __DIR__ . '/home.php';
-    });
-
-    $router->map('GET', '/vendor/*', function() {
-        require __DIR__ . '/home.php';
     });
 
     $match = $router->match();

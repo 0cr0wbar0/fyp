@@ -99,11 +99,11 @@ if (empty($_POST)):
 </html>
 <?php else:
 
-    $answer_1 = $_POST["question_1"];
-    $answer_2 = $_POST["question_2"];
-    $answer_3 = $_POST["question_3"];
-    $answer_4 = $_POST["question_4"];
-    $answer_5 = $_POST["question_5"];
+    $answer_1 = trim($_POST["question_1"]) !== "" ? $_POST["question_1"] : "No input...";
+    $answer_2 = $_POST["question_2"] ?? "No input...";
+    $answer_3 = $_POST["question_3"] ?? "No input...";
+    $answer_4 = trim($_POST["question_4"]) !== "" ? $_POST["question_4"] : "No input...";
+    $answer_5 = $_POST["question_5"] ?? "No input...";
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -190,7 +190,7 @@ if (empty($_POST)):
         <div class="info">
             <h3>Question <?=$iter+1?></h3>
             <p class="inlinelink">Correct answer(s): <?=$i?></p>
-            <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+            <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
                 <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                 <?php
                 $total += 1;

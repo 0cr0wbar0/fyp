@@ -98,11 +98,11 @@ if (empty($_POST)):
 </html>
 <?php else:
 
-$answer_1 = $_POST["question_1"];
-$answer_2 = $_POST["question_2"];
-$answer_3 = $_POST["question_3"];
-$answer_4 = $_POST["question_4"];
-$answer_5 = $_POST["question_5"];
+$answer_1 = $_POST["question_1"] ?? "No input...";
+$answer_2 = $_POST["question_2"] ?? "No input...";
+$answer_3 = trim($_POST["question_3"]) !== "" ? $_POST["question_3"] : "No input...";
+$answer_4 = $_POST["question_4"] ?? "No input...";
+$answer_5 = $_POST["question_5"] ?? "No input...";
 
 $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -114,10 +114,10 @@ foreach ($answers as $a) {
 
 $explanations = array(
     "The <em>identity function</em> is a computational or mathematical function that takes an input and immediately returns it. While this version of it works, Rust has an even purer version available in the <b>std::convert</b> library!",
-    "",
-    "",
-    "",
-    ""
+    "The return type of <em>f()</em> has a static lifetime, meaning it is guaranteed to be safe to access at any point during runtime.",
+    "<em>Clone</em> is the built-in trait used to implement this behaviour, while <em>Copy</em> does the same for data types small enough to be copied in memory.",
+    "A reference's lifetime being tied to the lifetime of the original value is what guarantees safe access to the original value!",
+    "Because the vector <em>v</em> is storing a String struct, rather than a slice, or char, or any other copy-able value, the program fails at compile-time, since String structs aren't copy-able!"
 );
 
 $results = array(0, 0, 0, 0, 0);
@@ -193,7 +193,7 @@ $results = array(0, 0, 0, 0, 0);
             <div class="info">
                 <h3>Question <?=$iter+1?></h3>
                 <p class="inlinelink">Correct answer(s): <?=$i?></p>
-                <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+                <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
                     <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                     <?php
                     $total += 1;
