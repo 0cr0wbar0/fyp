@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/init_database.php';
+require __DIR__ . '/init_style.php';
 session_start();
 
 global $database;
@@ -29,27 +30,8 @@ $conf = mysqli_real_escape_string($database, $conf);
             let sheets= document.getElementsByTagName('link');
             sheets[0].href = str;
         }
-
-        function init_style() {
-            const style = document.cookie.split("; ").find((row) => row.startsWith("theme="))?.split("=")[1] ?? "/static/stylesheet.css";
-            switch (style) {
-                case "/static/stylesheet.css":
-                    styleToggle('/static/stylesheet.css');
-                    break;
-                case "/static/lush.css":
-                    styleToggle('/static/lush.css');
-                    break;
-                case "/static/mono.css":
-                    styleToggle('/static/mono.css');
-                    break;
-            }
-        }
-
-        window.onload = function () {
-            init_style();
-        };
     </script>
-    <link rel="stylesheet" href="./static/stylesheet.css">
+    <link rel="stylesheet" href="<?=init_style()?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="./static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="./static/shocked_hugh.png">
@@ -77,9 +59,11 @@ if (trim($username) == "" or trim($password) == "" or trim($conf) == "") {
     echo "<p class='inline-err'>Fields cannot be left blank!<br></p>";
 }
 
-$qry = $database->query("select username from Users where username = '$username'");
+$qry = $database->prepare("select username from Users where username = ?");
+$qry->bind_param("s", $username);
+$qry->execute();
 
-if ($qry->num_rows > 0) {
+if ($qry->get_result()->num_rows > 0) {
     $error = true;
     echo "<p class='inline-err'>Username already in use!<br></p>";
 }
@@ -107,7 +91,7 @@ if (!$error) {
     $stmt = $database->prepare("insert into Users (username, password) values (?, ?)");
     $stmt->bind_param("ss", $username, $p_hash);
     if ($stmt->execute()) {
-        echo "<p class='inlinelink'>Successfully registered!</p><br><div class='nav'><a href='./login.php'>Go to login</a></div>";
+        echo "<p class='inlinelink'>Successfully registered!</p><br><div class='nav'><a href='/login.php'>Go to login</a></div>";
     } else {
         echo "<p class='inline-err'>Error registering your account!<br></p>";
         echo "<div class='nav'><a href='/register.php'>Try again</a></div>";

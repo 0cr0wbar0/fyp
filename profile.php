@@ -83,7 +83,6 @@ $attempt_list = $database->query("select Attempts.user_id,
 <head>
     <title>cr0wbar's Rust course</title>
     <script src="./static/styletoggle.js"></script>
-    
     <link rel="stylesheet" href=<?=init_style()?>>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="./static/shocked_hugh.ico">

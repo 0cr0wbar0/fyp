@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/init_database.php';
+require __DIR__ . '/init_style.php';
 session_start();
 
 global $database;
@@ -26,27 +27,8 @@ $password = mysqli_real_escape_string($database, $password);
             let sheets= document.getElementsByTagName('link');
             sheets[0].href = str;
         }
-
-        function init_style() {
-            const style = document.cookie.split("; ").find((row) => row.startsWith("theme="))?.split("=")[1] ?? "/static/stylesheet.css";
-            switch (style) {
-                case "/static/stylesheet.css":
-                    styleToggle('/static/stylesheet.css');
-                    break;
-                case "/static/lush.css":
-                    styleToggle('/static/lush.css');
-                    break;
-                case "/static/mono.css":
-                    styleToggle('/static/mono.css');
-                    break;
-            }
-        }
-
-        window.onload = function () {
-            init_style();
-        };
     </script>
-    <link rel="stylesheet" href="./static/stylesheet.css">
+    <link rel="stylesheet" href="<?=init_style()?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="./static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="./static/shocked_hugh.png">
@@ -74,14 +56,19 @@ if (trim($username) == "" or trim($password) == "") {
     echo "<p class='inline-err'>Fields cannot be left blank!<br></p>";
 }
 
-$times = $database->query("select last_login, num_of_attempts from Users where username = '$username'");
-while ($row = $times->fetch_assoc()) {
+$times = $database->prepare("select last_login, num_of_attempts from Users where username = ?");
+$times->bind_param("i", $username);
+$times->execute();
+$result = $times->get_result();
+while ($row = $result->fetch_assoc()) {
     if ((time() - $row["last_login"] < 300) and ($row["num_of_attempts"] >= 5)) {
         $error = true;
         echo "<p class='inline-err'>Too many login attempts! Try again later.<br></p>";
     } else {
         $current_time = time();
-        $database->query("update Users set last_login = '$current_time', num_of_attempts = num_of_attempts + 1 where username = '$username'");
+        $update = $database->prepare("update Users set last_login = ?, num_of_attempts = num_of_attempts + 1 where username = ?");
+        $update->bind_param("is", $current_time, $username);
+        $update->execute();
     }
 }
 
@@ -94,7 +81,9 @@ if (!$error) {
         if ($row["username"] == $username) {
             $user_found = true;
             if (password_verify($password, $row["password"])) {
-                $database->query("update Users set num_of_attempts = 0 where username = '$username'");
+                $success = $database->prepare("update Users set num_of_attempts = 0 where username = ?");
+                $success->bind_param("s", $username);
+                $success->execute();
                 $_SESSION["user_id"] = $row["user_id"];
                 $_SESSION["username"] = $row["username"];
                 echo "<p class='inlinelink'>" . $row["username"] . " successfully logged in, welcome!</p><br><div class='nav'><a href='./home.php'>Continue to website</a></div>";
@@ -105,11 +94,11 @@ if (!$error) {
     }
 
     if (!$user_found) {
-        echo "<p class='inline-err'>user not found<br></p>";
-        echo "<a href='/login.php'>Try again</a>";
+        echo "<p class='inline-err'>User not found!<br></p>";
+        echo "<div class='nav'><a href='/login.php'>Try again</a></div>";
     }
 } else {
-    echo "<a href='/login.php'>Try again</a>";
+    echo "<div class='nav'><a href='/login.php'>Try again</a></div>";
 }
 
 

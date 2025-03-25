@@ -63,15 +63,19 @@ if (isset($_POST["usrnm_old"]) and isset($_POST["usrnm_new"])) {
         echo "<p class='inline-err'>Inputted current username does not match!<br></p>";
     }
 
-    $new_check = $database->query("select username from Users where username = '$new'");
+    $new_check = $database->prepare("select username from Users where username = ?");
+    $new_check->bind_param("s", $new);
+    $new_check->execute();
 
-    if ($new_check->num_rows > 0) {
+    if ($new_check->get_result()->num_rows > 0) {
         $error = true;
         echo "<p class='inline-err'>Requested username already in use!<br></p>";
     }
 
     if (!$error) {
-        if ($database->query("update Users set username = '$new' where user_id = '$user_id'")) {
+        $update = $database->prepare("update Users set username = ? where user_id = ?");
+        $update->bind_param("si", $new, $user_id);
+        if ($update->execute()) {
             $_SESSION["username"] = $new;
             echo "<p class='inlinelink'>Successfully changed username!</p><br><div class='nav'><a href='profile.php'>Back</a></div>";
         } else {
@@ -120,7 +124,9 @@ if (isset($_POST["usrnm_old"]) and isset($_POST["usrnm_new"])) {
 
     if (!$error) {
         $hash = password_hash($new, PASSWORD_DEFAULT);
-        if ($database->query("update Users set password = '$hash' where user_id = '$user_id'")) {
+        $update_pass = $database->prepare("update Users set password = ? where user_id = ?");
+        $update_pass->bind_param("si", $hash, $user_id);
+        if ($update_pass->execute()) {
             session_destroy();
             echo "<p class='inlinelink'>Successfully changed password!</p><br><div class='nav'><a href='login.php'>Log in</a></div>";
         } else {
