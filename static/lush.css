@@ -189,7 +189,7 @@ table, thead, tbody, th {
     margin-bottom: 20px;
     width: auto;
     height: auto;
-    overflow-x: scroll;
+
 }
 
 .titles {
@@ -291,7 +291,7 @@ table, thead, tbody, th {
     color: #00b914;
     padding: 10px;
     tab-size: 4;
-    overflow-x: scroll;
+
 }
 
 .inlinelink a {
@@ -309,7 +309,7 @@ table, thead, tbody, th {
     border-radius: 10px;
     color: #ff8c8c;
     padding: 10px;
-    overflow-x: scroll;
+
 }
 
 .inline-err:hover {
