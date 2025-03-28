@@ -107,12 +107,6 @@ $answer_5 = trim($_POST["question_5"]) !== "" ? $_POST["question_5"] : "No input
 
 $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
-foreach ($answers as $a) {
-    if (trim($a) == "") {
-        $a = "No input...";
-    }
-}
-
 $explanations = array(
     "The <em>panic()</em> macro should only be used for unrecoverable errors, whereas <em>None</em> or <em>Err()</em> values can be mitigated.",
     "<b>This code panics,</b> so there's never any successful execution of this code!",
@@ -236,7 +230,7 @@ $results = array(0, 0, 0, 0, 0);
         }
         ?>
 
-        <h1 class="inlinelink">Total: <?=$total?>/5</h1>
+        <h1 class="total">Total: <?=$total?>/5</h1>
 
     </div>
 

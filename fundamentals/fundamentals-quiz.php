@@ -102,17 +102,11 @@ foreach ($row as $i) {
 
     $answer_1 = $_POST["question1_select"] ?? "No input...";
     $answer_2 = implode(" ", array(trim($_POST["question_2_1"]) !== "" ? $_POST["question_2_1"] : "No input...", trim($_POST["question_2_2"]) !== "" ? $_POST["question_2_2"] : "No input...", trim($_POST["question_2_3"]) !== "" ? $_POST["question_2_3"] : "No input...", trim($_POST["question_2_4"]) !== "" ? $_POST["question_2_4"] : "No input..."));
-    $answer_3 = trim($_POST["question_3"]) !== "" ? $_POST["question_3"] : "No input...";
+    $answer_3 = trim($_POST["question3"]) !== "" ? $_POST["question3"] : "No input...";
     $answer_4 = $_POST["question4_select"] ?? "No input...";
     $answer_5 = trim($_POST["question_5"]) !== "" ? $_POST["question_5"] : "No input...";
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
-
-    foreach ($answers as $a) {
-        if (trim($a) == "") {
-            $a = "No input...";
-        }
-    }
 
     $explanations = array(
             "Rust doesn't allow uninitialised variables at compile-time unless they're <em>explicitly typed,</em> and even then, they can't be used anywhere beyond their definition!",
@@ -233,7 +227,7 @@ foreach ($row as $i) {
     }
     ?>
 
-<h1 class="inlinelink">Total: <?=$total?>/5</h1>
+<h1 class="total">Total: <?=$total?>/5</h1>
 
 </div>
 

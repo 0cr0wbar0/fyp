@@ -107,12 +107,6 @@ if (empty($_POST)):
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
-    foreach ($answers as $a) {
-        if (trim($a) == "") {
-            $a = "No input...";
-        }
-    }
-
     $explanations = array(
         "It's impossible to exhaustively match on every single possible string slice without a wildcard branch.",
         "Conversely to strings, enums will likely always have a limited number of variants, so a wildcard branch will not usually be necessary, unless some variants deliberately should not be matched on.",
@@ -232,7 +226,7 @@ if (empty($_POST)):
     }
     ?>
 
-<h1 class="inlinelink">Total: <?=$total?>/5</h1>
+<h1 class="total">Total: <?=$total?>/5</h1>
 
 </div>
 

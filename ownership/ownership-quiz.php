@@ -107,12 +107,6 @@ if (empty($_POST)):
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
-    foreach ($answers as $a) {
-        if (trim($a) == "") {
-            $a = "No input...";
-        }
-    }
-
     $explanations = array(
         "Since the second definition of <em>num</em> is shadowing the first definition, and because the call to <em>println!()</em> is done outside the inner scope, only the outer value is printed.",
         "String <em>slices</em> are stored on the stack, making them immutable sequences of characters.",
@@ -215,7 +209,7 @@ if (empty($_POST)):
     }
     ?>
 
-<h1 class="inlinelink">Total: <?=$total?>/5</h1>
+<h1 class="total">Total: <?=$total?>/5</h1>
 
 </div>
 

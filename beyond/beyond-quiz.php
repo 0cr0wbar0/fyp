@@ -106,11 +106,6 @@ $answer_5 = $_POST["question_5"] ?? "No input...";
 
 $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
-foreach ($answers as $a) {
-    if (trim($a) == "") {
-        $a = "No input...";
-    }
-}
 
 $explanations = array(
     "The <em>identity function</em> is a computational or mathematical function that takes an input and immediately returns it. While this version of it works, Rust has an even purer version available in the <b>std::convert</b> library!",
@@ -218,7 +213,7 @@ $results = array(0, 0, 0, 0, 0);
         }
         ?>
 
-        <h1 class="inlinelink">Total: <?=$total?>/5</h1>
+        <h1 class="total">Total: <?=$total?>/5</h1>
 
     </div>
 

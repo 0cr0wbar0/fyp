@@ -282,6 +282,16 @@ table, thead, tbody, th {
     background-color: #dcffd6;
 }
 
+.total {
+    background-color: #114d00;
+    text-align: left;
+    font-family: "SF Mono";
+    border-radius: 10px;
+    color: #00b914;
+    padding: 10px;
+    tab-size: 4;
+}
+
 .inlinelink {
     background-color: #114d00;
     text-align: left;
@@ -291,7 +301,6 @@ table, thead, tbody, th {
     color: #00b914;
     padding: 10px;
     tab-size: 4;
-
 }
 
 .inlinelink a {
