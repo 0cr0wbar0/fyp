@@ -229,6 +229,8 @@ foreach ($row as $i) {
 
 <h1 class="total">Total: <?=$total?>/5</h1>
 
+<div class="nav"><a href="fundamentals-quiz.php">Try again?</a></div>
+
 </div>
 
 </body>

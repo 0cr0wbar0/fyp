@@ -228,6 +228,8 @@ if (empty($_POST)):
 
 <h1 class="total">Total: <?=$total?>/5</h1>
 
+<div class="nav"><a href="patternmatching-quiz.php">Try again?</a></div>
+
 </div>
 
 </body>

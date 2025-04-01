@@ -232,6 +232,8 @@ $results = array(0, 0, 0, 0, 0);
 
         <h1 class="total">Total: <?=$total?>/5</h1>
 
+        <div class="nav"><a href="errorhandling-quiz.php">Try again?</a></div>
+
     </div>
 
     </body>
