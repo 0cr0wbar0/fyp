@@ -18,7 +18,6 @@ if (empty($_POST)):
     <title>cr0wbar's Rust course - Ownership: quiz</title>
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href=<?=init_style()?>>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -99,11 +98,11 @@ if (empty($_POST)):
 </html>
 <?php else:
 
-    $answer_1 = trim($_POST["question_1"]) !== "" ? $_POST["question_1"] : "No input...";
-    $answer_2 = $_POST["question_2"] ?? "No input...";
-    $answer_3 = $_POST["question_3"] ?? "No input...";
-    $answer_4 = trim($_POST["question_4"]) !== "" ? $_POST["question_4"] : "No input...";
-    $answer_5 = $_POST["question_5"] ?? "No input...";
+    $answer_1 = trim($_POST["question_1"]) !== "" ? $_POST["question_1"] : "Unanswered";
+    $answer_2 = $_POST["question_2"] ?? "Unanswered";
+    $answer_3 = $_POST["question_3"] ?? "Unanswered";
+    $answer_4 = trim($_POST["question_4"]) !== "" ? $_POST["question_4"] : "Unanswered";
+    $answer_5 = $_POST["question_5"] ?? "Unanswered";
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -115,6 +114,8 @@ if (empty($_POST)):
         "Because of this risk, only <em>one mutable borrow of a given variable</em> can exist at any one time."
     );
 
+    $multiple_correct_answers = array(false, false, false, true, false);
+
     $results = array(0, 0, 0, 0, 0);
 ?>
 
@@ -125,7 +126,6 @@ if (empty($_POST)):
     <title>cr0wbar's Rust course - Ownership: quiz results</title>
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href=<?=init_style()?>>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -180,11 +180,26 @@ if (empty($_POST)):
 
     $iter = 0;
     $total = 0;
-    foreach ($row as $i) {?>
+    foreach ($row as $i) {
+    if (!$multiple_correct_answers[$iter]) { ?>
+    <div class="info">
+        <h3>Question <?=$iter+1?></h3>
+        <p class="inlinelink">Correct answer: <?=$i?></p>
+        <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+            <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
+            <?php
+            $total += 1;
+            $results[$iter] = 1;
+            ?>
+        <?php else:?>
+            <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
+        <?php endif;
+        } else {
+        $multi = explode("|", $i);?>
         <div class="info">
             <h3>Question <?=$iter+1?></h3>
-            <p class="inlinelink">Correct answer(s): <?=$i?></p>
-            <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
+            <p class="inlinelink">Correct answer: <?=implode(", or ", $multi)?></p>
+            <?php if (in_array(strtolower($answers[$iter]), array_map(fn($str): string => strtolower($str), $multi))): ?>
                 <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                 <?php
                 $total += 1;
@@ -192,11 +207,11 @@ if (empty($_POST)):
                 ?>
             <?php else:?>
                 <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
-            <?php endif;?>
-            <p><?=$explanations[$iter]?></p>
+            <?php endif;
+            } ?><p><?=$explanations[$iter]?></p>
         </div>
         <?php $iter += 1;
-    }
+        }
 
     if (isset($_SESSION["user_id"])) {
         $user_id = $_SESSION["user_id"];

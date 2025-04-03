@@ -18,7 +18,6 @@ if (empty($_POST)):
     <title>cr0wbar's Rust course - Error handling: quiz</title>
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href=<?=init_style()?>>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -99,11 +98,11 @@ if (empty($_POST)):
 </html>
 <?php else:
 
-$answer_1 = $_POST["question_1"] ?? "No input...";
-$answer_2 = $_POST["question_2"] ?? "No input...";
-$answer_3 = $_POST["question_3"] ?? "No input...";
-$answer_4 = trim($_POST["question_4"]) !== "" ? $_POST["question_4"] : "No input...";
-$answer_5 = trim($_POST["question_5"]) !== "" ? $_POST["question_5"] : "No input...";
+$answer_1 = $_POST["question_1"] ?? "Unanswered";
+$answer_2 = $_POST["question_2"] ?? "Unanswered";
+$answer_3 = $_POST["question_3"] ?? "Unanswered";
+$answer_4 = trim($_POST["question_4"]) !== "" ? $_POST["question_4"] : "Unanswered";
+$answer_5 = trim($_POST["question_5"]) !== "" ? $_POST["question_5"] : "Unanswered";
 
 $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -127,11 +126,6 @@ $results = array(0, 0, 0, 0, 0);
         <title>cr0wbar's Rust course - Ownership: quiz results</title>
         <script src="../static/styletoggle.js"></script>
         <link rel="stylesheet" href=<?=init_style()?>>
-        <script>
-            window.onload = function () {
-                init_style();
-            };
-        </script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
         <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -190,7 +184,7 @@ $results = array(0, 0, 0, 0, 0);
             if (!$multiple_correct_answers[$iter]) { ?>
             <div class="info">
                 <h3>Question <?=$iter+1?></h3>
-                <p class="inlinelink">Correct answer(s): <?=$i?></p>
+                <p class="inlinelink">Correct answer: <?=$i?></p>
                 <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
                     <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                     <?php
@@ -201,10 +195,10 @@ $results = array(0, 0, 0, 0, 0);
                     <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
                 <?php endif;
             } else {
-                $multi = explode(" ", $i);?>
+                $multi = explode("|", $i);?>
                 <div class="info">
                     <h3>Question <?=$iter+1?></h3>
-                    <p class="inlinelink">Correct answer(s): <?=implode(", or ", $multi)?></p>
+                    <p class="inlinelink">Correct answer: <?=implode(", or ", $multi)?></p>
                     <?php if (in_array(strtolower($answers[$iter]), array_map(fn($str): string => strtolower($str), $multi))): ?>
                     <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                     <?php

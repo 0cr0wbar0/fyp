@@ -19,7 +19,6 @@ if (empty($_POST)):
     <title>cr0wbar's Rust course - Fundamentals: quiz</title>
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href=<?=init_style()?>>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -100,11 +99,11 @@ foreach ($row as $i) {
 </html>
 <?php else:
 
-    $answer_1 = $_POST["question1_select"] ?? "No input...";
-    $answer_2 = implode(" ", array(trim($_POST["question_2_1"]) !== "" ? $_POST["question_2_1"] : "No input...", trim($_POST["question_2_2"]) !== "" ? $_POST["question_2_2"] : "No input...", trim($_POST["question_2_3"]) !== "" ? $_POST["question_2_3"] : "No input...", trim($_POST["question_2_4"]) !== "" ? $_POST["question_2_4"] : "No input..."));
-    $answer_3 = trim($_POST["question3"]) !== "" ? $_POST["question3"] : "No input...";
-    $answer_4 = $_POST["question4_select"] ?? "No input...";
-    $answer_5 = trim($_POST["question_5"]) !== "" ? $_POST["question_5"] : "No input...";
+    $answer_1 = $_POST["question1_select"] ?? "Unanswered";
+    $answer_2 = implode(" ", array(trim($_POST["question_2_1"]) !== "" ? $_POST["question_2_1"] : "Unanswered", trim($_POST["question_2_2"]) !== "" ? $_POST["question_2_2"] : "Unanswered", trim($_POST["question_2_3"]) !== "" ? $_POST["question_2_3"] : "Unanswered", trim($_POST["question_2_4"]) !== "" ? $_POST["question_2_4"] : "Unanswered"));
+    $answer_3 = trim($_POST["question3"]) !== "" ? $_POST["question3"] : "Unanswered";
+    $answer_4 = $_POST["question4_select"] ?? "Unanswered";
+    $answer_5 = trim($_POST["question_5"]) !== "" ? $_POST["question_5"] : "Unanswered";
 
     $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -115,6 +114,8 @@ foreach ($row as $i) {
             "Even though this function has an explicit return type of two integers in a tuple, parameters <em>i</em> and <em>j</em> still need explicit type hints!",
             "Recall that ranges in this language can be explicitly inclusive or exclusive, and if a range up to a certain number is needed, it will need to end at the number <em>above the required number</em> if it is exclusive."
     );
+
+    $multiple_inputs = array(false, true, false, false, false);
 
     $multiple_correct_answers = array(false, false, false, false, true);
 
@@ -128,7 +129,6 @@ foreach ($row as $i) {
     <title>cr0wbar's Rust course - Fundamentals: quiz results</title>
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href=<?=init_style()?>>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -184,11 +184,26 @@ foreach ($row as $i) {
     $iter = 0;
     $total = 0;
     foreach ($row as $i) {
-    if (!$multiple_correct_answers[$iter]) { ?>
+    if ($multiple_inputs[$iter]) {
+        $split_answers = explode(" ", $i);
+        $split_inputs = implode(", ", explode(" ", $answers[$iter]));?>
     <div class="info">
         <h3>Question <?=$iter+1?></h3>
-        <p class="inlinelink">Correct answer(s): <?=$i?></p>
-        <?php if (str_contains(strtolower($i), strtolower($answers[$iter]))): ?>
+        <p class="inlinelink">Correct answers: <?=implode(", ", $split_answers)?></p>
+        <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
+            <p class="inlinelink">Your correct answers: <?=$split_inputs?></p>
+            <?php
+            $total += 1;
+            $results[$iter] = 1;
+            ?>
+        <?php else:?>
+            <p class="inline-err">Your incorrect answers: <?=$split_inputs?></p>
+        <?php endif;
+    } else if (!$multiple_correct_answers[$iter]) { ?>
+    <div class="info">
+        <h3>Question <?=$iter+1?></h3>
+        <p class="inlinelink">Correct answer: <?=$i?></p>
+        <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
             <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
             <?php
             $total += 1;
@@ -198,10 +213,10 @@ foreach ($row as $i) {
             <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
         <?php endif;
         } else {
-        $multi = explode(" ", $i);?>
+        $multi = explode("|", $i);?>
         <div class="info">
             <h3>Question <?=$iter+1?></h3>
-            <p class="inlinelink">Correct answer(s): <?=implode(", or ", $multi)?></p>
+            <p class="inlinelink">Correct answer: <?=implode(", or ", $multi)?></p>
             <?php if (in_array(strtolower($answers[$iter]), array_map(fn($str): string => strtolower($str), $multi))): ?>
                 <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                 <?php

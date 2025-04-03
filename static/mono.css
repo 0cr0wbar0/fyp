@@ -178,7 +178,7 @@ table, thead, tbody, th {
 .codeinput {
     font-size: 1rem;
     font-family: "SF Mono";
-    background-color: #595959;
+    background-color: #2a2a2a;
     border-color: #151515;
     border-radius: 10px;
     color: #d0d0d0;
@@ -291,7 +291,7 @@ table, thead, tbody, th {
 }
 
 .inlinelink {
-    background-color: #2a2a2a;
+    background-color: #171717;
     text-align: left;
     font-size: 1rem;
     font-family: "SF Mono";
@@ -312,15 +312,11 @@ table, thead, tbody, th {
 
 
 .inline-err {
-    background-color: #151515;
+    background-color: #b9b9b9;
     border-radius: 10px;
-    color: #6c6c6c;
+    color: #000000;
     padding: 10px;
 
-}
-
-.inline-err:hover {
-    color: #b0b0b0;
 }
 
 .animbox {

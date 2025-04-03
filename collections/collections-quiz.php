@@ -18,7 +18,6 @@ if (empty($_POST)):
     <title>cr0wbar's Rust course - Collections: quiz</title>
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href=<?=init_style()?>>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -99,11 +98,11 @@ if (empty($_POST)):
 </html>
 <?php else:
 
-$answer_1 = $_POST["question_1"] ?? "No input...";
-$answer_2 = trim($_POST["question_2"]) !== "" ? $_POST["question_2"] : "No input...";
-$answer_3 = trim($_POST["question_3"]) !== "" ? $_POST["question_3"] : "No input...";
-$answer_4 = implode(" ", array(trim($_POST["question_4_1"]) !== "" ? $_POST["question_4_1"] : "No input...", trim($_POST["question_4_2"]) !== "" ? $_POST["question_4_2"] : "No input..."));
-$answer_5 = $_POST["question_5"] ?? "No input...";
+$answer_1 = $_POST["question_1"] ?? "Unanswered";
+$answer_2 = trim($_POST["question_2"]) !== "" ? $_POST["question_2"] : "Unanswered";
+$answer_3 = trim($_POST["question_3"]) !== "" ? $_POST["question_3"] : "Unanswered";
+$answer_4 = implode(" ", array(trim($_POST["question_4_1"]) !== "" ? $_POST["question_4_1"] : "Unanswered", trim($_POST["question_4_2"]) !== "" ? $_POST["question_4_2"] : "Unanswered"));
+$answer_5 = $_POST["question_5"] ?? "Unanswered";
 
 $answers = array($answer_1, $answer_2, $answer_3, $answer_4, $answer_5);
 
@@ -116,6 +115,8 @@ $explanations = array(
     "<em>iter()</em> is implemented for most collection types in Rust, and depending on the type, will return many different kinds of <em>iterator</em> that can be used to access or manipulate the elements of a collection. <em>iter_mut()</em> instead returns an iterator of <b>references</b> to the elements!"
 );
 
+$multiple_inputs = array(false, false, false, true, false);
+
 $results = array(0, 0, 0, 0, 0);
 ?>
 
@@ -126,7 +127,6 @@ $results = array(0, 0, 0, 0, 0);
     <title>cr0wbar's Rust course - Ownership: quiz results</title>
     <script src="../static/styletoggle.js"></script>
     <link rel="stylesheet" href=<?=init_style()?>>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut_icon" type="image/png" href="../static/shocked_hugh.ico">
     <link rel="apple-touch-icon" href="../static/shocked_hugh.png">
@@ -181,10 +181,26 @@ $results = array(0, 0, 0, 0, 0);
 
     $iter = 0;
     $total = 0;
-    foreach ($row as $i) {?>
+    foreach ($row as $i) {
+    if ($multiple_inputs[$iter]) {
+    $split_answers = explode(" ", $i);
+    $split_inputs = implode(", ", explode(" ", $answers[$iter]));?>
+    <div class="info">
+        <h3>Question <?=$iter+1?></h3>
+        <p class="inlinelink">Correct answers: <?=implode(", ", $split_answers)?></p>
+        <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
+            <p class="inlinelink">Your correct answers: <?=$split_inputs?></p>
+            <?php
+            $total += 1;
+            $results[$iter] = 1;
+            ?>
+        <?php else:?>
+            <p class="inline-err">Your incorrect answers: <?=$split_inputs?></p>
+        <?php endif;
+        } else { ?>
         <div class="info">
             <h3>Question <?=$iter+1?></h3>
-            <p class="inlinelink">Correct answer(s): <?=$i?></p>
+            <p class="inlinelink">Correct answer: <?=$i?></p>
             <?php if (strtolower($i) === strtolower($answers[$iter])): ?>
                 <p class="inlinelink">Your correct answer: <?=$answers[$iter]?></p>
                 <?php
@@ -193,7 +209,7 @@ $results = array(0, 0, 0, 0, 0);
                 ?>
             <?php else:?>
                 <p class="inline-err">Your incorrect answer: <?=$answers[$iter]?></p>
-            <?php endif;?>
+            <?php endif; } ?>
             <p><?=$explanations[$iter]?></p>
         </div>
         <?php $iter += 1;
